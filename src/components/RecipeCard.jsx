@@ -48,34 +48,107 @@ function searchTerms(text) {
   return [...new Set([phrase, mainDish, ...dishTerms].filter((term) => term.length >= 3))];
 }
 
+// Photo of a dish from TheMealDB: { url, full } where full means the dish name
+// contains every word typed; "" if none matches, or null if the request failed.
+async function findDishPhoto(key) {
+  const titleWords = wordsOf(key);
+  for (const term of searchTerms(key)) {
+    let meals;
+    try {
+      const response = await fetch(SEARCH_URL + encodeURIComponent(term));
+      meals = (await response.json()).meals ?? [];
+    } catch {
+      return null; // offline or blocked
+    }
+    // Only whole-word matches ("cake" must not match "Pancakes"). For the
+    // exact text typed, the last word may be unfinished ("ice crea" -> "Ice Cream").
+    const pattern = term === key ? `\\b${term}` : `\\b${term}(s|es)?\\b`;
+    const matches = meals.filter((meal) => new RegExp(pattern).test(meal.strMeal.toLowerCase()));
+    if (!matches.length) continue;
+    // Prefer the dish that shares the most words with the title.
+    const shared = (meal) => titleWords.filter((word) => meal.strMeal.toLowerCase().includes(word)).length;
+    const best = matches.reduce((a, b) => (shared(b) > shared(a) ? b : a));
+    const typed = titleWords.filter((word) => word.length >= 3 && !DESCRIPTORS.has(word));
+    return { url: `${best.strMealThumb}/medium`, full: shared(best) >= typed.length };
+  }
+  return "";
+}
+
+// Branded foods ("Hershey's chocolate bar", "Doritos") come from Open Food Facts
+// (free, no key), which looks products up by brand. Its search allows about
+// 10 requests a minute, so it is only asked when no dish matched.
+const PRODUCTS_URL =
+  "https://world.openfoodfacts.org/api/v2/search?fields=product_name,image_front_url,image_front_small_url&page_size=24&brands_tags=";
+
+// Open Food Facts brand tags: "Hershey's" -> "hershey-s", "Kit Kat" -> "kit-kat".
+const brandTag = (text) => text.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+// The brand is usually the first word or two: "hersheys chocolate bar".
+function brandGuesses(text) {
+  const words = text.split(/\s+/).filter(Boolean);
+  const first = brandTag(words[0] ?? "");
+  const guesses = words.length >= 2 ? [brandTag(`${words[0]} ${words[1]}`), first] : [first];
+  // Brands are tagged both ways: "hersheys" and "hershey-s".
+  guesses.push(first.endsWith("-s") ? first.replace(/-s$/, "s") : first.replace(/([a-z])s$/, "$1-s"));
+  return [...new Set(guesses)].filter((tag) => tag.length >= 3);
+}
+
+// Photo of a branded product, "" if none matches, or null if the request failed.
+async function findProductPhoto(key) {
+  for (const brand of brandGuesses(key)) {
+    let products;
+    try {
+      const response = await fetch(PRODUCTS_URL + encodeURIComponent(brand));
+      if (!response.ok) return null; // e.g. too many requests
+      products = (await response.json()).products ?? [];
+    } catch {
+      return null;
+    }
+    // When more than the brand was typed ("hersheys chocolate bar"), the
+    // product name must share one of those other words.
+    const otherWords = wordsOf(key).filter((word) => word.length >= 3 && !brand.includes(word));
+    const shared = (product) => otherWords.filter((word) => (product.product_name ?? "").toLowerCase().includes(word)).length;
+    const withPhoto = products.filter((product) => product.image_front_url || product.image_front_small_url);
+    const matches = otherWords.length ? withPhoto.filter((product) => shared(product) > 0) : withPhoto;
+    if (!matches.length) continue;
+    const best = matches.reduce((a, b) => (shared(b) > shared(a) ? b : a));
+    return best.image_front_url || best.image_front_small_url;
+  }
+  return "";
+}
+
+// Photos of popular craving brands, looked up once on Open Food Facts so they
+// show instantly without a request. aliases are what people type.
+const BRAND_PHOTOS = [
+  // BRAND_PHOTOS_START
+  // BRAND_PHOTOS_END
+];
+
+const brandPhotoFor = (key) =>
+  BRAND_PHOTOS.find(({ aliases }) =>
+    aliases.some((alias) => new RegExp(`(^|[^a-z])${alias.replace(/[.*+?^${}()|[\]\\&]/g, "\\$&")}($|[^a-z])`).test(key))
+  )?.image ?? "";
+
 const photoCache = new Map(); // text -> Promise of a photo URL, or "" if none found
 
-// Finds a photo URL for a food, or "" if there is none.
+// Finds a photo URL for a food or branded product, or "" if there is none.
+// Order: a known brand, a dish matching every word typed, any branded product
+// (Open Food Facts), then a dish matching some of the words.
 function findFoodPhoto(text) {
   const key = String(text ?? "").trim().toLowerCase();
+  const brand = brandPhotoFor(key);
+  if (brand) return Promise.resolve(brand);
   if (!photoCache.has(key)) {
-    const titleWords = wordsOf(key);
     photoCache.set(
       key,
       (async () => {
-        for (const term of searchTerms(key)) {
-          let meals;
-          try {
-            const response = await fetch(SEARCH_URL + encodeURIComponent(term));
-            meals = (await response.json()).meals ?? [];
-          } catch {
-            return ""; // offline or blocked: use the fallback
-          }
-          // Only whole-word matches ("cake" must not match "Pancakes"). For the
-          // exact text typed, the last word may be unfinished ("ice crea" -> "Ice Cream").
-          const pattern = term === key ? `\\b${term}` : `\\b${term}(s|es)?\\b`;
-          const matches = meals.filter((meal) => new RegExp(pattern).test(meal.strMeal.toLowerCase()));
-          if (!matches.length) continue;
-          // Prefer the dish that shares the most words with the title.
-          const shared = (meal) => titleWords.filter((word) => meal.strMeal.toLowerCase().includes(word)).length;
-          const best = matches.reduce((a, b) => (shared(b) > shared(a) ? b : a));
-          return `${best.strMealThumb}/medium`;
-        }
+        const dish = await findDishPhoto(key);
+        if (dish?.full) return dish.url;
+        const product = await findProductPhoto(key);
+        if (product) return product;
+        if (dish) return dish.url;
+        // Don't remember failed requests, so the next try can succeed.
+        if (dish === null || product === null) photoCache.delete(key);
         return "";
       })()
     );
