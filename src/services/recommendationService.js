@@ -322,35 +322,13 @@ function lookUp(craving) {
   return cache.get(key);
 }
 
-// Each craving group has one photo in public/images/cravings/ (see CREDITS.md there).
-const photoFor = (groupId) => `${import.meta.env?.BASE_URL ?? "/"}images/cravings/${groupId}.jpg`;
-
-// Gives a recipe its group's photo, unless it already has its own image.
-const withPhoto = (recipe, groupId) => (recipe.image ? recipe : { ...recipe, image: photoFor(groupId) });
-
-// The group a craving fits best, for choosing a photo.
-function bestGroup(craving) {
-  const { groupScores, traits } = understand(craving);
-  let best = FALLBACK_GROUP;
-  let bestScore = 0;
-  for (const [groupId, group] of Object.entries(CRAVING_GROUPS)) {
-    const score = (groupScores[groupId] ?? 0) + similarity(traits, group.traits);
-    if (score > bestScore) {
-      best = groupId;
-      bestScore = score;
-    }
-  }
-  return best;
-}
-
+// Every recipe carries its own photo (recipe.image), so none is added here.
 export function getRecommendations(craving) {
   const entry = lookUp(craving);
   const position = entry.calls++;
-  const quick = entry.quick[position % entry.quick.length];
-  const elaborate = entry.elaborate[position % entry.elaborate.length];
   return {
-    quick: withPhoto(quick, groupOf(quick)),
-    elaborate: withPhoto(elaborate, groupOf(elaborate)),
+    quick: entry.quick[position % entry.quick.length],
+    elaborate: entry.elaborate[position % entry.elaborate.length],
   };
 }
 
@@ -360,87 +338,11 @@ export function isKnownCraving(craving) {
   return lookUp(craving).understood;
 }
 
-// ---------------------------------------------------------------------------
-// AI recommendations (optional)
-//
-// When VITE_RECOMMENDATION_API_URL is set in .env.local, getFreshRecommendations
-// asks the recommendation server (server/index.js) to write the two recipes
-// with AI. If the setting is missing, the server is not running, or its answer
-// is unusable, the built-in recipes above are used instead.
-// ---------------------------------------------------------------------------
-
-const AI_TIMEOUT_MS = 30000;
-
-const aiUrl = () => import.meta.env?.VITE_RECOMMENDATION_API_URL || "";
-
-// True when the app is set up to ask the recommendation server.
-// Turned off: the app only shows real, published recipes (src/data/recipes.js),
-// never recipes written by AI. The server code is kept in case the team decides
-// otherwise; remove `false &&` to turn it back on.
-export function isAiEnabled() {
-  return false && Boolean(aiUrl());
-}
-
-const isText = (value, max) => typeof value === "string" && value.trim().length > 0 && value.length <= max;
-const isTextList = (value) =>
-  Array.isArray(value) && value.length >= 2 && value.length <= 12 && value.every((item) => isText(item, 400));
-
-// Turns the server's answer into a recipe in the shared structure, or throws.
-function toRecipe(raw, category) {
-  if (
-    !raw ||
-    !isText(raw.title, 100) ||
-    !isText(raw.cookingTime, 30) ||
-    !isText(raw.description, 250) ||
-    !isTextList(raw.ingredients) ||
-    !isTextList(raw.instructions)
-  ) {
-    throw new Error(`The recommendation server returned an invalid ${category} recipe`);
-  }
-  return {
-    id: `ai-${category}-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-    title: raw.title.trim(),
-    category,
-    cookingTime: raw.cookingTime.trim(),
-    description: raw.description.trim(),
-    image: "",
-    ingredients: raw.ingredients.map((item) => item.trim()),
-    instructions: raw.instructions.map((item) => item.trim()),
-  };
-}
-
-async function askServer(craving, avoidTitles) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), AI_TIMEOUT_MS);
-  try {
-    const response = await fetch(aiUrl(), {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ craving, avoidTitles }),
-      signal: controller.signal,
-    });
-    if (!response.ok) throw new Error(`Recommendation server responded ${response.status}`);
-    const answer = await response.json();
-    return { quick: toRecipe(answer.quick, "quick"), elaborate: toRecipe(answer.elaborate, "elaborate") };
-  } finally {
-    clearTimeout(timer);
-  }
-}
-
 /**
- * Like getRecommendations, but uses AI when the recommendation server is set up.
- * Returns a Promise of { quick, elaborate, source }, where source is "ai" or "built-in".
- * avoidTitles: recipe titles already shown, so a refresh gives new ones.
+ * The same recommendations as getRecommendations, as a Promise, for Results.
+ * Returns { quick, elaborate, source: "built-in" }. Recipes always come from
+ * src/data/recipes.js (real, published recipes); none are written by AI.
  */
-export async function getFreshRecommendations(craving, avoidTitles = []) {
-  if (isAiEnabled() && String(craving ?? "").trim()) {
-    try {
-      const { quick, elaborate } = await askServer(craving, avoidTitles);
-      const groupId = bestGroup(craving);
-      return { quick: withPhoto(quick, groupId), elaborate: withPhoto(elaborate, groupId), source: "ai" };
-    } catch (error) {
-      console.warn("AI recommendations unavailable, using the built-in recipes instead:", error);
-    }
-  }
+export async function getFreshRecommendations(craving) {
   return { ...getRecommendations(craving), source: "built-in" };
 }

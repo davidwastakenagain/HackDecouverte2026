@@ -15,26 +15,9 @@ npm run dev
 
 Then open the address shown in the terminal (usually http://localhost:5173).
 
-## Optional: AI-written recipes
+## Recipes
 
-Without any setup, the app suggests recipes from its built-in list. To have Claude write recipes for any craving:
-
-1. Create a file called `.env.local` in the project root with these two lines:
-
-   ```
-   ANTHROPIC_API_KEY=your-key-here
-   VITE_RECOMMENDATION_API_URL=http://localhost:8787/api/recommendations
-   ```
-
-2. In a second terminal, start the recipe server:
-
-   ```
-   cd server
-   npm install
-   npm start
-   ```
-
-`.env.local` is ignored by git, so the key is never pushed. Each request costs money on the key's account. If the server is not running, the app goes back to the built-in recipes.
+All recipes are real, published recipes from [TheMealDB](https://www.themealdb.com), with their own photos, ingredients and steps, and a link to the original. Recipes with pregnancy food-safety risks were left out, and the list favours nutrients that matter in pregnancy. See the top of `src/data/recipes.js` for details. No recipes are written by AI.
 
 ## Working on it
 

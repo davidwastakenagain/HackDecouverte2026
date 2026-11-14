@@ -9,6 +9,16 @@
 // fish, high-mercury fish, raw or runny egg, rare meat, mould-ripened or blue
 // cheese, uncooked cured meat, game, caffeine) or are deep-fried.
 // cookingTime is estimated from the times written in each recipe's steps.
+//
+// Pregnancy nutrition (from each recipe's ingredient list, following the NHS
+// "Have a healthy diet in pregnancy" guidance; not a lab nutrient analysis):
+//   nutrients: [{ name, from }] - folate, iron, calcium, protein, omega-3,
+//              fibre and vitamin C, with the ingredients that provide them.
+//              Every recipe has at least two; recipes with more nutrients and
+//              less added sugar and salt were picked first.
+//   allergens: common allergens found in the ingredients. Always check labels.
+//   cautions:  practical pregnancy notes (cooking through, oily fish and tuna
+//              limits, pasteurised soft cheese, salt, added sugar).
 // Generated file: regenerate rather than editing entries by hand.
 
 export const recipes = [
@@ -38,7 +48,35 @@ export const recipes = [
       "Work the bulghar into the lamb with the spices, garlic (if using) and seasoning, then shape into 4 burgers. Brush with a little oil and fry or barbecue for about 5 mins each side until cooked all the way through. Serve in the buns (toasted if you like) with the tzatziki, tomatoes, onion and a few mint leaves."
     ],
     "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/lamb-burgers-tzatziki"
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/lamb-burgers-tzatziki",
+    "nutrients": [
+      {
+        "name": "Iron",
+        "from": [
+          "lamb mince"
+        ]
+      },
+      {
+        "name": "Calcium",
+        "from": [
+          "greek yogurt"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "lamb mince",
+          "greek yogurt"
+        ]
+      }
+    ],
+    "allergens": [
+      "Milk",
+      "Wheat (gluten)"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks."
+    ]
   },
   {
     "id": "burger-elaborate-1",
@@ -71,68 +109,32 @@ export const recipes = [
       "Meanwhile, toast buns in oven or toaster oven until golden, 3-5 minutes. Divide toasted buns between plates and fill with as much BBQ pork as you’d like. Top with pickled onion and hot sauce. Serve with sweet potato wedges on the side."
     ],
     "sourceName": "TheMealDB",
-    "sourceUrl": "https://www.themealdb.com/meal/52995"
-  },
-  {
-    "id": "fries-quick-1",
-    "title": "Runner Bean Mash (Snijbonen Stamppot)",
-    "category": "quick",
-    "cookingTime": "About 20 minutes (estimated)",
-    "description": "A Netherlands side dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/urq5w21777540535.jpg",
-    "ingredients": [
-      "400g Runner Beans",
-      "1 clove Garlic",
-      "1 chopped Onion",
-      "800g Potatoes",
-      "25g Butter",
-      "1 tablespoon Mustard",
-      "1 dash Milk",
-      "100g Cheese",
-      "75g Bacon",
-      "Pinch Salt"
+    "sourceUrl": "https://www.themealdb.com/meal/52995",
+    "nutrients": [
+      {
+        "name": "Protein",
+        "from": [
+          "pork"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "lime",
+          "tomato ketchup",
+          "pepper"
+        ]
+      }
     ],
-    "instructions": [
-      "Wash and chop the runner beans. Place in a saucepan with salted water and bring to a boil.",
-      "Cook the beans for about 10 minutes or until al dente. Drain and set aside.",
-      "Meanwhile, add the potatoes and cook until tender.",
-      "Heat a small skillet with a little butter and sauté the onion until translucent. Add the garlic and cook briefly. Add the runner beans to the pan and stir-fry for a few minutes.",
-      "Meanwhile, mash the potatoes with a masher. Add a knob of butter and a splash of milk. Add the bean mixture and grated cheese. Season with salt, pepper and mustard.",
-      "Fry the bacon and serve with the bean mash."
+    "allergens": [
+      "Wheat (gluten)"
     ],
-    "sourceName": "insimoneskitchen.com",
-    "sourceUrl": "https://insimoneskitchen.com/runner-bean-mash/#recipe"
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks."
+    ]
   },
   {
     "id": "fries-elaborate-1",
-    "title": "Bolani with Potato Filling",
-    "category": "elaborate",
-    "cookingTime": "About 50 minutes (estimated)",
-    "description": "A side dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/de0sns1779555283.jpg",
-    "ingredients": [
-      "450g Plain Flour",
-      "225ml Water",
-      "3 tsp Salt",
-      "900g Potatoes",
-      "50g Spring Onions",
-      "1 tsp Black Pepper",
-      "For frying Vegetable Oil"
-    ],
-    "instructions": [
-      "Put the flour and teaspoon of salt in a mixing bowl. Slowly adding as much water as is required. Mix to form a stiff dough.",
-      "Place the dough on a clean work surface and knead for about 5-10 minutes until the dough is elastic, smooth and shiny. Form the dough into a ball, cover with a damp cloth and set aside for at least half an hour.",
-      "Peel and wash the potatoes and boil them in salted water until soft. Drain off the water and mash thoroughly. Add the spring onions, salt and black pepper.",
-      "Divide the dough into 3 or 4 balls. Roll out each ball as thinly as possible on a lightly floured surface (the thickness should be no more than 1.5mm - if the dough is too thick the Bolani will be tough)",
-      "Take a round cutter of 13-15cm (I often use a pan lid or tid lid), and cut as many rounds as possible. On each round spread 1-2 tablespoons of the mashed potato. Moisten the edges of the dough, fold over and seal shut.",
-      "The Bolani should be spread out on a lightly floured surface until ready to fry. Heat enough vegetable oil in a frying-pan and shallow fry one or two Bolani at a time, browning on both sides.",
-      "Make sure to keep the fried Bolani warm until all are finished, and serve straight away."
-    ],
-    "sourceName": "afghanaid.org.uk",
-    "sourceUrl": "https://www.afghanaid.org.uk/brilliant-bolani-with-potato-filling"
-  },
-  {
-    "id": "fries-elaborate-2",
     "title": "Baked Yuca Fries",
     "category": "elaborate",
     "cookingTime": "About 45 minutes (estimated)",
@@ -158,170 +160,79 @@ export const recipes = [
       "Serve fries immediately with dipping sauce."
     ],
     "sourceName": "delish.com",
-    "sourceUrl": "https://www.delish.com/cooking/recipe-ideas/a36702083/yuca-fries-recipe/"
+    "sourceUrl": "https://www.delish.com/cooking/recipe-ideas/a36702083/yuca-fries-recipe/",
+    "nutrients": [
+      {
+        "name": "Folate",
+        "from": [
+          "avocado"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "lime"
+        ]
+      }
+    ],
+    "allergens": [
+      "Milk"
+    ],
+    "cautions": []
   },
   {
-    "id": "fries-elaborate-3",
-    "title": "Sweet potato salad",
-    "category": "elaborate",
-    "cookingTime": "About 45 minutes (estimated)",
-    "description": "A Turkish vegetarian dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/z458v91763817681.jpg",
-    "ingredients": [
-      "1200g Sweet Potatoes",
-      "1 tablespoon Olive Oil",
-      "2 Shallots",
-      "4 sliced Spring Onions",
-      "Bunch Chives",
-      "5 tablespoons Sherry vinegar",
-      "2 tablespoons Extra Virgin Olive Oil",
-      "2 tablespoons Honey"
-    ],
-    "instructions": [
-      "Heat oven to 200C/180C fan/gas 6. Toss the sweet potato chunks with the olive oil and some seasoning, and spread on a baking parchment-lined baking sheet. Roast for 30 - 35 mins until tender and golden. Cool at room temperature.",
-      "When just about cool whisk together all the dressing ingredients with a little more seasoning and gently toss through the potato chunks – use your hands to avoid breaking them up."
-    ],
-    "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/sweet-potato-salad"
-  },
-  {
-    "id": "fries-elaborate-4",
-    "title": "Mustard champ",
-    "category": "elaborate",
-    "cookingTime": "About 25 minutes (estimated)",
-    "description": "An Irish side dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/o7p9581608589317.jpg",
-    "ingredients": [
-      "1kg Potatoes",
-      "200ml Milk",
-      "50g Butter",
-      "2 tbs Mustard",
-      "Bunch Spring Onions",
-      "Bunch Spring Onions"
-    ],
-    "instructions": [
-      "Boil the potatoes for 15 mins or until tender. Drain, then mash.",
-      "Heat the milk and half the butter in the corner of the pan, then beat into the mash, along with the wholegrain mustard.",
-      "Gently fry the spring onions in the remaining butter for 2 mins until just soft but still a perky green. Fold into the mash and serve. Great with gammon or to top a fish pie."
-    ],
-    "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/mustard-champ"
-  },
-  {
-    "id": "pizza-elaborate-1",
-    "title": "Pizza Express Margherita",
-    "category": "elaborate",
-    "cookingTime": "About 45 minutes (estimated)",
-    "description": "An Italian dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/x0lk931587671540.jpg",
-    "ingredients": [
-      "150ml Water",
-      "1 tsp Sugar",
-      "15g Yeast",
-      "225g Plain Flour",
-      "1 1/2 tsp Salt",
-      "Drizzle Olive Oil",
-      "80g Passata",
-      "70g Mozzarella",
-      "Peeled and Sliced Oregano",
-      "Leaves Basil",
-      "Pinch Black Pepper"
-    ],
-    "instructions": [
-      "1 Preheat the oven to 230°C.",
-      "2 Add the sugar and crumble the fresh yeast into warm water.",
-      "3 Allow the mixture to stand for 10 – 15 minutes in a warm place (we find a windowsill on a sunny day works best) until froth develops on the surface.",
-      "4 Sift the flour and salt into a large mixing bowl, make a well in the middle and pour in the yeast mixture and olive oil.",
-      "5 Lightly flour your hands, and slowly mix the ingredients together until they bind.",
-      "6 Generously dust your surface with flour.",
-      "7 Throw down the dough and begin kneading for 10 minutes until smooth, silky and soft.",
-      "8 Place in a lightly oiled, non-stick baking tray (we use a round one, but any shape will do!)",
-      "9 Spread the passata on top making sure you go to the edge.",
-      "10 Evenly place the mozzarella (or other cheese) on top, season with the oregano and black pepper, then drizzle with a little olive oil.",
-      "11 Cook in the oven for 10 – 12 minutes until the cheese slightly colours.",
-      "12 When ready, place the basil leaf on top and tuck in!"
-    ],
-    "sourceName": "dailymail.co.uk",
-    "sourceUrl": "https://www.dailymail.co.uk/femail/food/article-8240361/Pizza-Express-release-secret-recipe-Margherita-Pizza-make-home.html"
-  },
-  {
-    "id": "pizza-elaborate-2",
-    "title": "Phaphatha Flatbreads",
-    "category": "elaborate",
-    "cookingTime": "About 45 minutes (estimated)",
-    "description": "A side dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/um1phx1782504510.jpg",
-    "ingredients": [
-      "500g Flour",
-      "1 tablespoon Baking Powder",
-      "1 1/2 tsp Salt",
-      "2 tsp Sugar",
-      "1 cup Milk"
-    ],
-    "instructions": [
-      "In a stand mixer bowl, combine the dry ingredients: flour, baking powder, salt, and sugar.",
-      "With the dough hook on low, drizzle in the milk.",
-      "Continue to knead until a small ball of dough is formed.",
-      "Remove the dough from the bowl, oil the bowl lightly, and return the ball of dough to the bowl. Cover and set aside to rest for 15-30 minutes.",
-      "Divide the ball of dough into 12 portions, in roughly even lumps.",
-      "Heat a small amount of oil in a large, flat skillet. Flatten a ball of dough with your palm and work it into a slightly larger round with the back of your hand, leaving it a thick round about 10cm (4\") in diameter. Place in the hot skillet. Repeat with as many rounds as will fit in your skillet.",
-      "After 3-4 minutes, once the bottom is slightly browned in spots, flip and cook for another 1-2 minutes on the second side."
-    ],
-    "sourceName": "kosherworldkitchen.com",
-    "sourceUrl": "https://kosherworldkitchen.com/phaphatha/#recipe"
-  },
-  {
-    "id": "chocolate-elaborate-1",
-    "title": "Chocolate Raspberry Brownies",
-    "category": "elaborate",
-    "cookingTime": "About 45 minutes (estimated)",
-    "description": "An United States dessert dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/yypvst1511386427.jpg",
-    "ingredients": [
-      "200g Dark Chocolate",
-      "100g Milk Chocolate",
-      "250g Salted Butter",
-      "400g Light Brown Soft Sugar",
-      "4 large Eggs",
-      "140g Plain Flour",
-      "50g Cocoa",
-      "200g Raspberries"
-    ],
-    "instructions": [
-      "Heat oven to 180C/160C fan/gas 4. Line a 20 x 30cm baking tray tin with baking parchment. Put the chocolate, butter and sugar in a pan and gently melt, stirring occasionally with a wooden spoon. Remove from the heat.",
-      "Stir the eggs, one by one, into the melted chocolate mixture. Sieve over the flour and cocoa, and stir in. Stir in half the raspberries, scrape into the tray, then scatter over the remaining raspberries. Bake on the middle shelf for 30 mins or, if you prefer a firmer texture, for 5 mins more. Cool before slicing into squares. Store in an airtight container for up to 3 days."
-    ],
-    "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/2121648/bestever-chocolate-raspberry-brownies"
-  },
-  {
-    "id": "chocolate-elaborate-2",
-    "title": "Chocolate Coconut Squares",
+    "id": "fries-elaborate-2",
+    "title": "Apple Potato Mash (Hete bliksem)",
     "category": "elaborate",
     "cookingTime": "About 30 minutes (estimated)",
-    "description": "An Australian dessert dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/8oupz51761848432.jpg",
+    "description": "A Netherlands side dish from TheMealDB recipe collection.",
+    "image": "https://www.themealdb.com/images/media/meals/pa03n41777540582.jpg",
     "ingredients": [
-      "100g Butter",
-      "100g Caster Sugar",
-      "2 Egg",
-      "140g Self-raising Flour",
-      "1 teaspoon Baking Powder",
-      "2 tablespoons Cocoa Powder",
-      "2 tablespoons Milk",
-      "100g Plain Chocolate",
-      "25g Butter",
-      "100g Icing Sugar",
-      "100g Desiccated Coconut"
+      "250g Apples",
+      "250g Potatoes",
+      "1 Cinnamon Stick",
+      "1 tsp Maple Syrup",
+      "Sprinkling Ground Cinnamon",
+      "4 Bacon",
+      "200g Cheese",
+      "Pinch Salt",
+      "1 Egg",
+      "50g Sesame Seed"
     ],
     "instructions": [
-      "Heat oven to 180C/fan 160C/gas 4. Butter and line the base of a 20cm square baking tin. Beat together the butter and sugar until pale and creamy, then beat in the eggs. Add 1 tbsp of the flour if the mix starts to curdle.",
-      "Sieve in the flour, baking powder and cocoa and fold in with a metal spoon. Stir in the milk. Scrape mix into the tin and level the top. Bake for 18-20 mins or until the cake springs back when pressed. Allow to cool in the tin.",
-      "To make the icing, put the chocolate, butter and 4 tbsp water in a pan and gently heat until melted. Allow to cool slightly, then beat in the icing sugar.",
-      "Remove cake from tin and peel away paper. Cut into 16 squares. Dip the squares into the icing, then roll in the coconut. Allow to set on cooling rack."
+      "Clean and peel the potatoes and cut them into even size chunks. Boil them in salted water for about 10 min and then add the cleaned and chopped apples into the boiling water. Add the cinnamon stick as well. Leave to boil for another 10 minutes or until both apples and potatoes are to your liking. I like mine to be fairly chunky but that is a personal preference",
+      "In the mean time bake the streaky bacon in a dry frying pan until crispy and set aside to drain on paper towels.",
+      "Slice a few apple pieces and melt a little butter in a fryin pan. Add the apple slices to it and add a bit of maple syrup into the pan as well as some cinnamon. Let it simmer until the apple is soft.",
+      "Prepare a plate with one whisked egg and one plate with sesame seeds. Cut your cheese into the required size. The smaller it is, the easier it is too handle.",
+      "Dip the cheese into the egg and make sure it coats all sides. Then dip the cheese into the sesame seeds and make sure it is covered everywhere.",
+      "Heat a non stick frying pan on high until nice and hot. Put the cheese slice in and bake until the sesame seeds are brown. You have to do this rather quickly or the cheese will melt completely. Turn and bake the other side.",
+      "Drain the apples and potatoes and mash them together. Taste and add cinnamon and salt where needed. Remove the cinnamon stick before mashing"
     ],
-    "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/isaacs-chocolate-coconut-squares"
+    "sourceName": "insimoneskitchen.com",
+    "sourceUrl": "https://insimoneskitchen.com/hete-bliksem-recipe-hot-lightning/#recipe",
+    "nutrients": [
+      {
+        "name": "Calcium",
+        "from": [
+          "cheese"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "egg"
+        ]
+      }
+    ],
+    "allergens": [
+      "Milk",
+      "Egg",
+      "Sesame"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Can be salty (bacon). Go easy on any extra salt."
+    ]
   },
   {
     "id": "fried-chicken-elaborate-1",
@@ -343,33 +254,31 @@ export const recipes = [
       "Arrange the drumsticks on the foil, spaced apart. Coat the chicken with any marinade left in the bowl, then roast for 35-40 mins until tender. Wrap in foil or pack into a food container."
     ],
     "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/fragrant-thai-drumsticks"
-  },
-  {
-    "id": "fried-chicken-elaborate-2",
-    "title": "Stir-fried chicken with chillies & basil",
-    "category": "elaborate",
-    "cookingTime": "About 35 minutes (estimated)",
-    "description": "A Thai chicken dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/el64dy1763483009.jpg",
-    "ingredients": [
-      "2 tablespoons Vegetable Oil",
-      "450g Chicken",
-      "3 tblsp chopped Garlic",
-      "3 tblsp chopped Shallots",
-      "3 Red Chilli",
-      "2 tablespoons Fish Sauce",
-      "2 tsp Soy Sauce",
-      "2 tsp Sugar",
-      "Handful Basil Leaves"
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/fragrant-thai-drumsticks",
+    "nutrients": [
+      {
+        "name": "Folate",
+        "from": [
+          "orange"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "chicken drumsticks"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "orange"
+        ]
+      }
     ],
-    "instructions": [
-      "Heat a wok or large frying pan until it is very hot, then add 1 tbsp of the oil. When it is very hot, add the chicken and stir-fry over a high heat for 8-10 minutes, until browned all over. Using a slotted spoon, take the chicken from the pan and set aside.",
-      "Reheat the wok and add the remaining oil. Toss in the garlic and shallots and stir fry for 3 minutes, until golden brown.",
-      "Return the chicken to the wok and add the chillies, fish sauce, dark soy sauce and sugar. Stir fry over a high heat for a further 8-10 minutes or until the chicken is cooked through. Stir in the basil leaves and serve at once."
-    ],
-    "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/ken-homs-stir-fried-chicken-chillies-basil"
+    "allergens": [],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks."
+    ]
   },
   {
     "id": "pasta-quick-1",
@@ -394,7 +303,49 @@ export const recipes = [
       "Drain the pasta and add to the pan with 2-3 tbsp of the cooking water. Toss everything together well, then divide between plates and serve, scattered with Parmesan."
     ],
     "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/pilchard-puttanesca"
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/pilchard-puttanesca",
+    "nutrients": [
+      {
+        "name": "Iron",
+        "from": [
+          "pilchards"
+        ]
+      },
+      {
+        "name": "Calcium",
+        "from": [
+          "pilchards",
+          "parmesan"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "pilchards"
+        ]
+      },
+      {
+        "name": "Omega-3",
+        "from": [
+          "pilchards"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "tomato puree"
+        ]
+      }
+    ],
+    "allergens": [
+      "Milk",
+      "Fish",
+      "Wheat (gluten)"
+    ],
+    "cautions": [
+      "Contains oily fish (pilchards). The NHS advises no more than 2 portions of oily fish a week in pregnancy.",
+      "Can be salty (black olives). Go easy on any extra salt."
+    ]
   },
   {
     "id": "pasta-quick-2",
@@ -418,42 +369,153 @@ export const recipes = [
       "Add the parsley and parmesan, toss well and splash in the pasta water, to moisten. Hand round extra parmesan at the table."
     ],
     "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/spaghetti-spanish-flavours"
-  },
-  {
-    "id": "pasta-quick-3",
-    "title": "Chilli prawn linguine",
-    "category": "quick",
-    "cookingTime": "About 15 minutes (estimated)",
-    "description": "An Italian pasta dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/usywpp1511189717.jpg",
-    "ingredients": [
-      "280g Linguine Pasta",
-      "200g Sugar Snap Peas",
-      "2 tblsp Olive Oil",
-      "2 cloves chopped Garlic Clove",
-      "1 large Red Chilli",
-      "24 Skinned King Prawns",
-      "12 Cherry Tomatoes",
-      "Handful Basil Leaves",
-      "Leaves Lettuce",
-      "to serve Bread",
-      "2 tbsp Fromage Frais",
-      "Grated Zest of 2 Lime",
-      "2 tsp Caster Sugar"
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/spaghetti-spanish-flavours",
+    "nutrients": [
+      {
+        "name": "Calcium",
+        "from": [
+          "parmesan cheese"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "red pepper"
+        ]
+      }
     ],
-    "instructions": [
-      "Mix the dressing ingredients in a small bowl and season with salt and pepper. Set aside.",
-      "Cook the pasta according to the packet instructions. Add the sugar snap peas for the last minute or so of cooking time.",
-      "Meanwhile, heat the oil in a wok or large frying pan, toss in the garlic and chilli and cook over a fairly gentle heat for about 30 seconds without letting the garlic brown. Tip in the prawns and cook over a high heat, stirring frequently, for about 3 minutes until they turn pink.",
-      "Add the tomatoes and cook, stirring occasionally, for 3 minutes until they just start to soften. Drain the pasta and sugar snaps well, then toss into the prawn mixture. Tear in the basil leaves, stir, and season with salt and pepper.",
-      "Serve with salad leaves drizzled with the lime dressing, and warm crusty bread."
+    "allergens": [
+      "Milk",
+      "Wheat (gluten)"
     ],
-    "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/1269/chilli-prawn-linguine"
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Can be salty (chorizo). Go easy on any extra salt."
+    ]
   },
   {
     "id": "pasta-elaborate-1",
+    "title": "Spaghetti Bolognese",
+    "category": "elaborate",
+    "cookingTime": "About 45 minutes (estimated)",
+    "description": "An Italian beef dish from TheMealDB recipe collection.",
+    "image": "https://www.themealdb.com/images/media/meals/sutysw1468247559.jpg",
+    "ingredients": [
+      "2 onions",
+      "1tbsp olive oil",
+      "1 clove garlic",
+      "500g lean minced beef",
+      "90g mushrooms",
+      "1tsp dried oregano",
+      "400g can tomatoes",
+      "300ml hot beef stock",
+      "1tbsp tomato puree",
+      "1tbsp worcestershire sauce",
+      "350g spaghetti",
+      "Topping parmesan"
+    ],
+    "instructions": [
+      "Put the onion and oil in a large pan and fry over a fairly high heat for 3-4 mins. Add the garlic and mince and fry until they both brown. Add the mushrooms and herbs, and cook for another couple of mins.",
+      "Stir in the tomatoes, beef stock, tomato ketchup or purée, Worcestershire sauce and seasoning. Bring to the boil, then reduce the heat, cover and simmer, stirring occasionally, for 30 mins.",
+      "Meanwhile, cook the spaghetti in a large pan of boiling, salted water, according to packet instructions. Drain well, run hot water through it, put it back in the pan and add a dash of olive oil, if you like, then stir in the meat sauce. Serve in hot bowls and hand round Parmesan cheese, for sprinkling on top."
+    ],
+    "sourceName": "TheMealDB",
+    "sourceUrl": "https://www.themealdb.com/meal/52770",
+    "nutrients": [
+      {
+        "name": "Iron",
+        "from": [
+          "lean minced beef",
+          "hot beef stock"
+        ]
+      },
+      {
+        "name": "Calcium",
+        "from": [
+          "parmesan"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "lean minced beef"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "tomatoes",
+          "tomato puree"
+        ]
+      }
+    ],
+    "allergens": [
+      "Milk",
+      "Wheat (gluten)"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks."
+    ]
+  },
+  {
+    "id": "pasta-elaborate-2",
+    "title": "Chicken Fajita Mac and Cheese",
+    "category": "elaborate",
+    "cookingTime": "About 30 minutes (estimated)",
+    "description": "An United States chicken dish from TheMealDB recipe collection.",
+    "image": "https://www.themealdb.com/images/media/meals/qrqywr1503066605.jpg",
+    "ingredients": [
+      "500g macaroni",
+      "2 cups chicken stock",
+      "1/2 cup heavy cream",
+      "1 packet fajita seasoning",
+      "1 tsp salt",
+      "3 diced chicken breast",
+      "2 tbsp olive oil",
+      "1 small finely diced onion",
+      "2 finely diced red pepper",
+      "2 cloves minced garlic",
+      "1 cup cheddar cheese",
+      "garnish chopped parsley"
+    ],
+    "instructions": [
+      "Fry your onion, peppers and garlic in olive oil until nicely translucent. Make a well in your veg and add your chicken. Add your seasoning and salt. Allow to colour slightly.",
+      "Add your cream, stock and macaroni.",
+      "Cook on low for 20 minutes. Add your cheeses, stir to combine.",
+      "Top with roasted peppers and parsley."
+    ],
+    "sourceName": "twistedfood.co.uk",
+    "sourceUrl": "http://twistedfood.co.uk/chicken-fajita-mac-n-cheese/",
+    "nutrients": [
+      {
+        "name": "Calcium",
+        "from": [
+          "cheddar cheese"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "chicken breast"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "red pepper"
+        ]
+      }
+    ],
+    "allergens": [
+      "Milk",
+      "Wheat (gluten)"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks."
+    ]
+  },
+  {
+    "id": "pasta-elaborate-3",
     "title": "Mediterranean Pasta Salad",
     "category": "elaborate",
     "cookingTime": "About 50 minutes (estimated)",
@@ -481,146 +543,34 @@ export const recipes = [
       "Sprinkle the pasta with a generous grind of black pepper and drizzle with the remaining olive oil just before serving."
     ],
     "sourceName": "thelemonsqueezy.com",
-    "sourceUrl": "https://thelemonsqueezy.com/recipe/mediterranean-pasta-salad/"
-  },
-  {
-    "id": "pasta-elaborate-2",
-    "title": "Spaghetti Bolognese",
-    "category": "elaborate",
-    "cookingTime": "About 45 minutes (estimated)",
-    "description": "An Italian beef dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/sutysw1468247559.jpg",
-    "ingredients": [
-      "2 onions",
-      "1tbsp olive oil",
-      "1 clove garlic",
-      "500g lean minced beef",
-      "90g mushrooms",
-      "1tsp dried oregano",
-      "400g can tomatoes",
-      "300ml hot beef stock",
-      "1tbsp tomato puree",
-      "1tbsp worcestershire sauce",
-      "350g spaghetti",
-      "Topping parmesan"
+    "sourceUrl": "https://thelemonsqueezy.com/recipe/mediterranean-pasta-salad/",
+    "nutrients": [
+      {
+        "name": "Calcium",
+        "from": [
+          "mozzarella balls"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "baby plum tomatoes",
+          "pepper"
+        ]
+      }
     ],
-    "instructions": [
-      "Put the onion and oil in a large pan and fry over a fairly high heat for 3-4 mins. Add the garlic and mince and fry until they both brown. Add the mushrooms and herbs, and cook for another couple of mins.",
-      "Stir in the tomatoes, beef stock, tomato ketchup or purée, Worcestershire sauce and seasoning. Bring to the boil, then reduce the heat, cover and simmer, stirring occasionally, for 30 mins.",
-      "Meanwhile, cook the spaghetti in a large pan of boiling, salted water, according to packet instructions. Drain well, run hot water through it, put it back in the pan and add a dash of olive oil, if you like, then stir in the meat sauce. Serve in hot bowls and hand round Parmesan cheese, for sprinkling on top."
+    "allergens": [
+      "Milk",
+      "Fish"
     ],
-    "sourceName": "TheMealDB",
-    "sourceUrl": "https://www.themealdb.com/meal/52770"
-  },
-  {
-    "id": "pasta-elaborate-3",
-    "title": "Chicken Fajita Mac and Cheese",
-    "category": "elaborate",
-    "cookingTime": "About 30 minutes (estimated)",
-    "description": "An United States chicken dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/qrqywr1503066605.jpg",
-    "ingredients": [
-      "500g macaroni",
-      "2 cups chicken stock",
-      "1/2 cup heavy cream",
-      "1 packet fajita seasoning",
-      "1 tsp salt",
-      "3 diced chicken breast",
-      "2 tbsp olive oil",
-      "1 small finely diced onion",
-      "2 finely diced red pepper",
-      "2 cloves minced garlic",
-      "1 cup cheddar cheese",
-      "garnish chopped parsley"
-    ],
-    "instructions": [
-      "Fry your onion, peppers and garlic in olive oil until nicely translucent. Make a well in your veg and add your chicken. Add your seasoning and salt. Allow to colour slightly.",
-      "Add your cream, stock and macaroni.",
-      "Cook on low for 20 minutes. Add your cheeses, stir to combine.",
-      "Top with roasted peppers and parsley."
-    ],
-    "sourceName": "twistedfood.co.uk",
-    "sourceUrl": "http://twistedfood.co.uk/chicken-fajita-mac-n-cheese/"
-  },
-  {
-    "id": "pasta-elaborate-4",
-    "title": "Spicy Arrabiata Penne",
-    "category": "elaborate",
-    "cookingTime": "About 25 minutes (estimated)",
-    "description": "An Italian vegetarian dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg",
-    "ingredients": [
-      "1 pound penne rigate",
-      "1/4 cup olive oil",
-      "3 cloves garlic",
-      "1 tin chopped tomatoes",
-      "1/2 teaspoon red chilli flakes",
-      "1/2 teaspoon italian seasoning",
-      "6 leaves basil",
-      "sprinkling Parmigiano-Reggiano"
-    ],
-    "instructions": [
-      "Bring a large pot of water to a boil. Add kosher salt to the boiling water, then add the pasta. Cook according to the package instructions, about 9 minutes.",
-      "In a large skillet over medium-high heat, add the olive oil and heat until the oil starts to shimmer. Add the garlic and cook, stirring, until fragrant, 1 to 2 minutes. Add the chopped tomatoes, red chile flakes, Italian seasoning and salt and pepper to taste. Bring to a boil and cook for 5 minutes. Remove from the heat and add the chopped basil.",
-      "Drain the pasta and add it to the sauce. Garnish with Parmigiano-Reggiano flakes and more basil and serve warm."
-    ],
-    "sourceName": "TheMealDB",
-    "sourceUrl": "https://www.themealdb.com/meal/52771"
+    "cautions": [
+      "Contains tuna. The NHS advises no more than 4 medium cans of tuna a week in pregnancy.",
+      "Use pasteurised mozzarella balls (check the label).",
+      "Can be salty (green olives). Go easy on any extra salt."
+    ]
   },
   {
     "id": "tacos-elaborate-1",
-    "title": "Mango Tropical Salsa",
-    "category": "elaborate",
-    "cookingTime": "About 45 minutes (estimated)",
-    "description": "A side dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/ukeksq1784395551.jpg",
-    "ingredients": [
-      "1/4 cup Red Onions",
-      "1/4 cup Red Pepper",
-      "2 1/2 cups Tomato",
-      "1 1/2 cups Mango",
-      "1 cup Avocado",
-      "1/4 cup Cilantro",
-      "1/3 cup Lime juice",
-      "1 tsp Salt",
-      "1 tsp Black Pepper"
-    ],
-    "instructions": [
-      "In a large bowl, combine all the ingredients together, mix well! Cover and refrigerate for at least 15 min before serving. Serve with chips",
-      "I recommend to make this salsa just 15 to 20 minutes before serving, it you make it to early it will get a little to soupy. Have everything chopped and ready and just put it together when your guest arrive."
-    ],
-    "sourceName": "recipesfromcostarica.com",
-    "sourceUrl": "https://www.recipesfromcostarica.com/recipes"
-  },
-  {
-    "id": "tacos-elaborate-2",
-    "title": "Pollo en Salsa",
-    "category": "elaborate",
-    "cookingTime": "About 45 minutes (estimated)",
-    "description": "A chicken dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/4o13oe1784396585.jpg",
-    "ingredients": [
-      "4 Chicken Thighs",
-      "1 tsp Oregano",
-      "1 tsp Cumin",
-      "1 tsp Salt",
-      "1 tsp Pepper",
-      "1 1/2 tsp Achiote Paste",
-      "4 Cloves Crushed Garlic",
-      "1 medium Onion",
-      "1 large Tomato",
-      "1/2 Red Pepper",
-      "2 cups Chicken Stock"
-    ],
-    "instructions": [
-      "Chopped pepper, onion and tomato and set aside. Turn on Instant Pot in sauteed setting for 8 minutes. Add a little bit of olive oil and add, onion, garlic, tomato, bell pepper, cumin, oregano salt and pepper and sauteed for 4 minutes.",
-      "Add the chicken and cook for 2 minutes on each side often, mixing often. Add the chicken stock , cover and set the pressure cooker on high for 20 minutes. When done release the pressure and if need it, add a little bit more salt. I like to serve it with some of the juice over rice and beans."
-    ],
-    "sourceName": "recipesfromcostarica.com",
-    "sourceUrl": "https://www.recipesfromcostarica.com/recipes"
-  },
-  {
-    "id": "tacos-elaborate-3",
     "title": "Chickpea Fajitas",
     "category": "elaborate",
     "cookingTime": "About 35 minutes (estimated)",
@@ -648,7 +598,130 @@ export const recipes = [
       "Put everything on the table and build the fajitas : spread a little of the harissa cream over the tortilla, top with roasted chickpeas, guacamole, pickled salsa and coriander, if you like. Serve with the lime wedges for squeezing over."
     ],
     "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/chickpea-fajitas"
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/chickpea-fajitas",
+    "nutrients": [
+      {
+        "name": "Folate",
+        "from": [
+          "chickpeas",
+          "avocado"
+        ]
+      },
+      {
+        "name": "Iron",
+        "from": [
+          "chickpeas"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "chickpeas"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "tomatoes",
+          "lime"
+        ]
+      }
+    ],
+    "allergens": [
+      "Milk"
+    ],
+    "cautions": []
+  },
+  {
+    "id": "tacos-elaborate-2",
+    "title": "Mango Tropical Salsa",
+    "category": "elaborate",
+    "cookingTime": "About 45 minutes (estimated)",
+    "description": "A side dish from TheMealDB recipe collection.",
+    "image": "https://www.themealdb.com/images/media/meals/ukeksq1784395551.jpg",
+    "ingredients": [
+      "1/4 cup Red Onions",
+      "1/4 cup Red Pepper",
+      "2 1/2 cups Tomato",
+      "1 1/2 cups Mango",
+      "1 cup Avocado",
+      "1/4 cup Cilantro",
+      "1/3 cup Lime juice",
+      "1 tsp Salt",
+      "1 tsp Black Pepper"
+    ],
+    "instructions": [
+      "In a large bowl, combine all the ingredients together, mix well! Cover and refrigerate for at least 15 min before serving. Serve with chips",
+      "I recommend to make this salsa just 15 to 20 minutes before serving, it you make it to early it will get a little to soupy. Have everything chopped and ready and just put it together when your guest arrive."
+    ],
+    "sourceName": "recipesfromcostarica.com",
+    "sourceUrl": "https://www.recipesfromcostarica.com/recipes",
+    "nutrients": [
+      {
+        "name": "Folate",
+        "from": [
+          "avocado"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "red pepper",
+          "tomato",
+          "mango",
+          "lime juice"
+        ]
+      }
+    ],
+    "allergens": [],
+    "cautions": []
+  },
+  {
+    "id": "tacos-elaborate-3",
+    "title": "Pollo en Salsa",
+    "category": "elaborate",
+    "cookingTime": "About 45 minutes (estimated)",
+    "description": "A chicken dish from TheMealDB recipe collection.",
+    "image": "https://www.themealdb.com/images/media/meals/4o13oe1784396585.jpg",
+    "ingredients": [
+      "4 Chicken Thighs",
+      "1 tsp Oregano",
+      "1 tsp Cumin",
+      "1 tsp Salt",
+      "1 tsp Pepper",
+      "1 1/2 tsp Achiote Paste",
+      "4 Cloves Crushed Garlic",
+      "1 medium Onion",
+      "1 large Tomato",
+      "1/2 Red Pepper",
+      "2 cups Chicken Stock"
+    ],
+    "instructions": [
+      "Chopped pepper, onion and tomato and set aside. Turn on Instant Pot in sauteed setting for 8 minutes. Add a little bit of olive oil and add, onion, garlic, tomato, bell pepper, cumin, oregano salt and pepper and sauteed for 4 minutes.",
+      "Add the chicken and cook for 2 minutes on each side often, mixing often. Add the chicken stock , cover and set the pressure cooker on high for 20 minutes. When done release the pressure and if need it, add a little bit more salt. I like to serve it with some of the juice over rice and beans."
+    ],
+    "sourceName": "recipesfromcostarica.com",
+    "sourceUrl": "https://www.recipesfromcostarica.com/recipes",
+    "nutrients": [
+      {
+        "name": "Protein",
+        "from": [
+          "chicken thighs"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "pepper",
+          "tomato",
+          "red pepper"
+        ]
+      }
+    ],
+    "allergens": [],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks."
+    ]
   },
   {
     "id": "tacos-elaborate-4",
@@ -672,10 +745,119 @@ export const recipes = [
       "Serve warm."
     ],
     "sourceName": "TheMealDB",
-    "sourceUrl": "https://www.themealdb.com/meal/52765"
+    "sourceUrl": "https://www.themealdb.com/meal/52765",
+    "nutrients": [
+      {
+        "name": "Calcium",
+        "from": [
+          "shredded monterey jack cheese"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "chicken breasts"
+        ]
+      }
+    ],
+    "allergens": [
+      "Milk"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks."
+    ]
   },
   {
     "id": "asian-quick-1",
+    "title": "Mee goreng mamak",
+    "category": "quick",
+    "cookingTime": "About 10 minutes (estimated)",
+    "description": "A Malaysian seafood dish from TheMealDB recipe collection.",
+    "image": "https://www.themealdb.com/images/media/meals/xquakq1619787532.jpg",
+    "ingredients": [
+      "50g Peanuts",
+      "15g Chilli",
+      "10g Prawns",
+      "5 tbs Oil",
+      "750 ml Water",
+      "1/2 tbs Tamarind Paste",
+      "250g Potatoes",
+      "2 Red Onions",
+      "4 Garlic Clove",
+      "30g Cabbage",
+      "30g Chinese Broccoli",
+      "1 Tofu",
+      "1 tbs Soy Sauce",
+      "4 Noodles",
+      "1 Egg"
+    ],
+    "instructions": [
+      "Heat oil in a pan at medium heat. Then, add peanuts, dried chilies, dried shrimps and dhal. Fry the aromatics until fragrant. Remove from pan and leave aside.",
+      "Blend fried ingredients with tamarind paste and water until fine. Then, sauté the blended ingredients in oil heated over low heat. Continue cooking until the oil separates from the paste and turns a darker shade.",
+      "Skin and cut potatoes into small chunks and boil them in a pot of water until knife-tender. Once ready, remove them from the pot and leave aside. Discard water.",
+      "Slice onion and fried tofu, mince garlic, cut some cabbage and Chinese flowering cabbage (choi sam). Prepare prawn fritters and cut them. Boil noodles to soften them if bought dried. Also mix black soy sauce with water.",
+      "To fry one portion of mee goreng mamak, heat oil and add 1/4 of the following ingredients in this order: garlic, onion, paste. Sauté until fragrant. Optionally, add prawns.",
+      "Add in 1/4 amount of tofu, boiled potatoes, cabbage, Chinese flowering cabbage and prawn fritters. Sauté for another 30 seconds.",
+      "Add noodles to the wok. Add 3 tablespoons of dark soy sauce mixture. Mix evenly for the next 1 minute. Then, move the noodles to the side of the wok. Stir in an egg. Garnish with a slice of lime and slices of green chilies. To cook another plate of noodles, repeat from step 5 onwards."
+    ],
+    "sourceName": "nyonyacooking.com",
+    "sourceUrl": "https://www.nyonyacooking.com/recipes/mee-goreng-mamak~BkTLRjTuX",
+    "nutrients": [
+      {
+        "name": "Folate",
+        "from": [
+          "chinese broccoli"
+        ]
+      },
+      {
+        "name": "Iron",
+        "from": [
+          "tofu"
+        ]
+      },
+      {
+        "name": "Calcium",
+        "from": [
+          "tofu"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "prawns",
+          "tofu",
+          "egg"
+        ]
+      },
+      {
+        "name": "Fibre",
+        "from": [
+          "cabbage",
+          "chinese broccoli"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "cabbage",
+          "chinese broccoli"
+        ]
+      }
+    ],
+    "allergens": [
+      "Egg",
+      "Shellfish",
+      "Peanuts",
+      "Wheat (gluten)",
+      "Soy"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Can be salty (soy sauce). Go easy on any extra salt."
+    ]
+  },
+  {
+    "id": "asian-quick-2",
     "title": "Ma Po Tofu",
     "category": "quick",
     "cookingTime": "About 20 minutes (estimated)",
@@ -712,43 +894,53 @@ export const recipes = [
       "Serve immediately with steamed rice."
     ],
     "sourceName": "chinasichuanfood.com",
-    "sourceUrl": "https://www.chinasichuanfood.com/mapo-tofu-recipe/"
-  },
-  {
-    "id": "asian-quick-2",
-    "title": "Mee goreng mamak",
-    "category": "quick",
-    "cookingTime": "About 10 minutes (estimated)",
-    "description": "A Malaysian seafood dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/xquakq1619787532.jpg",
-    "ingredients": [
-      "50g Peanuts",
-      "15g Chilli",
-      "10g Prawns",
-      "5 tbs Oil",
-      "750 ml Water",
-      "1/2 tbs Tamarind Paste",
-      "250g Potatoes",
-      "2 Red Onions",
-      "4 Garlic Clove",
-      "30g Cabbage",
-      "30g Chinese Broccoli",
-      "1 Tofu",
-      "1 tbs Soy Sauce",
-      "4 Noodles",
-      "1 Egg"
+    "sourceUrl": "https://www.chinasichuanfood.com/mapo-tofu-recipe/",
+    "nutrients": [
+      {
+        "name": "Folate",
+        "from": [
+          "fermented black beans"
+        ]
+      },
+      {
+        "name": "Iron",
+        "from": [
+          "tofu",
+          "minced beef",
+          "fermented black beans"
+        ]
+      },
+      {
+        "name": "Calcium",
+        "from": [
+          "tofu"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "tofu",
+          "minced beef",
+          "fermented black beans"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "pepper",
+          "sichuan pepper"
+        ]
+      }
     ],
-    "instructions": [
-      "Heat oil in a pan at medium heat. Then, add peanuts, dried chilies, dried shrimps and dhal. Fry the aromatics until fragrant. Remove from pan and leave aside.",
-      "Blend fried ingredients with tamarind paste and water until fine. Then, sauté the blended ingredients in oil heated over low heat. Continue cooking until the oil separates from the paste and turns a darker shade.",
-      "Skin and cut potatoes into small chunks and boil them in a pot of water until knife-tender. Once ready, remove them from the pot and leave aside. Discard water.",
-      "Slice onion and fried tofu, mince garlic, cut some cabbage and Chinese flowering cabbage (choi sam). Prepare prawn fritters and cut them. Boil noodles to soften them if bought dried. Also mix black soy sauce with water.",
-      "To fry one portion of mee goreng mamak, heat oil and add 1/4 of the following ingredients in this order: garlic, onion, paste. Sauté until fragrant. Optionally, add prawns.",
-      "Add in 1/4 amount of tofu, boiled potatoes, cabbage, Chinese flowering cabbage and prawn fritters. Sauté for another 30 seconds.",
-      "Add noodles to the wok. Add 3 tablespoons of dark soy sauce mixture. Mix evenly for the next 1 minute. Then, move the noodles to the side of the wok. Stir in an egg. Garnish with a slice of lime and slices of green chilies. To cook another plate of noodles, repeat from step 5 onwards."
+    "allergens": [
+      "Wheat (gluten)",
+      "Soy",
+      "Sesame"
     ],
-    "sourceName": "nyonyacooking.com",
-    "sourceUrl": "https://www.nyonyacooking.com/recipes/mee-goreng-mamak~BkTLRjTuX"
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Can be salty (soy sauce). Go easy on any extra salt."
+    ]
   },
   {
     "id": "asian-quick-3",
@@ -777,7 +969,35 @@ export const recipes = [
       "Add mayonnaise and/or Sambal before cutting the sandwich (optional)."
     ],
     "sourceName": "196flavors.com",
-    "sourceUrl": "https://www.196flavors.com/malaysia-roti-john/"
+    "sourceUrl": "https://www.196flavors.com/malaysia-roti-john/",
+    "nutrients": [
+      {
+        "name": "Iron",
+        "from": [
+          "minced beef"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "minced beef",
+          "eggs"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "pepper"
+        ]
+      }
+    ],
+    "allergens": [
+      "Egg",
+      "Wheat (gluten)"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks."
+    ]
   },
   {
     "id": "asian-quick-4",
@@ -806,7 +1026,30 @@ export const recipes = [
       "Add the noodles, carrots and Chinese leaf and simmer for 4-6 mins, until all are tender. Mix in beansprouts and tomatoes. Add lime juice to taste and some extra seasoning, if you like. Spoon into bowls and sprinkle with spring onions and coriander."
     ],
     "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/thai-coconut-veg-broth"
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/thai-coconut-veg-broth",
+    "nutrients": [
+      {
+        "name": "Protein",
+        "from": [
+          "egg noodles"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "cherry tomatoes",
+          "lime"
+        ]
+      }
+    ],
+    "allergens": [
+      "Egg",
+      "Wheat (gluten)"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Cook bean sprouts thoroughly; don't eat them raw."
+    ]
   },
   {
     "id": "asian-elaborate-1",
@@ -839,144 +1082,104 @@ export const recipes = [
       "Meanwhile, combine all the dipping sauce ingredients in small bowl. Serve the dumplings with the dipping sauce on the side."
     ],
     "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/rice-paper-dumplings"
-  },
-  {
-    "id": "asian-elaborate-2",
-    "title": "Jamaican Boiled Dumplings",
-    "category": "elaborate",
-    "cookingTime": "About 30 minutes (estimated)",
-    "description": "A Jamaican side dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/tsdbcq1764795636.jpg",
-    "ingredients": [
-      "8 cups Water",
-      "1/2 tbs Salt",
-      "2 cups All purpose flour",
-      "1 tsp Salt",
-      "1/2 cup Water"
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/rice-paper-dumplings",
+    "nutrients": [
+      {
+        "name": "Protein",
+        "from": [
+          "ground pork"
+        ]
+      },
+      {
+        "name": "Fibre",
+        "from": [
+          "white cabbage",
+          "carrots"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "white cabbage"
+        ]
+      }
     ],
-    "instructions": [
-      "Instructions",
-      "In a large pot, bring water and salt to a boil to boil the dumplings.",
-      "In a large mixing bowl, combine the all-purpose flour and salt, stirring to distribute the salt evenly throughout the flour. Gradually add water to the flour mixture, mixing with your hands until a dough forms.",
-      "Divide the dough into equal-sized pieces, rolling each into a smooth ball. Flatten each ball slightly with the palm of your hand to form a round, circular dumpling. It should look like a thick disk.",
-      "Carefully drop the dumplings into the boiling water, one at a time, ensuring that they don't stick together. You can use a wooden spoon to stir the dumplings in the water.",
-      "Boil the dumplings for 15-20 minutes, or until they are cooked through and have risen to the surface of the water. Stir occasionally to prevent sticking.",
-      "Use a slotted spoon to remove the cooked dumplings from the pot, allowing any excess water to drain.",
-      "Serve with your favorite recipes."
+    "allergens": [
+      "Wheat (gluten)",
+      "Soy",
+      "Sesame"
     ],
-    "sourceName": "myforkinglife.com",
-    "sourceUrl": "https://www.myforkinglife.com/jamaican-boiled-dumplings/#recipe"
-  },
-  {
-    "id": "asian-elaborate-3",
-    "title": "Thai pumpkin soup",
-    "category": "elaborate",
-    "cookingTime": "About 55 minutes (estimated)",
-    "description": "A Thai vegetarian dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/1brbso1763585098.jpg",
-    "ingredients": [
-      "1.5kg Pumpkin",
-      "4 tsp Sunflower Oil",
-      "1 sliced Onion",
-      "1 tbsp grated Ginger",
-      "1 Lemongrass",
-      "4 tablespoons Thai Red Curry Paste",
-      "400ml Coconut Milk",
-      "800ml Vegetable Stock",
-      "To taste Lime juice",
-      "To taste Sugar",
-      "To serve Red Chilli"
-    ],
-    "instructions": [
-      "Heat oven to 200C/180C fan/gas 6. Toss the pumpkin or squash in a roasting tin with half the oil and seasoning, then roast for 30 mins until golden and tender.",
-      "Meanwhile, put the remaining oil in a pan with the onion, ginger and lemongrass. Gently cook for 8-10 mins until softened. Stir in the curry paste for 1 min, followed by the roasted pumpkin, all but 3 tbsp of the coconut milk and the stock. Bring to a simmer, cook for 5 mins, then fish out the lemongrass. Cool for a few mins, then whizz until smooth with a hand blender, or in a large blender in batches. Return to the pan to heat through, seasoning with salt, pepper, lime juice and sugar, if it needs it. Serve drizzled with the remaining coconut milk and scattered with chilli, if you like."
-    ],
-    "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/thai-pumpkin-soup"
-  },
-  {
-    "id": "asian-elaborate-4",
-    "title": "Clear Soup with Semolina Dumplings",
-    "category": "elaborate",
-    "cookingTime": "About 45 minutes (estimated)",
-    "description": "A dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/qserum1780156275.jpg",
-    "ingredients": [
-      "120g Semolina",
-      "60g Butter",
-      "1 Egg",
-      "Pinch Salt",
-      "Pinch Nutmeg",
-      "Splash Oil",
-      "1 L Beef Stock",
-      "Chopped Parsley"
-    ],
-    "instructions": [
-      "Allow butter to come to room temperature before beating in a bowl until creamed. Season with salt and a small, delicate pinch of nutmeg.",
-      "Add in the egg, stirring vigorously. Sprinkle the semolina over this, and mix it in well until the surface is smooth. Cover with saran wrap and leave to rest for 15 – 20 minutes.",
-      "Use two spoons, dipped regularly into hot water throughout, to press or shape dumplings from the paste. You can also place these on a lightly oiled board or plate and again leave them to stand for a short while (this allows the dumplings to rise even more).",
-      "Heat a generous quantity of salted water in a large pan. Place the dumplings into the water and bring them back to a boil before turning down the heat and leaving to simmer gently for 10 – 15 minutes (do not boil). Carefully turn the dumplings occasionally.",
-      "Remove the semolina dumplings carefully and put them in the heated soup. Serve promptly, with a garnish of sprinkled parsley or chives.",
-      "The semolina dumplings can also be cooked in the beef broth, but this causes the soup to take on a slightly dull appearance. The cooked dumplings should never be left standing in the soup for too long, as they will “soak up” the soup and become softened."
-    ],
-    "sourceName": "austria.info",
-    "sourceUrl": "https://www.austria.info/en-gb/recipes/clear-soup-with-semolina-dumplings/"
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Can be salty (soy sauce). Go easy on any extra salt."
+    ]
   },
   {
     "id": "seafood-quick-1",
-    "title": "Fish Soup (Ukha)",
+    "title": "Salmon Avocado Salad",
     "category": "quick",
-    "cookingTime": "About 20 minutes (estimated)",
-    "description": "A Russian seafood dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/7n8su21699013057.jpg",
+    "cookingTime": "About 15 minutes (estimated)",
+    "description": "A British seafood dish from TheMealDB recipe collection.",
+    "image": "https://www.themealdb.com/images/media/meals/1549542994.jpg",
     "ingredients": [
-      "2 tbs Olive Oil",
-      "1 sliced Onion",
-      "2 medium Carrots",
-      "3 cups Fish Stock",
-      "3 cups Water",
-      "4 large Potatoes",
-      "3 Bay Leaf",
-      "1 Cod",
-      "1 Salmon"
+      "400g Salmon",
+      "3 Avocado",
+      "1 Cucumber",
+      "400g Spinach",
+      "4 tbs Mint",
+      "zest and juice of 1 Lime",
+      "2 tsp Honey",
+      "3 tbs Olive Oil"
     ],
     "instructions": [
-      "In a medium pot, heat the olive oil over medium-high heat. Add the onions and cook, stirring occasionally until the onions start to caramelize. Add the carrots and cook until the carrots start to soften, about 4 more minutes.",
-      "Add the stock, water, potatoes, bay leaves, and black peppercorns. Season with salt and bring to a boil. Reduce heat, cover and cook for 10 minutes. Add the millet and cook for 15 more minutes until millet and potatoes are cooked.",
-      "Gently add the fish cubes. Stir and bring the soup to a simmer. The fish will cook through very fast, so make sure to not overcook them. They are done when the flesh is opaque and flakes easily.",
-      "Garnish the soup with chopped fresh dill or parsley before serving."
+      "Season the salmon, then rub with oil. Mix the dressing ingredients together. Halve, stone, peel and slice the avocados. Halve and quarter the cucumber lengthways, then cut into slices. Divide salad, avocado and cucumber between four plates, then drizzle with half the dressing.",
+      "Heat a non-stick pan. Add the salmon and fry for 3-4 mins on each side until crisp but still moist inside. Put a salmon fillet on top of each salad and drizzle over the remaining dressing. Serve warm."
     ],
-    "sourceName": "curiouscuisiniere.com",
-    "sourceUrl": "https://www.curiouscuisiniere.com/ukha-russian-fish-soup/"
+    "sourceName": "bbcgoodfood.com",
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/4521/salmon-avocado-and-cucumber-salad",
+    "nutrients": [
+      {
+        "name": "Folate",
+        "from": [
+          "avocado",
+          "spinach"
+        ]
+      },
+      {
+        "name": "Iron",
+        "from": [
+          "spinach"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "salmon"
+        ]
+      },
+      {
+        "name": "Omega-3",
+        "from": [
+          "salmon"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "lime"
+        ]
+      }
+    ],
+    "allergens": [
+      "Fish"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Contains oily fish (salmon). The NHS advises no more than 2 portions of oily fish a week in pregnancy."
+    ]
   },
   {
     "id": "seafood-quick-2",
-    "title": "Spanish rice & prawn one-pot",
-    "category": "quick",
-    "cookingTime": "About 25 minutes (estimated)",
-    "description": "A Spanish seafood dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/sl6vqv1763335988.jpg",
-    "ingredients": [
-      "1 sliced Onion",
-      "1 sliced Red Pepper",
-      "1 sliced Green Pepper",
-      "50g Chorizo",
-      "2 cloves minced Garlic",
-      "1 tblsp Olive Oil",
-      "250g Basmati Rice",
-      "400g Tinned Tomatos",
-      "200g Prawns"
-    ],
-    "instructions": [
-      "Boil the kettle. In a non-stick frying or shallow pan with a lid, fry the onion, peppers, chorizo and garlic in the oil over a high heat for 3 mins. Stir in the rice and chopped tomatoes with 500ml boiling water, cover, then cook over a high heat for 12 mins.",
-      "Uncover, then stir – the rice should be almost tender. Stir in the prawns, with a splash more water if the rice is looking dry, then cook for another min until the prawns are just pink and rice tender."
-    ],
-    "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/spanish-rice-prawn-one-pot"
-  },
-  {
-    "id": "seafood-quick-3",
     "title": "Cajun spiced fish tacos",
     "category": "quick",
     "cookingTime": "About 20 minutes (estimated)",
@@ -1004,41 +1207,143 @@ export const recipes = [
       "Soften the tortillas by heating in the microwave for 5-10 seconds. Pile high with the avocado, lettuce and spring onion, add a spoonful of salsa, top with large flakes of fish and drizzle over the dressing."
     ],
     "sourceName": "realfood.tesco.com",
-    "sourceUrl": "https://realfood.tesco.com/recipes/cajun-spiced-fish-tacos.html"
+    "sourceUrl": "https://realfood.tesco.com/recipes/cajun-spiced-fish-tacos.html",
+    "nutrients": [
+      {
+        "name": "Folate",
+        "from": [
+          "avocado"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "white fish"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "lemon"
+        ]
+      }
+    ],
+    "allergens": [
+      "Milk",
+      "Fish",
+      "Wheat (gluten)"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks."
+    ]
+  },
+  {
+    "id": "seafood-quick-3",
+    "title": "Prawns with Romesco sauce",
+    "category": "quick",
+    "cookingTime": "About 20 minutes (estimated)",
+    "description": "A Spanish seafood dish from TheMealDB recipe collection.",
+    "image": "https://www.themealdb.com/images/media/meals/u03xhi1763308917.jpg",
+    "ingredients": [
+      "1 Red Pepper",
+      "3 Large Garlic Clove",
+      "1 large Red Chilli",
+      "1 large Tomato",
+      "10 Shelled Hazelnuts",
+      "10 Almonds",
+      "3 sprigs Parsley",
+      "1 sliced Bread",
+      "120ml Olive Oil",
+      "2 tblsp Red Wine Vinegar",
+      "400g Tiger Prawns"
+    ],
+    "instructions": [
+      "Prepare ahead - halve the pepper lengthways and remove the seeds and stalk. Line a grill pan with foil and put the pepper halves, skin side up, on the grill pan with the whole garlic cloves, chilli and tomato. Grill for 2 minutes, turn the tomato, then grill for a further 2 minutes. Remove the tomato with a large spoon, then peel, quarter and remove the seeds. Then chop the tomato roughly.",
+      "Continue grilling the pepper, chilli and garlic for 4-5 minutes, until the pepper and chilli skins have blackened and the garlic is starting to soften (the garlic skin will start to split when it is ready). When cool enough to handle, peel and halve the chilli, and scrape out and discard the seeds. Peel the pepper and roughly chop both the pepper and chilli.",
+      "Spread nuts over the foil and grill until toasted. Finely chop the nuts and parsley in a food processor. Tip into a small bowl.",
+      "Heat 3 tablespoons of oil in a frying pan, add the pepper, garlic and chilli and fry for 3 minutes. Tear up the bread and add to the pan, turning it in the oil until lightly browned. Pulse in food processor with the tomatoes, salt, vinegar and oil until roughly chopped. Tip into a bowl. Leave to cool and store in fridge for up to 3 days.",
+      "On the day add the nuts and parsley to the sauce and mix. Serve in a small bowl on a plate with the peeled prawns. Supply cocktail sticks for spearing the prawns."
+    ],
+    "sourceName": "bbcgoodfood.com",
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/prawns-romesco-sauce",
+    "nutrients": [
+      {
+        "name": "Calcium",
+        "from": [
+          "almonds"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "tiger prawns"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "red pepper",
+          "tomato"
+        ]
+      }
+    ],
+    "allergens": [
+      "Shellfish",
+      "Tree nuts",
+      "Wheat (gluten)"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks."
+    ]
   },
   {
     "id": "seafood-quick-4",
-    "title": "Codfish deviled eggs",
+    "title": "Fish Soup (Ukha)",
     "category": "quick",
-    "cookingTime": "About 25 minutes (estimated)",
-    "description": "A seafood dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/vayi021784668764.jpg",
+    "cookingTime": "About 20 minutes (estimated)",
+    "description": "A Russian seafood dish from TheMealDB recipe collection.",
+    "image": "https://www.themealdb.com/images/media/meals/7n8su21699013057.jpg",
     "ingredients": [
-      "12 Eggs",
-      "7 tablespoons Mayonnaise",
-      "1 tsp Mustard",
-      "To taste Pepper",
-      "To taste Salt",
-      "Pinch Paprika",
-      "Garnish Chives",
-      "Garnish Black Pepper",
-      "Topping Codfish Bulljaw"
+      "2 tbs Olive Oil",
+      "1 sliced Onion",
+      "2 medium Carrots",
+      "3 cups Fish Stock",
+      "3 cups Water",
+      "4 large Potatoes",
+      "3 Bay Leaf",
+      "1 Cod",
+      "1 Salmon"
     ],
     "instructions": [
-      "Bring eggs to a boil for 15 minutes. Let eggs sit in the water for another 5. Run under cold water",
-      "let eggs further cool",
-      "Rest eggs",
-      "Peel eggs",
-      "Cut eggs in half and remove egg yolks, place them in bowl",
-      "Mash egg yolks in a bowl",
-      "Combine all ingredients except for chives and peppercorns",
-      "Put the mixture in a piping bag or plastic bag",
-      "Fill egg slices with the mixture",
-      "Add codfish on the wider side of the egg",
-      "Garnish with crushed peppercorn and chive"
+      "In a medium pot, heat the olive oil over medium-high heat. Add the onions and cook, stirring occasionally until the onions start to caramelize. Add the carrots and cook until the carrots start to soften, about 4 more minutes.",
+      "Add the stock, water, potatoes, bay leaves, and black peppercorns. Season with salt and bring to a boil. Reduce heat, cover and cook for 10 minutes. Add the millet and cook for 15 more minutes until millet and potatoes are cooked.",
+      "Gently add the fish cubes. Stir and bring the soup to a simmer. The fish will cook through very fast, so make sure to not overcook them. They are done when the flesh is opaque and flakes easily.",
+      "Garnish the soup with chopped fresh dill or parsley before serving."
     ],
-    "sourceName": "dominicagourmet.com",
-    "sourceUrl": "https://dominicagourmet.com/codfish-deviled-eggs-recipe/"
+    "sourceName": "curiouscuisiniere.com",
+    "sourceUrl": "https://www.curiouscuisiniere.com/ukha-russian-fish-soup/",
+    "nutrients": [
+      {
+        "name": "Protein",
+        "from": [
+          "cod",
+          "salmon"
+        ]
+      },
+      {
+        "name": "Omega-3",
+        "from": [
+          "salmon"
+        ]
+      }
+    ],
+    "allergens": [
+      "Fish"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Contains oily fish (salmon). The NHS advises no more than 2 portions of oily fish a week in pregnancy."
+    ]
   },
   {
     "id": "seafood-elaborate-1",
@@ -1071,65 +1376,143 @@ export const recipes = [
       "Allow the sauce to come to a simmer and continue to cook over medium heat, stirring occasionally and flipping the shrimp halfway, until the shrimp is fully cooked on both sides. This should take about 5-6 minutes. Salt and pepper to taste."
     ],
     "sourceName": "myforkinglife.com",
-    "sourceUrl": "https://www.myforkinglife.com/jamaican-curry-shrimp/#recipe"
+    "sourceUrl": "https://www.myforkinglife.com/jamaican-curry-shrimp/#recipe",
+    "nutrients": [
+      {
+        "name": "Protein",
+        "from": [
+          "jumbo shrimp"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "red pepper",
+          "green pepper",
+          "tomato ketchup",
+          "pepper"
+        ]
+      }
+    ],
+    "allergens": [
+      "Shellfish"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks."
+    ]
   },
   {
     "id": "seafood-elaborate-2",
-    "title": "Cayman-Style Lobster",
+    "title": "Salmon noodle wraps",
     "category": "elaborate",
-    "cookingTime": "About 45 minutes (estimated)",
-    "description": "A seafood dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/wkhwqr1782774765.jpg",
+    "cookingTime": "About 30 minutes (estimated)",
+    "description": "A Vietnamese seafood dish from TheMealDB recipe collection.",
+    "image": "https://www.themealdb.com/images/media/meals/prrirc1763781360.jpg",
     "ingredients": [
-      "6 Lobster",
-      "1/2 cup Chicken Stock",
-      "1/2 cup Red Pepper",
-      "1/2 cup Green Pepper",
-      "1/2 cup Onion",
-      "2 cloves minced Garlic",
-      "1/2 Scotch Bonnet",
-      "To taste Salt",
-      "To taste Pepper",
-      "To taste Thyme",
-      "2 tsp Cornstarch",
-      "2 tablespoons Olive Oil"
+      "100g Rice Noodles",
+      "3 sliced thinly Spring Onions",
+      "50g Petit Pois",
+      "85g Chilli",
+      "85g Coriander",
+      "85g Lime",
+      "300g Salmon"
     ],
     "instructions": [
-      "Rinse lobster under cold running water. Bring water and salt to boil in a 12 quart pot. Quickly plunge lobsters, headfirst, into boiling water. Cover and boil for 20 minutes or until lobsters turn red.",
-      "Remove lobster and allow it to cool. Remove lobster tails and cut shell down to middle to remove the meat. Cut the tail meat down the middle to remove the vein inside. Remove large claws and smaller legs by twisting them away from the body. A nut cracker can be used to crush the claw and legs to remove the meat inside.",
-      "Chop lobster meat. Heat butter or olive oil in large pan over low heat. Sauté red, green and scotch bonnet peppers, thyme and garlic. Add salt and chicken stock to pan. Then, add lobster meat and sauté for 10 to 15 minutes. Thicken sauce with the corn starch and water mixture.",
-      "Serve with your choice of vegetables, salad and/or rice."
+      "Heat oven to 200C/fan 180C/gas 6. Put the noodles in a bowl and pour over enough boiling water to just cover them. Leave for 2 mins, until they are bendable, but not too soft, then drain well. Return to the bowl with the spring onions, petit pois, salt and pepper and a third of the butter. Mix well until the butter has melted.",
+      "Pile the noodles and vegetables onto two large squares of baking parchment, then sit the salmon on top. Slice the remaining butter and arrange over the top of the salmon. Bring the ends of the paper over the fish, fold them together to seal, then tuck the ends of the paper underneath so there are no gaps. Put the parcels on a baking sheet and bake for 15-20 mins. Transfer to dinner plates and serve without delay."
     ],
-    "sourceName": "ourcayman.ky",
-    "sourceUrl": "https://www.ourcayman.ky/en-us/about/more-about-cayman/recipes"
+    "sourceName": "bbcgoodfood.com",
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/salmon-noodle-wraps",
+    "nutrients": [
+      {
+        "name": "Protein",
+        "from": [
+          "salmon"
+        ]
+      },
+      {
+        "name": "Omega-3",
+        "from": [
+          "salmon"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "lime"
+        ]
+      }
+    ],
+    "allergens": [
+      "Fish"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Contains oily fish (salmon). The NHS advises no more than 2 portions of oily fish a week in pregnancy."
+    ]
   },
   {
     "id": "seafood-elaborate-3",
-    "title": "Spanish seafood rice",
+    "title": "Seafood fideuà",
     "category": "elaborate",
-    "cookingTime": "About 40 minutes (estimated)",
+    "cookingTime": "About 50 minutes (estimated)",
     "description": "A Spanish seafood dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/c6ghxm1763335584.jpg",
+    "image": "https://www.themealdb.com/images/media/meals/wqqvyq1511179730.jpg",
     "ingredients": [
-      "1 tblsp Olive Oil",
-      "1 chopped Onion",
-      "1 Red Pepper",
-      "1 Yellow Pepper",
-      "2 sliced Garlic Clove",
-      "250g Paella Rice",
-      "800ml Vegetable Stock",
-      "Pinch Saffron",
-      "400g Frozen Seafood mix",
-      "Juice of 1/2 Lemon",
-      "Handful Parsley"
+      "400g Mussels",
+      "8 Prawns",
+      "2 pinches Saffron",
+      "350g Vermicelli Pasta",
+      "5 tblsp Olive Oil",
+      "1 large Onions",
+      "3 cloves Garlic",
+      "2 tbs Paprika",
+      "1 tail Monkfish",
+      "4 Baby Squid",
+      "650ml Fish Stock",
+      "2 large Tomatoes",
+      "Juice of 1 Lemon",
+      "Topping Parsley"
     ],
     "instructions": [
-      "Heat the oil in a large saucepan and soften the onion for 6-7 mins. Add the pepper and garlic, cook for 2 mins more, then stir in the paella rice and cook for 1 min, stirring to coat.",
-      "Pour in the stock, add the saffron and bring to the boil. Cook, uncovered, at a gentle bubble, for 20 mins, stirring occasionally until the rice is tender.",
-      "Stir in the seafood and lemon juice and cook for 2 mins or until piping hot and completely cooked through. Serve in warm bowls scattered with the parsley."
+      "Boil the kettle. Empty the mussels into a colander and run under cold water. Throw away any with broken shells. Pick through the shells, tapping each one on the side of the sink – they should be closed or should slowly close when tapped – if they stay open, throw them away. If any of the shells still have barnacles or stringy beards attached, pull them off with a cutlery knife and rinse the shells well. Keep in the colander, covered with a cold, damp cloth, until you’re ready to cook. Peel the prawn shells on the body section only – leave the heads and tails intact. Score down the backs and pull out any gritty entrails. Chill until you’re ready to cook.",
+      "Put the saffron in a small cup, cover with 50ml kettle-hot water and set aside for 10 mins. If using vermicelli, put in a bowl and crush to little pieces (about 1cm long) with your hands.",
+      "Heat the oil in a large frying pan with at least a 3cm lip, or a 40cm paella pan. Add the onion and stir around the pan for 5 mins until soft. Add the garlic and cook for 1 min more, then tip in the vermicelli and cook for 5 mins, stirring from time to time, until the vermicelli is toasted brown. Stir in the paprika.",
+      "Keeping the heat moderate, stir through the monkfish, squid and saffron with its water, seasoning well. Spread the ingredients out in an even layer, then pour over the hot stock and scatter the tomatoes on top. Bring to a simmer, then cover the whole dish with a tight-fitting lid (or foil). Turn the heat to medium and cook for 6 mins.",
+      "Uncover and stir to incorporate the dry top layer of pasta. Push the mussels into the pasta so the hinges are buried in the bottom of the dish, and they stand straight up. Arrange the prawns on top, cover tightly and cook for another 6 mins or until the mussels are open, the prawns are pink and the pasta is cooked through. Leave to simmer for another 2-3 mins to cook off most of the remaining liquid (leave a little in the pan to prevent the pasta from sticking together). Allow to sit for 2-3 mins, then squeeze over the lemon juice and arrange the wedges on top. Scatter with parsley before serving."
     ],
     "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/spanish-seafood-rice"
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/seafood-fideua-paella",
+    "nutrients": [
+      {
+        "name": "Iron",
+        "from": [
+          "mussels"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "mussels",
+          "prawns"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "tomatoes",
+          "lemon"
+        ]
+      }
+    ],
+    "allergens": [
+      "Fish",
+      "Shellfish",
+      "Wheat (gluten)"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks."
+    ]
   },
   {
     "id": "seafood-elaborate-4",
@@ -1152,28 +1535,36 @@ export const recipes = [
       "Spread the drained fennel over a shallow ovenproof dish, then add the tomatoes. Drizzle with olive oil, then bake for 10 mins. Nestle the salmon among the veg, sprinkle with lemon juice, then bake 15 mins more until the fish is just cooked. Scatter over the parsley and serve."
     ],
     "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/7745/baked-salmon-with-fennel-and-tomatoes"
-  },
-  {
-    "id": "snacks-elaborate-1",
-    "title": "Paracuca (Roasted Peanuts)",
-    "category": "elaborate",
-    "cookingTime": "About 55 minutes (estimated)",
-    "description": "A starter from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/vgsipt1779917593.jpg",
-    "ingredients": [
-      "5 Cups Unsalted Peanuts",
-      "1 cup Sugar",
-      "1 cup Water",
-      "1/4 tsp Salt"
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/7745/baked-salmon-with-fennel-and-tomatoes",
+    "nutrients": [
+      {
+        "name": "Protein",
+        "from": [
+          "salmon"
+        ]
+      },
+      {
+        "name": "Omega-3",
+        "from": [
+          "salmon"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "lemon",
+          "cherry tomatoes"
+        ]
+      }
     ],
-    "instructions": [
-      "In a large heavy saucepan, combine the peanuts, sugar and water. Bring to a boil; cook until syrup has evaporated, about 10 minutes.",
-      "Spread peanuts in a single layer in a greased 15x10x1-in. baking pan; sprinkle with salt.",
-      "Bake at 300° for 30-35 minutes or until dry and lightly browned. Cool completely. Store in an airtight container."
+    "allergens": [
+      "Fish"
     ],
-    "sourceName": "tasteofhome.com",
-    "sourceUrl": "https://www.tasteofhome.com/recipes/sugared-peanuts/#RecipeCard"
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Contains oily fish (salmon). The NHS advises no more than 2 portions of oily fish a week in pregnancy.",
+      "Can be salty (black olives). Go easy on any extra salt."
+    ]
   },
   {
     "id": "sour-quick-1",
@@ -1196,7 +1587,23 @@ export const recipes = [
       "Check the sauerkraut. After a few days, you will see bubbles that have built up as it ferments. Give it a stir, then cover and weigh it down again as before. The cabbage will become increasingly sour the longer it’s fermented, so taste it now and again. When you like the flavour, transfer it to sterilised jars and keep chilled. Will keep chilled for up to six months."
     ],
     "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/beetroot-red-cabbage-sauerkraut"
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/beetroot-red-cabbage-sauerkraut",
+    "nutrients": [
+      {
+        "name": "Folate",
+        "from": [
+          "beetroot"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "red cabbage"
+        ]
+      }
+    ],
+    "allergens": [],
+    "cautions": []
   },
   {
     "id": "sour-elaborate-1",
@@ -1235,7 +1642,30 @@ export const recipes = [
       "Present the stew hot in bowls, optionally garnished with fresh herbs like cilantro."
     ],
     "sourceName": "recipes-for-life.com",
-    "sourceUrl": "https://recipes-for-life.com/cambodian-recipes/"
+    "sourceUrl": "https://recipes-for-life.com/cambodian-recipes/",
+    "nutrients": [
+      {
+        "name": "Protein",
+        "from": [
+          "chicken thighs"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "pineapple chunks",
+          "cherry tomatoes",
+          "kaffir lime leaves"
+        ]
+      }
+    ],
+    "allergens": [
+      "Fish"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Can be salty (fish sauce). Go easy on any extra salt."
+    ]
   },
   {
     "id": "sour-elaborate-2",
@@ -1273,39 +1703,34 @@ export const recipes = [
       "Serve on a plate and add some coriander for decoration."
     ],
     "sourceName": "chinahighlights.com",
-    "sourceUrl": "https://www.chinahighlights.com/travelguide/chinese-food/cooking/sweet-sour-pork.htm"
+    "sourceUrl": "https://www.chinahighlights.com/travelguide/chinese-food/cooking/sweet-sour-pork.htm",
+    "nutrients": [
+      {
+        "name": "Protein",
+        "from": [
+          "pork",
+          "egg"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "tomato puree"
+        ]
+      }
+    ],
+    "allergens": [
+      "Egg",
+      "Wheat (gluten)",
+      "Soy"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Can be salty (soy sauce). Go easy on any extra salt."
+    ]
   },
   {
     "id": "candy-elaborate-1",
-    "title": "Authentic Laos Tapioca Pudding with Bananas",
-    "category": "elaborate",
-    "cookingTime": "About 55 minutes (estimated)",
-    "description": "A dessert dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/5pmn0g1779813285.jpg",
-    "ingredients": [
-      "1 cup Warm Water",
-      "4 cups Water",
-      "3  tablespoons Tapioca",
-      "14 oz jar Coconut Milk",
-      "2 tablespoons Sugar",
-      "3 Cups Banana",
-      "4 cups Water",
-      "To taste Salt"
-    ],
-    "instructions": [
-      "In a bowl of warm water, add tapioca pearls and allow them to soak for 20 minutes.",
-      "Prepare bananas by peeling them and cutting them into ½ inch slices. Set the slices aside",
-      "On a stove, pour in 4 cups of water and bring it to a boil. Add in the banana slices.",
-      "After 20 minutes, drain the tapioca pearls in cold water to allow the pearls to separate from each other.",
-      "Add the tapioca pearls into the the pot. Allow to simmer for 3 minutes or until the tapioca pearls turn clear.",
-      "Next, add in sugar and pour in the coconut cream. Stir the ingredients gently for 3 minutes to incorporate the flavors.",
-      "Add salt to taste."
-    ],
-    "sourceName": "cookingwithlane.com",
-    "sourceUrl": "https://cookingwithlane.com/laos-banana-tapioca-pudding-nam-van-mak-kuay/"
-  },
-  {
-    "id": "candy-elaborate-2",
     "title": "Blueberry & lemon friands",
     "category": "elaborate",
     "cookingTime": "About 35 minutes (estimated)",
@@ -1328,10 +1753,40 @@ export const recipes = [
       "Cool in the tins for 5 minutes, then turn out and cool on a wire rack. To serve, dust lightly with icing sugar."
     ],
     "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/blueberry-lemon-friands"
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/blueberry-lemon-friands",
+    "nutrients": [
+      {
+        "name": "Calcium",
+        "from": [
+          "almonds"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "egg white"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "unwaxed lemon"
+        ]
+      }
+    ],
+    "allergens": [
+      "Milk",
+      "Egg",
+      "Tree nuts",
+      "Wheat (gluten)"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Contains added sugar (icing sugar), so it's best as an occasional treat."
+    ]
   },
   {
-    "id": "candy-elaborate-3",
+    "id": "candy-elaborate-2",
     "title": "Peach & Blueberry Grunt",
     "category": "elaborate",
     "cookingTime": "About 40 minutes (estimated)",
@@ -1357,64 +1812,164 @@ export const recipes = [
       "Bake for 20-25 mins, until the topping is crisp and golden. Serve warm."
     ],
     "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/1553651/peach-and-blueberry-grunt"
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/1553651/peach-and-blueberry-grunt",
+    "nutrients": [
+      {
+        "name": "Folate",
+        "from": [
+          "orange"
+        ]
+      },
+      {
+        "name": "Calcium",
+        "from": [
+          "milk"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "orange"
+        ]
+      }
+    ],
+    "allergens": [
+      "Milk",
+      "Wheat (gluten)"
+    ],
+    "cautions": [
+      "Contains added sugar (caster sugar, muscovado sugar), so it's best as an occasional treat."
+    ]
   },
   {
-    "id": "candy-elaborate-4",
-    "title": "Apple & Blackberry Crumble",
+    "id": "candy-elaborate-3",
+    "title": "Strawberry tart",
     "category": "elaborate",
-    "cookingTime": "About 45 minutes (estimated)",
-    "description": "A British dessert dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/xvsurr1511719182.jpg",
-    "ingredients": [
-      "120g Plain Flour",
-      "60g Caster Sugar",
-      "60g Butter",
-      "300g Braeburn Apples",
-      "30g Butter",
-      "30g Demerara Sugar",
-      "120g Blackberries",
-      "¼ teaspoon Cinnamon",
-      "to serve Ice Cream"
-    ],
-    "instructions": [
-      "Heat oven to 190C/170C fan/gas 5. Tip the flour and sugar into a large bowl. Add the butter, then rub into the flour using your fingertips to make a light breadcrumb texture. Do not overwork it or the crumble will become heavy. Sprinkle the mixture evenly over a baking sheet and bake for 15 mins or until lightly coloured.",
-      "Meanwhile, for the compote, peel, core and cut the apples into 2cm dice. Put the butter and sugar in a medium saucepan and melt together over a medium heat. Cook for 3 mins until the mixture turns to a light caramel. Stir in the apples and cook for 3 mins. Add the blackberries and cinnamon, and cook for 3 mins more. Cover, remove from the heat, then leave for 2-3 mins to continue cooking in the warmth of the pan.",
-      "To serve, spoon the warm fruit into an ovenproof gratin dish, top with the crumble mix, then reheat in the oven for 5-10 mins. Serve with vanilla ice cream."
-    ],
-    "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/778642/apple-and-blackberry-crumble"
-  },
-  {
-    "id": "bakery-quick-1",
-    "title": "Arra të Mbushura me Fik Walnut Stuffed Figs (with Fig Syrup)",
-    "category": "quick",
-    "cookingTime": "About 25 minutes (estimated)",
+    "cookingTime": "About 35 minutes (estimated)",
     "description": "A dessert dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/dokbyt1779645030.jpg",
+    "image": "https://www.themealdb.com/images/media/meals/9kmyly1784660555.jpg",
     "ingredients": [
-      "4 Figs",
-      "4 Walnuts",
-      "150ml Water",
-      "60g Sugar"
+      "250g Marzipan",
+      "80g Sugar",
+      "7 oz Butter",
+      "4 Eggs",
+      "50g All purpose flour",
+      "100g Dark Chocolate",
+      "3 tsp vanilla sugar",
+      "3 Egg Yolks",
+      "50g Sugar",
+      "2 tablespoons Cornstarch",
+      "3/4 cup Milk",
+      "1/2 cup Double Cream",
+      "500g Strawberries",
+      "Handful Mint"
     ],
     "instructions": [
-      "Prepare the Figs",
-      "Cut off the hard bits of stalk and then cut the figs in half length ways.",
-      "Place the figs in a small frying pan / saute pan with the cut side face up and add the water around them.",
-      "Cooking",
-      "Leave the figs on a medium heat to cook through, once they become soft remove them from the pan and place onto a serving dish. This will take around 10 - 15 minutes.",
-      "Prepare the Syrup",
-      "In the pan there will be a red water juice left from the figs. Add the sugar while remaining on a medium heat. Stir continuously for a couple of minutes until the juice has turned to a thick syrup. Remove from the heat.",
-      "Serving",
-      "Push one half of walnut into every fig and then drizzle the syrup over the top.",
-      "Serve warm or cooled."
+      "Tart shell",
+      "Heat oven to 175°C / 347 °F",
+      "Grate the marzipan and mix thoroughly with the sugar. Whip the mixture with butter until fluffy.",
+      "Whip the eggs into the mixture and then folk the flour into the dough. Line an approximately 24 cm springform pan with baking paper and grease with butter. Then roll out the dough and transfer to the pan. Bake in the middle of the oven for approximately 25 minutes. Prepare the vanilla custard while the dough bakes.",
+      "Finely chop the chocolate and sprinkle over the shell after baking. Spread out the chocolate with a spatula as it melts. Allow the shell to cool to room temperature.",
+      "Vanilla custard",
+      "Mix vanilla sugar, egg yolks, sugar and corn starch in a saucepan. Turn the heat to medium and whisk in the milk. Heat the mixture while stirring until it thickens. Transfer the custard to a container and cool completely.",
+      "Whip the double cream to a light foam and folk into the cooled vanilla custard.",
+      "Tart assembly",
+      "Rinse the strawberries, remove the stems and quarter from top to bottom",
+      "Spread the vanilla custard in a thick layer on top of the tart shell. Top with the fresh strawberries and fresh mint (optional). Bon appétit!"
     ],
-    "sourceName": "myalbanianfood.com",
-    "sourceUrl": "https://www.myalbanianfood.com/recipe/arra-te-mbushura-me-fik-walnut-stuffed-figs/"
+    "sourceName": "denmark.dk",
+    "sourceUrl": "https://denmark.dk/people-and-culture/recipes/strawberry-tart/",
+    "nutrients": [
+      {
+        "name": "Calcium",
+        "from": [
+          "milk"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "eggs",
+          "egg yolks"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "strawberries"
+        ]
+      }
+    ],
+    "allergens": [
+      "Milk",
+      "Egg",
+      "Wheat (gluten)"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Contains added sugar (sugar, vanilla sugar), so it's best as an occasional treat."
+    ]
   },
   {
     "id": "bakery-elaborate-1",
+    "title": "Cashew Ghoriba Biscuits",
+    "category": "elaborate",
+    "cookingTime": "About 30 minutes (estimated)",
+    "description": "A Tunisian dessert dish from TheMealDB recipe collection.",
+    "image": "https://www.themealdb.com/images/media/meals/t3r3ka1560461972.jpg",
+    "ingredients": [
+      "250g Cashew Nuts",
+      "100g Icing Sugar",
+      "2 Egg Yolks",
+      "2 tbs Orange Blossom Water",
+      "To Glaze Icing Sugar",
+      "100g Almonds"
+    ],
+    "instructions": [
+      "Preheat the oven at 180 C / Gas 4. Line a baking tray with greaseproof paper.",
+      "In a bowl, mix the cashews and icing sugar. Add the egg yolks and orange blossom water and mix to a smooth homogeneous paste.",
+      "Take lumps of the cashew paste and shape into small balls. Roll the balls in icing sugar and transfer to the baking tray. Push an almond in the centre of each ghribia.",
+      "Bake until the biscuits are lightly golden, about 20 minutes. Keep an eye on them, they burn quickly."
+    ],
+    "sourceName": "allrecipes.co.uk",
+    "sourceUrl": "http://allrecipes.co.uk/recipe/40152/cashew-ghoriba-biscuits.aspx",
+    "nutrients": [
+      {
+        "name": "Folate",
+        "from": [
+          "orange blossom water"
+        ]
+      },
+      {
+        "name": "Calcium",
+        "from": [
+          "almonds"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "egg yolks"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "orange blossom water"
+        ]
+      }
+    ],
+    "allergens": [
+      "Egg",
+      "Tree nuts"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Contains added sugar (icing sugar), so it's best as an occasional treat."
+    ]
+  },
+  {
+    "id": "bakery-elaborate-2",
     "title": "Apple Pie",
     "category": "elaborate",
     "cookingTime": "About 40 minutes (estimated)",
@@ -1437,152 +1992,84 @@ export const recipes = [
       "Pour dough in to a butter greased pan. Sprinkle over sugar (and cinnamon). Bake at 180 C for 30 minute"
     ],
     "sourceName": "estoniancuisine.com",
-    "sourceUrl": "https://estoniancuisine.com/2017/07/07/soft-grandmothers-apple-or-rhubarb-pie/"
-  },
-  {
-    "id": "bakery-elaborate-2",
-    "title": "Dominica’s coconut rough cake",
-    "category": "elaborate",
-    "cookingTime": "About 45 minutes (estimated)",
-    "description": "A dessert dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/sgqy9d1784832045.jpg",
-    "ingredients": [
-      "4 cups Wheat Flour",
-      "1 cup Oats",
-      "1 1/2 cup Brown Sugar",
-      "2 cups Coconut",
-      "1 tsp Vanilla Extract",
-      "2 1/2 cups Coconut Milk",
-      "1 tsp Bicarbonate Of Soda",
-      "1/2 tsp Baking Powder",
-      "1 ½ tbsp Ground Cinnamon",
-      "1 ½ tsp Nutmeg",
-      "Zest of 1 Lime",
-      "1/4 cup Raisins"
+    "sourceUrl": "https://estoniancuisine.com/2017/07/07/soft-grandmothers-apple-or-rhubarb-pie/",
+    "nutrients": [
+      {
+        "name": "Calcium",
+        "from": [
+          "sour milk"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "eggs"
+        ]
+      }
     ],
-    "instructions": [
-      "Mix all dry ingredients in bowl",
-      "Add coconut milk to dry ingredients",
-      "Grease baking pan with vegetable oil",
-      "I use an ice cream scoop to form drops. I placed the scooped cake mixture on a baking sheet. I also used a cake mold and gently pressed the mixture in. You can use a baking pan as well.",
-      "Preheat your over at 350°",
-      "Bake for 25 to 35 minutes or until brown"
+    "allergens": [
+      "Milk",
+      "Egg",
+      "Wheat (gluten)"
     ],
-    "sourceName": "dominicagourmet.com",
-    "sourceUrl": "https://dominicagourmet.com/dominica-coconut-rough-cake-recipe/"
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Contains added sugar (sugar), so it's best as an occasional treat."
+    ]
   },
   {
     "id": "bakery-elaborate-3",
-    "title": "Bulgarian Honey Cookies",
+    "title": "Rock Cakes",
     "category": "elaborate",
-    "cookingTime": "About 40 minutes (estimated)",
-    "description": "A dessert dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/y75q5j1782685779.jpg",
+    "cookingTime": "About 30 minutes (estimated)",
+    "description": "A British dessert dish from TheMealDB recipe collection.",
+    "image": "https://www.themealdb.com/images/media/meals/tqrrsq1511723764.jpg",
     "ingredients": [
-      "2 large Eggs",
-      "1 cup Powdered Sugar",
-      "1/4 cup Honey",
-      "1 tsp Vanilla Extract",
-      "3 Cups Vegetable Oil",
-      "4 cups All purpose flour",
-      "1/4 tsp Salt",
-      "1 tsp Ground Cinnamon",
+      "225g Self-raising Flour",
+      "75g Caster Sugar",
       "1 tsp Baking Powder",
-      "2 cups Chocolate Chips",
-      "2 tsp Vegetable Oil"
+      "125g Butter",
+      "150g Dried Fruit",
+      "1 Eggs",
+      "1 tbs Milk",
+      "2 tsp Vanilla Extract"
     ],
     "instructions": [
-      "Preheat oven to 350 F. Line 2-3 baking sheets with parchment paper.",
-      "In a bowl, combine flour, salt, cinnamon and baking soda.",
-      "In the bowl of a stand mixer, fitted with the paddle attachment, beat together eggs and powdered sugar for3 minutes. Add vanilla extract and honey. Mix to combine, then add oil.",
-      "Add the flour mixture in two increments and beat to incorporate. Let the dough rest for 5-10 minutes.",
-      "Shape 2 tbsp balls, place on baking sheets and press flat. Bake for 12-15 minutes, until golden. Let the cookies cool down completely.",
-      "Melt white and semi-sweet chocolate separately with 1 tbsp vegetable oil each.",
-      "Dip cookies halfway into chocolate. Let it set. Keep in a air tight container or wrapped in cellophane bags for up to 2 weeks in room temperature or refrigerated."
+      "Preheat oven to 180C/350F/Gas 4 and line a baking tray with baking parchment.",
+      "Mix the flour, sugar and baking powder in a bowl and rub in the cubed butter until the mixture looks like breadcrumbs, then mix in the dried fruit.",
+      "In a clean bowl, beat the egg and milk together with the vanilla extract.",
+      "Add the egg mixture to the dry ingredients and stir with a spoon until the mixture just comes together as a thick, lumpy dough. Add a teaspoon more milk if you really need it to make the mixture stick together.",
+      "Place golfball-sized spoons of the mixture onto the prepared baking tray. Leave space between them as they will flatten and spread out to double their size during baking.",
+      "Bake for 15-20 minutes, until golden-brown. Remove from the oven, allow to cool for a couple of minutes then turn them out onto a wire rack to cool."
     ],
-    "sourceName": "cookinglsl.com",
-    "sourceUrl": "https://cookinglsl.com/bulgarian-honey-cookies-medenki-recipe/#wprm-recipe-container-32773"
-  },
-  {
-    "id": "bakery-elaborate-4",
-    "title": "Laos Plantain Coconut Bake (Flourless Muffin)",
-    "category": "elaborate",
-    "cookingTime": "About 55 minutes (estimated)",
-    "description": "A dessert dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/x7cbsp1779811798.jpg",
-    "ingredients": [
-      "450ml Coconut Cream",
-      "4 large Plantain",
-      "4 tablespoons Sugar"
+    "sourceName": "bbc.co.uk",
+    "sourceUrl": "https://www.bbc.co.uk/food/recipes/rock_cakes_03094",
+    "nutrients": [
+      {
+        "name": "Calcium",
+        "from": [
+          "milk"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "eggs"
+        ]
+      }
     ],
-    "instructions": [
-      "Preheat oven to 350 degrees.",
-      "Mash the plantains until it has a paste consistency.",
-      "Mix togher the coconut cream and granulated sugar. Mix well.",
-      "Add muffin liners to muffin pan.",
-      "Fill the mixture into muffin pan.",
-      "Bake for 45 minutes until baked all the way through."
+    "allergens": [
+      "Milk",
+      "Egg",
+      "Wheat (gluten)"
     ],
-    "sourceName": "cookingwithlane.com",
-    "sourceUrl": "https://cookingwithlane.com/laos-plantain-coconut-bake/"
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Contains added sugar (caster sugar), so it's best as an occasional treat."
+    ]
   },
   {
     "id": "breakfast-quick-1",
-    "title": "Antiguan Breakfast (Chop Up and ‘Saltfish’)",
-    "category": "quick",
-    "cookingTime": "About 15 minutes (estimated)",
-    "description": "A breakfast dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/jvjnoh1780086318.jpg",
-    "ingredients": [
-      "4 Egg Plants",
-      "8 oz Callaloo",
-      "1 lb Pumpkin",
-      "3 cloves Chopped Garlic",
-      "1 Diced Onion",
-      "2 oz Butter",
-      "1/2 tsp Salt",
-      "1/4 tsp Black Pepper"
-    ],
-    "instructions": [
-      "Peel and chop eggplant and pumpkin into medium-sized pieces.",
-      "Heat butter and add onions and garlic in a medium sized pot set to medium to high heat. Sauté for 2 minutes until softened but not browned.",
-      "Add pumpkin and eggplant. Sauté for an additional two to three minutes.",
-      "Add water just to cover the vegetables. Bring to a boil, reduce heat to a simmer and cook until the vegetables are soft.",
-      "Add the chopped spinach, stir and cook for an additional 3 minutes.",
-      "Pour the vegetable mixture into a colander and let drain.",
-      "After vegetable mixture has been drained return it to the pot and mash vigorously with a potato masher or a thick whisk.",
-      "Add salt and pepper. Adjust seasoning to taste."
-    ],
-    "sourceName": "atastefortravel.ca",
-    "sourceUrl": "https://www.atastefortravel.ca/24626-antigua-chop-up/#recipe"
-  },
-  {
-    "id": "breakfast-quick-2",
-    "title": "Rømmegrøt – Norwegian Sour Cream Porridge",
-    "category": "quick",
-    "cookingTime": "About 20 minutes (estimated)",
-    "description": "A Norway breakfast dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/hyk47c1762772689.jpg",
-    "ingredients": [
-      "2 cups Full fat sour cream",
-      "3/4 cup Flour",
-      "2 cups Milk",
-      "1 tsp Salt",
-      "Sprinkling Sugar",
-      "Sprinkling Cinnamon",
-      "To taste Butter"
-    ],
-    "instructions": [
-      "Cook the sour cream in a covered saucepan on medium heat for about 5 minutes.",
-      "Turn down the heat and add half of the flour and stir well with a whisk. Once the flour is fully incorporated, let the mixture continue to cook, stirring occasionally, until fat starts to release. Use a spoon to gather as much of the fat as you can in a small bowl, saving for later. (Don't worry if you can't get any fat – in that case you can add butter later.)",
-      "Whisk in the rest of the flour and then slowly add the milk, whisking constantly to avoid lumps. Let the porridge continue to cook on low heat for 5 minutes and then add salt.",
-      "Serve with sugar, cinnamon, and the fat from the porridge. If you're using lower fat sour cream you can top the rømmegrøt with some butter instead."
-    ],
-    "sourceName": "scandinaviancookbook.com",
-    "sourceUrl": "https://scandinaviancookbook.com/rommegrot-norwegian-sour-cream-porridge/"
-  },
-  {
-    "id": "breakfast-quick-3",
     "title": "Oatmeal pancakes",
     "category": "quick",
     "cookingTime": "About 20 minutes (estimated)",
@@ -1608,7 +2095,40 @@ export const recipes = [
       "Finally, add the caramel and strawberries."
     ],
     "sourceName": "goya.es",
-    "sourceUrl": "https://goya.es/en/recipes/oatmeal-pancakes"
+    "sourceUrl": "https://goya.es/en/recipes/oatmeal-pancakes",
+    "nutrients": [
+      {
+        "name": "Iron",
+        "from": [
+          "ground oats"
+        ]
+      },
+      {
+        "name": "Calcium",
+        "from": [
+          "milk"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "egg"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "strawberries"
+        ]
+      }
+    ],
+    "allergens": [
+      "Milk",
+      "Egg"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks."
+    ]
   },
   {
     "id": "breakfast-elaborate-1",
@@ -1643,66 +2163,33 @@ export const recipes = [
       "Gently stir in almost all the 3 tbsp chopped fresh parsley, and season with a little salt and black pepper to taste. Serve scattered with the remaining parsley and garnished with 1 lemon, cut into wedges."
     ],
     "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/2256/smoked-haddock-kedgeree"
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/2256/smoked-haddock-kedgeree",
+    "nutrients": [
+      {
+        "name": "Protein",
+        "from": [
+          "smoked haddock",
+          "eggs"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "lemon"
+        ]
+      }
+    ],
+    "allergens": [
+      "Milk",
+      "Egg",
+      "Fish"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks."
+    ]
   },
   {
     "id": "breakfast-elaborate-2",
-    "title": "Jamaican Cornmeal Porridge",
-    "category": "elaborate",
-    "cookingTime": "About 35 minutes (estimated)",
-    "description": "A Jamaican breakfast dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/sng9bm1765320170.jpg",
-    "ingredients": [
-      "4 cups Water",
-      "380g Coconut Milk",
-      "1 cup Fine Yellow Cornmeal",
-      "1 1/2 tsp Vanilla Extract",
-      "1/2 tsp Ground Cinnamon",
-      "1/2 tsp Ground Nutmeg",
-      "1/4 tsp Ground Allspice",
-      "1/2 cup Sweetened Condensed Milk"
-    ],
-    "instructions": [
-      "Add 2 ½ cups water, 1 can coconut milk to a 4 QT heavy bottomed pot. Bring to a boil over medium-high heat.",
-      "Meanwhile, add 1 cup cornmeal and 1 ½ cup water to a large mixing cup and whisk until smooth.",
-      "Once the pot begins to boil, whisk in cornmeal mixture and continue to whisk for about 1 minute, ensuring there are no lumps. Reduce heat to low and cover with a tight fitting lid.",
-      "Cook over low heat for 15-20 minutes, stirring occasionally. When there is about 5 minutes left, stir in vanilla extract, cinnamon, nutmeg, and all-spice. Remove from heat and sweeten with condensed milk.",
-      "Serve and enjoy."
-    ],
-    "sourceName": "myforkinglife.com",
-    "sourceUrl": "https://www.myforkinglife.com/jamaican-cornmeal-porridge/#recipe"
-  },
-  {
-    "id": "breakfast-elaborate-3",
-    "title": "Fruit and Cream Cheese Breakfast Pastries",
-    "category": "elaborate",
-    "cookingTime": "About 30 minutes (estimated)",
-    "description": "An United States breakfast dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/1543774956.jpg",
-    "ingredients": [
-      "1 1/4 oz Cream Cheese",
-      "1 1/4 cup Sugar",
-      "1 teaspoon Vanilla Extract",
-      "Flour",
-      "2 Puff Pastry",
-      "Strawberries",
-      "Raspberries",
-      "Blackberries"
-    ],
-    "instructions": [
-      "Preheat oven to 400ºF (200ºC), and prepare two cookie sheets with parchment paper. In a bowl, mix cream cheese, sugar, and vanilla until fully combined. Lightly flour the surface and roll out puff pastry on top to flatten. Cut each sheet of puff pastry into 9 equal squares. On the top right and bottom left of the pastry, cut an L shape approximately ½ inch (1 cm) from the edge.",
-      "NOTE: This L shape should reach all the way down and across the square, however both L shapes should not meet at the ends. Your pastry should look like a picture frame with two corners still intact.",
-      "Take the upper right corner and fold down towards the inner bottom corner. You will now have a diamond shape.",
-      "Place 1 to 2 teaspoons of the cream cheese filling in the middle, then place berries on top.",
-      "Repeat with the remaining pastry squares and place them onto the parchment covered baking sheet.",
-      "Bake for 15-20 minutes or until pastry is golden brown and puffed.",
-      "Enjoy!"
-    ],
-    "sourceName": "TheMealDB",
-    "sourceUrl": "https://www.themealdb.com/meal/52957"
-  },
-  {
-    "id": "breakfast-elaborate-4",
     "title": "Dutch poffertjes (mini pancakes)",
     "category": "elaborate",
     "cookingTime": "About 55 minutes (estimated)",
@@ -1727,38 +2214,29 @@ export const recipes = [
       "Serve the poffertjes with butter and icing sugar"
     ],
     "sourceName": "insimoneskitchen.com",
-    "sourceUrl": "https://insimoneskitchen.com/old-dutch-poffertjes/#recipe"
-  },
-  {
-    "id": "sandwich-quick-1",
-    "title": "Open-faced Sandwich With Potato",
-    "category": "quick",
-    "cookingTime": "About 25 minutes (estimated)",
-    "description": "A pork dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/wooxjq1784663522.jpg",
-    "ingredients": [
-      "500g New Potatoes",
-      "4 slices Bacon",
-      "4 tablespoons Mayonnaise",
-      "Handful Chives",
-      "8 slices Rye Bread",
-      "2 Red Onions",
-      "1/2 cup All purpose flour",
-      "1 1/4 cup Vegetable Oil",
-      "Pinch Sea Salt"
+    "sourceUrl": "https://insimoneskitchen.com/old-dutch-poffertjes/#recipe",
+    "nutrients": [
+      {
+        "name": "Calcium",
+        "from": [
+          "milk"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "eggs"
+        ]
+      }
     ],
-    "instructions": [
-      "Scrub the potatoes clean and place in a small saucepan with water and 1 tablespoon of salt. Bring to a boil and simmer the potatoes for about 10 minutes. Turn off the heat and let the potatoes stand in the water for 5 minutes. Drain the potatoes and allow to cool slightly. Remember that potatoes come in various sizes, so the cooking time may vary – if they do not easily glide off of a fork when speared and lifted out of the water, they are not done yet.",
-      "Fry bacon slices and transfer to a dish lined with paper towels.",
-      "Peel the red onion and slice in thin rings.",
-      "Transfer the flour to a bowl and toss the onions in the flour. Remove onions and shake off excess flour.",
-      "Heat the oil in a saucepan over medium heat. You can test whether the oil is hot enough by adding a small piece of onion to the saucepan. If the oil bubbles around the onion, the oil is ready.",
-      "Transfer as many onion rings to the saucepan as can fit in one layer. Do not add too many onion rings at once.",
-      "Fry the onions for a couple of minutes until they are golden brown. Transfer onions to a dish lined with paper towels and sprinkle with salt. Repeat the process until all onions are fried.",
-      "Butter a slice of dark rye bread and arrange round potato slices (or, if the potatoes are very small, halved potatoes) on top. Top your open potato sandwich with a good mayonnaise, crispy fried onions, fried bacon and sliced chives."
+    "allergens": [
+      "Milk",
+      "Egg",
+      "Wheat (gluten)"
     ],
-    "sourceName": "denmark.dk",
-    "sourceUrl": "https://denmark.dk/people-and-culture/recipes/open-sandwich-with-potato/"
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks."
+    ]
   },
   {
     "id": "spicy-quick-1",
@@ -1786,34 +2264,42 @@ export const recipes = [
       "Blitz the whole peppers and the mayo in a food processor. Add a heap of the salad to each flatbread. Slice the lamb, trimming off any excess fat and lay on top of the salad, drizzling with the resting juices. Spoon over the mayo and scatter with a few of the sliced peppers. Roll up and eat. If using pitta, split and stuff. Serve any extra salad on the side."
     ],
     "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/hot-cumin-lamb-wrap-crunchy-slaw-spicy-mayo"
-  },
-  {
-    "id": "spicy-quick-2",
-    "title": "Thai curry noodle soup",
-    "category": "quick",
-    "cookingTime": "About 20 minutes (estimated)",
-    "description": "A Thai seafood dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/118oj61763423896.jpg",
-    "ingredients": [
-      "1 teaspoon Vegetable Oil",
-      "1 tbsp Thai Green Curry Paste",
-      "220g Stir-fry Vegetables",
-      "150g Raw King Prawns",
-      "150ml Coconut Milk",
-      "225ml Vegetable Stock",
-      "250g Udon Noodles",
-      "10g Coriander",
-      "10g Basil",
-      "1 sliced Red Chilli",
-      "1 sliced Spring Onions"
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/hot-cumin-lamb-wrap-crunchy-slaw-spicy-mayo",
+    "nutrients": [
+      {
+        "name": "Iron",
+        "from": [
+          "lamb leg"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "lamb leg"
+        ]
+      },
+      {
+        "name": "Fibre",
+        "from": [
+          "carrots",
+          "white cabbage"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "white cabbage",
+          "sweet peppadew peppers"
+        ]
+      }
     ],
-    "instructions": [
-      "Heat the oil in a saucepan over a medium heat and cook the curry paste for 1 min before adding the stir-fry veg and prawns. Cook for 3 mins until the prawns are mostly pink, then add the coconut milk, veg stock and noodles.",
-      "Bring to the boil, then reduce the heat to a simmer and cook for 5 mins until the noodles are cooked through and the veg is tender but still has a bite. Divide between two bowls and sprinkle over the herbs, chilli and spring onion."
+    "allergens": [
+      "Egg",
+      "Wheat (gluten)"
     ],
-    "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/thai-curry-noodle-soup"
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks."
+    ]
   },
   {
     "id": "spicy-elaborate-1",
@@ -1843,7 +2329,59 @@ export const recipes = [
       "Mix the yogurt with the garlic, most of the walnuts and coriander and a little salt and pepper. Arrange the aubergine slices over a warm platter and spoon over the chickpea mix. Drizzle with the walnut sauce and scatter with the remaining walnuts and coriander."
     ],
     "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/grilled-aubergines-spicy-chickpeas-walnut-sauce"
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/grilled-aubergines-spicy-chickpeas-walnut-sauce",
+    "nutrients": [
+      {
+        "name": "Folate",
+        "from": [
+          "chickpeas"
+        ]
+      },
+      {
+        "name": "Iron",
+        "from": [
+          "chickpeas"
+        ]
+      },
+      {
+        "name": "Calcium",
+        "from": [
+          "greek yogurt"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "chickpeas",
+          "greek yogurt"
+        ]
+      },
+      {
+        "name": "Omega-3",
+        "from": [
+          "walnuts"
+        ]
+      },
+      {
+        "name": "Fibre",
+        "from": [
+          "chickpeas",
+          "aubergine"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "tomato",
+          "lemon"
+        ]
+      }
+    ],
+    "allergens": [
+      "Milk",
+      "Tree nuts"
+    ],
+    "cautions": []
   },
   {
     "id": "spicy-elaborate-2",
@@ -1871,7 +2409,35 @@ export const recipes = [
       "Turn down the heat and simmer for 15 mins until the curry is nice and thick. Season to taste, then serve with the basmati rice and the coriander leaves."
     ],
     "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/kidney-bean-curry"
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/kidney-bean-curry",
+    "nutrients": [
+      {
+        "name": "Folate",
+        "from": [
+          "kidney beans"
+        ]
+      },
+      {
+        "name": "Iron",
+        "from": [
+          "kidney beans"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "kidney beans"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "chopped tomatoes"
+        ]
+      }
+    ],
+    "allergens": [],
+    "cautions": []
   },
   {
     "id": "spicy-elaborate-3",
@@ -1899,7 +2465,35 @@ export const recipes = [
       "Fluff rice with a fork; stir in lime zest and 1 TBSP butter. Divide rice between bowls. Arrange beef, grated carrot, and pickled cucumber on top. Top with a squeeze of lime juice. Drizzle with sriracha mayo."
     ],
     "sourceName": "TheMealDB",
-    "sourceUrl": "https://www.themealdb.com/meal/52997"
+    "sourceUrl": "https://www.themealdb.com/meal/52997",
+    "nutrients": [
+      {
+        "name": "Iron",
+        "from": [
+          "ground beef"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "ground beef"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "lime"
+        ]
+      }
+    ],
+    "allergens": [
+      "Wheat (gluten)",
+      "Soy"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Can be salty (soy sauce). Go easy on any extra salt."
+    ]
   },
   {
     "id": "spicy-elaborate-4",
@@ -1932,10 +2526,157 @@ export const recipes = [
       "Adjust salt and pepper to taste."
     ],
     "sourceName": "TheMealDB",
-    "sourceUrl": "https://www.themealdb.com/meal/52797"
+    "sourceUrl": "https://www.themealdb.com/meal/52797",
+    "nutrients": [
+      {
+        "name": "Calcium",
+        "from": [
+          "feta"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "lemon",
+          "pepper"
+        ]
+      }
+    ],
+    "allergens": [
+      "Milk",
+      "Tree nuts"
+    ],
+    "cautions": [
+      "Use pasteurised feta (check the label).",
+      "Can be salty (feta). Go easy on any extra salt."
+    ]
   },
   {
     "id": "meat-quick-1",
+    "title": "Moussaka",
+    "category": "quick",
+    "cookingTime": "About 20 minutes (estimated)",
+    "description": "A Greek beef dish from TheMealDB recipe collection.",
+    "image": "https://www.themealdb.com/images/media/meals/ctg8jd1585563097.jpg",
+    "ingredients": [
+      "500g Beef",
+      "1 large Aubergine",
+      "150g Greek Yogurt",
+      "1 beaten Egg",
+      "3 tbs Parmesan",
+      "400g Tomato",
+      "4 tbs Tomato Puree",
+      "350g Potatoes"
+    ],
+    "instructions": [
+      "Heat the grill to high. Brown the beef in a deep ovenproof frying pan over a high heat for 5 mins. Meanwhile, prick the aubergine with a fork, then microwave on High for 3-5 mins until soft. Mix the yogurt, egg and parmesan together, then add a little seasoning.",
+      "Stir the tomatoes, purée and potatoes in with the beef with some seasoning and heat through. Smooth the surface of the beef mixture with the back of a spoon, then slice the cooked aubergine and arrange on top. Pour the yogurt mixture over the aubergines, smooth out evenly, then grill until the topping has set and turned golden."
+    ],
+    "sourceName": "bbcgoodfood.com",
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/must-make-moussaka",
+    "nutrients": [
+      {
+        "name": "Iron",
+        "from": [
+          "beef"
+        ]
+      },
+      {
+        "name": "Calcium",
+        "from": [
+          "greek yogurt",
+          "parmesan"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "beef",
+          "greek yogurt",
+          "egg"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "tomato",
+          "tomato puree"
+        ]
+      }
+    ],
+    "allergens": [
+      "Milk",
+      "Egg"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks."
+    ]
+  },
+  {
+    "id": "meat-quick-2",
+    "title": "Chicken Quinoa Greek Salad",
+    "category": "quick",
+    "cookingTime": "About 15 minutes (estimated)",
+    "description": "A Greek chicken dish from TheMealDB recipe collection.",
+    "image": "https://www.themealdb.com/images/media/meals/k29viq1585565980.jpg",
+    "ingredients": [
+      "225g Quinoa",
+      "25g Butter",
+      "1 chopped Red Chilli",
+      "1 clove finely chopped Garlic",
+      "400g Chicken Breast",
+      "2 tbs Olive Oil",
+      "Handful Black Olives",
+      "1 chopped Red Onions",
+      "100g Feta",
+      "Chopped Mint",
+      "Juice of 1/2 Lemon"
+    ],
+    "instructions": [
+      "Cook the quinoa following the pack instructions, then rinse in cold water and drain thoroughly.",
+      "Meanwhile, mix the butter, chilli and garlic into a paste. Toss the chicken fillets in 2 tsp of the olive oil with some seasoning. Lay in a hot griddle pan and cook for 3-4 mins each side or until cooked through. Transfer to a plate, dot with the spicy butter and set aside to melt.",
+      "Next, tip the tomatoes, olives, onion, feta and mint into a bowl. Toss in the cooked quinoa. Stir through the remaining olive oil, lemon juice and zest, and season well. Serve with the chicken fillets on top, drizzled with any buttery chicken juices."
+    ],
+    "sourceName": "bbcgoodfood.com",
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/griddled-chicken-quinoa-greek-salad",
+    "nutrients": [
+      {
+        "name": "Iron",
+        "from": [
+          "quinoa"
+        ]
+      },
+      {
+        "name": "Calcium",
+        "from": [
+          "feta"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "quinoa",
+          "chicken breast"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "lemon"
+        ]
+      }
+    ],
+    "allergens": [
+      "Milk"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Use pasteurised feta (check the label).",
+      "Can be salty (black olives, feta). Go easy on any extra salt."
+    ]
+  },
+  {
+    "id": "meat-quick-3",
     "title": "Picadillo de Vainicas (Green Beans Picadillo)",
     "category": "quick",
     "cookingTime": "About 25 minutes (estimated)",
@@ -1958,34 +2699,26 @@ export const recipes = [
       "Add to the pot, the shredded meat, green beans, thyme, salt and pepper, and mix well. Add the water, cover and cook for 15 minutes, uncover and cook for 5 more minutes or until the green beans are soft."
     ],
     "sourceName": "recipesfromcostarica.com",
-    "sourceUrl": "https://www.recipesfromcostarica.com/recipes"
+    "sourceUrl": "https://www.recipesfromcostarica.com/recipes",
+    "nutrients": [
+      {
+        "name": "Iron",
+        "from": [
+          "flank steak"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "pepper"
+        ]
+      }
+    ],
+    "allergens": [],
+    "cautions": []
   },
   {
-    "id": "meat-quick-2",
-    "title": "Moussaka",
-    "category": "quick",
-    "cookingTime": "About 20 minutes (estimated)",
-    "description": "A Greek beef dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/ctg8jd1585563097.jpg",
-    "ingredients": [
-      "500g Beef",
-      "1 large Aubergine",
-      "150g Greek Yogurt",
-      "1 beaten Egg",
-      "3 tbs Parmesan",
-      "400g Tomato",
-      "4 tbs Tomato Puree",
-      "350g Potatoes"
-    ],
-    "instructions": [
-      "Heat the grill to high. Brown the beef in a deep ovenproof frying pan over a high heat for 5 mins. Meanwhile, prick the aubergine with a fork, then microwave on High for 3-5 mins until soft. Mix the yogurt, egg and parmesan together, then add a little seasoning.",
-      "Stir the tomatoes, purée and potatoes in with the beef with some seasoning and heat through. Smooth the surface of the beef mixture with the back of a spoon, then slice the cooked aubergine and arrange on top. Pour the yogurt mixture over the aubergines, smooth out evenly, then grill until the topping has set and turned golden."
-    ],
-    "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/must-make-moussaka"
-  },
-  {
-    "id": "meat-quick-3",
+    "id": "meat-quick-4",
     "title": "Thai chicken cakes with sweet chilli sauce",
     "category": "quick",
     "cookingTime": "About 20 minutes (estimated)",
@@ -2009,58 +2742,186 @@ export const recipes = [
       "Heat the oil in a frying pan, then fry the cakes over a medium heat for about 6-8 mins, turning once. Serve hot, with sweet chilli sauce, lime wedges, coriander, shredded spring onion and red chilli."
     ],
     "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/thai-chicken-cakes-sweet-chilli-sauce"
-  },
-  {
-    "id": "meat-quick-4",
-    "title": "Fašírky",
-    "category": "quick",
-    "cookingTime": "About 15 minutes (estimated)",
-    "description": "A Slovakia pork dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/gtpvwp1763363947.jpg",
-    "ingredients": [
-      "500g Ground Pork",
-      "1 medium chopped Onion",
-      "2 cloves minced Garlic",
-      "2 sliced Bread",
-      "1 shot Milk",
-      "1 Egg",
-      "1 teaspoon Salt",
-      "1/2 teaspoon Black Pepper",
-      "1 teaspoon Marjoram",
-      "1 tsp Mustard",
-      "1 tablespoon chopped Parsley",
-      "1/2 cup Flour",
-      "1 beaten Egg",
-      "1 cup Breadcrumbs",
-      "For frying Vegetable Oil"
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/thai-chicken-cakes-sweet-chilli-sauce",
+    "nutrients": [
+      {
+        "name": "Protein",
+        "from": [
+          "chicken breast"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "lime"
+        ]
+      }
     ],
-    "instructions": [
-      "Prepare the Bread Mixture",
-      "Soak the bread slices in milk or water until soft.",
-      "Squeeze out excess liquid and mash into small crumbs.",
-      "Mix the Ingredients",
-      "In a large bowl, combine ground meat, chopped onions, garlic, soaked bread, egg, and seasonings.",
-      "Mix well until evenly combined.",
-      "Shape the Meat Patties",
-      "Take portions of the mixture and shape them into palm-sized patties.",
-      "Flatten slightly to help with even cooking.",
-      "Coat the Patties",
-      "Lightly dust each patty with flour.",
-      "Dip into beaten egg, then coat with breadcrumbs for a crispy finish.",
-      "Fry the Fašírky",
-      "Heat vegetable oil in a pan over medium heat.",
-      "Fry the patties for 4-5 minutes per side until golden brown and fully cooked.",
-      "Transfer to a paper towel-lined plate to drain excess oil.",
-      "Serve and Enjoy",
-      "Serve Fašírky hot with mashed potatoes, cabbage salad, or fresh bread.",
-      "Enjoy with mustard, pickles, or garlic sauce for extra flavor."
-    ],
-    "sourceName": "slovakia-foods.co.uk",
-    "sourceUrl": "https://www.slovakia-foods.co.uk/blog/post/fasirky-recipe-how-to-make-authentic-slovak-meat-patties.html"
+    "allergens": [],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks."
+    ]
   },
   {
     "id": "meat-elaborate-1",
+    "title": "Chorba Hamra bel Frik (Algerian Lamb, Tomato, and Freekeh Soup)",
+    "category": "elaborate",
+    "cookingTime": "About 55 minutes (estimated)",
+    "description": "An Algerian lamb dish from TheMealDB recipe collection.",
+    "image": "https://www.themealdb.com/images/media/meals/p9tebp1764118792.jpg",
+    "ingredients": [
+      "1 cup Freekeh",
+      "12 ounces Lamb",
+      "1 finely chopped Onion",
+      "1 tsp Black Pepper",
+      "1 tsp Paprika",
+      "1 tsp Ground Cinnamon",
+      "To taste Salt",
+      "3  tablespoons Vegetable Oil",
+      "1  bunch Cilantro",
+      "1  bunch Mint",
+      "1 Celery",
+      "14 oz jar Chickpeas",
+      "4 cups Water",
+      "1 Diced Zucchini",
+      "1 Diced Carrots",
+      "1 tablespoon Tomato Puree",
+      "3 Medium Tomato",
+      "1 Diced Potatoes"
+    ],
+    "instructions": [
+      "Place freekeh in a small bowl and cover with cold water. Set aside.",
+      "Combine lamb, onion, black pepper, paprika, cinnamon, and salt in a pot. Stir in oil, 1/2 the cilantro, 1/2 the mint, and celery stalk until combined. Simmer over low heat for 15 minutes. Stir in chickpeas; pour in just enough water to cover, and return to a simmer. Stir in zucchini, carrot, and tomato paste.",
+      "Set a steamer over the pot; add tomatoes. Cover and steam tomatoes until soft, about 5 minutes. Crush tomatoes using a wooden spoon, so pulp drips into soup. Remove the steamer and discard leftover tomato peels.",
+      "Add potato to soup and just enough water to cover. Simmer until potato is soft, about 10 minutes.",
+      "Drain freekeh and add to soup. Simmer until soft, about 15 minutes. Remove celery stalk and discard. Sprinkle soup with remaining 1/2 cilantro and remaining 1/2 mint before serving."
+    ],
+    "sourceName": "allrecipes.com",
+    "sourceUrl": "https://www.allrecipes.com/recipe/264552/chorba-hamra-bel-frik-algerian-lamb-tomato-and-freekeh-soup/",
+    "nutrients": [
+      {
+        "name": "Folate",
+        "from": [
+          "chickpeas"
+        ]
+      },
+      {
+        "name": "Iron",
+        "from": [
+          "freekeh",
+          "lamb",
+          "chickpeas"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "lamb",
+          "chickpeas"
+        ]
+      },
+      {
+        "name": "Fibre",
+        "from": [
+          "freekeh",
+          "chickpeas",
+          "zucchini",
+          "carrots"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "tomato puree",
+          "tomato"
+        ]
+      }
+    ],
+    "allergens": [
+      "Wheat (gluten)"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks."
+    ]
+  },
+  {
+    "id": "meat-elaborate-2",
+    "title": "Tunisian Lamb Soup",
+    "category": "elaborate",
+    "cookingTime": "About 50 minutes (estimated)",
+    "description": "A Tunisian lamb dish from TheMealDB recipe collection.",
+    "image": "https://www.themealdb.com/images/media/meals/t8mn9g1560460231.jpg",
+    "ingredients": [
+      "500g Lamb Mince",
+      "2 cloves minced Garlic",
+      "1 Onion",
+      "300g Spinach",
+      "3 tbs Tomato Puree",
+      "1 tbs Cumin",
+      "1 Litre Chicken Stock",
+      "3 tsp Harissa Spice",
+      "400g Chickpeas",
+      "1/2 Lemon Juice",
+      "150g Macaroni",
+      "Pinch Salt",
+      "Pinch Pepper"
+    ],
+    "instructions": [
+      "Add the lamb to a casserole and cook over high heat. When browned, remove from the heat and set aside.",
+      "Keep a tablespoon of fat in the casserole and discard the rest. Reduce to medium heat then add the garlic, onion and spinach and cook until the onion is translucent and the spinach wilted or about 5 minutes.",
+      "Return the lamb to the casserole with the onion-spinach mixture, add the tomato puree, cumin, harissa, chicken, chickpeas, lemon juice, salt and pepper in the pan. Simmer over low heat for about 20 minutes.",
+      "Add the pasta and cook for 15 minutes or until pasta is cooked."
+    ],
+    "sourceName": "allrecipes.co.uk",
+    "sourceUrl": "http://allrecipes.co.uk/recipe/16694/tunisian-lamb-soup.aspx",
+    "nutrients": [
+      {
+        "name": "Folate",
+        "from": [
+          "spinach",
+          "chickpeas"
+        ]
+      },
+      {
+        "name": "Iron",
+        "from": [
+          "lamb mince",
+          "spinach",
+          "chickpeas"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "lamb mince",
+          "chickpeas"
+        ]
+      },
+      {
+        "name": "Fibre",
+        "from": [
+          "spinach",
+          "chickpeas"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "tomato puree",
+          "lemon juice",
+          "pepper"
+        ]
+      }
+    ],
+    "allergens": [
+      "Wheat (gluten)"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks."
+    ]
+  },
+  {
+    "id": "meat-elaborate-3",
     "title": "Cabbage with Ground Beef",
     "category": "elaborate",
     "cookingTime": "About 55 minutes (estimated)",
@@ -2101,145 +2962,178 @@ export const recipes = [
       "Sprinkle with chopped parsley or fresh herbs before serving."
     ],
     "sourceName": "cookinglsl.com",
-    "sourceUrl": "https://cookinglsl.com/ground-beef-cabbage-recipe/#wprm-recipe-container-59951"
-  },
-  {
-    "id": "meat-elaborate-2",
-    "title": "Chorba Hamra bel Frik (Algerian Lamb, Tomato, and Freekeh Soup)",
-    "category": "elaborate",
-    "cookingTime": "About 55 minutes (estimated)",
-    "description": "An Algerian lamb dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/p9tebp1764118792.jpg",
-    "ingredients": [
-      "1 cup Freekeh",
-      "12 ounces Lamb",
-      "1 finely chopped Onion",
-      "1 tsp Black Pepper",
-      "1 tsp Paprika",
-      "1 tsp Ground Cinnamon",
-      "To taste Salt",
-      "3  tablespoons Vegetable Oil",
-      "1  bunch Cilantro",
-      "1  bunch Mint",
-      "1 Celery",
-      "14 oz jar Chickpeas",
-      "4 cups Water",
-      "1 Diced Zucchini",
-      "1 Diced Carrots",
-      "1 tablespoon Tomato Puree",
-      "3 Medium Tomato",
-      "1 Diced Potatoes"
+    "sourceUrl": "https://cookinglsl.com/ground-beef-cabbage-recipe/#wprm-recipe-container-59951",
+    "nutrients": [
+      {
+        "name": "Iron",
+        "from": [
+          "ground beef"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "ground beef"
+        ]
+      },
+      {
+        "name": "Fibre",
+        "from": [
+          "carrots",
+          "cabbage",
+          "apple cider vinegar"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "red pepper",
+          "tomato puree",
+          "cabbage"
+        ]
+      }
     ],
-    "instructions": [
-      "Place freekeh in a small bowl and cover with cold water. Set aside.",
-      "Combine lamb, onion, black pepper, paprika, cinnamon, and salt in a pot. Stir in oil, 1/2 the cilantro, 1/2 the mint, and celery stalk until combined. Simmer over low heat for 15 minutes. Stir in chickpeas; pour in just enough water to cover, and return to a simmer. Stir in zucchini, carrot, and tomato paste.",
-      "Set a steamer over the pot; add tomatoes. Cover and steam tomatoes until soft, about 5 minutes. Crush tomatoes using a wooden spoon, so pulp drips into soup. Remove the steamer and discard leftover tomato peels.",
-      "Add potato to soup and just enough water to cover. Simmer until potato is soft, about 10 minutes.",
-      "Drain freekeh and add to soup. Simmer until soft, about 15 minutes. Remove celery stalk and discard. Sprinkle soup with remaining 1/2 cilantro and remaining 1/2 mint before serving."
-    ],
-    "sourceName": "allrecipes.com",
-    "sourceUrl": "https://www.allrecipes.com/recipe/264552/chorba-hamra-bel-frik-algerian-lamb-tomato-and-freekeh-soup/"
-  },
-  {
-    "id": "meat-elaborate-3",
-    "title": "Venezuelan Shredded Beef",
-    "category": "elaborate",
-    "cookingTime": "About 40 minutes (estimated)",
-    "description": "A Venezuela beef dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/mq27gf1764436795.jpg",
-    "ingredients": [
-      "2 Lbs Skirty Steak",
-      "2 cloves minced Garlic",
-      "1 chopped Onion",
-      "1 sliced Onion",
-      "1 sliced Red Pepper",
-      "3 sliced thinly Tomato",
-      "4 cups Beef Stock",
-      "2 tsp Worcestershire Sauce",
-      "1 tablespoon Tomato Puree",
-      "1 tsp Cumin",
-      "1/4 cup Tomato Ketchup",
-      "To taste Salt",
-      "To taste Pepper",
-      "1 tablespoon Olive Oil"
-    ],
-    "instructions": [
-      "Season beef with salt, pepper and minced garlic",
-      "Chop 1 onion in 4 big wedges",
-      "Place in the beef pressure cooker with the 4 wedges of onion and the stock",
-      "Pressure cook for 20 minutes",
-      "Release the pressure and open the lid",
-      "Remove the beef and SAVE 2 cups of stock in another container",
-      "With 2 forks, shred the beef. Beef should be tender enough to so easily. If not, cook for another 10 minutes",
-      "Press the saute button of the Instant pot. Add the olive oil",
-      "When the machine beeps, add the sliced onion, pepper and tomatoes. Cook until tender",
-      "Add the shredded beef back in the pot and mix",
-      "Pour in 1 1/2 cups of the saved stock, the Worcestershire sauce, tomato paste, ketchup and cumin. Mix",
-      "If sauce seems to dry, add a tad more of stock",
-      "Season with salt and pepper",
-      "Serve!"
-    ],
-    "sourceName": "livingsweetmoments.com",
-    "sourceUrl": "https://livingsweetmoments.com/venezuelan-shredded-beef-made-instant-pot/"
+    "allergens": [],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks."
+    ]
   },
   {
     "id": "meat-elaborate-4",
-    "title": "Corned Beef and Cabbage – Jamaican Style",
+    "title": "Mastawa Lamb and Rice",
     "category": "elaborate",
-    "cookingTime": "About 25 minutes (estimated)",
-    "description": "A Jamaican beef dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/kdz63q1764793442.jpg",
+    "cookingTime": "About 40 minutes (estimated)",
+    "description": "A lamb dish from TheMealDB recipe collection.",
+    "image": "https://www.themealdb.com/images/media/meals/4kzx4d1779554755.jpg",
     "ingredients": [
-      "1 tablespoon Olive Oil",
-      "1/2 Cabbage",
-      "1 chopped Green Pepper",
-      "1 chopped Onion",
-      "2 cloves minced Garlic",
-      "12 ounces Corned Beef",
-      "2 chopped Plum Tomatoes",
-      "2 sprigs Thyme",
-      "1 tablespoon Tomato Ketchup",
-      "To taste Salt",
-      "To taste Pepper"
+      "700g Lamb",
+      "3 Medium Onion",
+      "1 tsp Turmeric",
+      "1 large Orange",
+      "150g Rice",
+      "500g Natural Yoghurt",
+      "4 Cloves Crushed Garlic Clove",
+      "1 tblsp Vegetable Oil",
+      "1 tablespoon Dried Dill",
+      "1 tablespoon Black Pepper",
+      "1 Can Chickpeas",
+      "To taste Salt"
     ],
     "instructions": [
-      "Heat olive oil in a skillet or Dutch pot over medium-high heat. Add onion and green pepper and sauté for about 3-5 minutes.",
-      "Add garlic and stir for about 1 minute.",
-      "Add shredded cabbage and stir. Cook for about about 3-5 minutes, stirring often until softened.",
-      "Add corned beef, Roma tomatoes, and thyme and stir. Add ketchup and scotch bonnet pepper sauce and stir. Reduce heat and cook on medium for about 3-5 minutes, until the corned beef is heated through. Remove from heat.",
-      "Serve with white rice, bread, or on its own."
+      "Place the meat cut into pieces, in a large pan with the onions. Add the turmeric and enough water to cover. Bring to the boil then cook gently until the meat is very tender and can easily be removed from the bones.",
+      "While the meat is cooking, cut the orange peel into thin match style pieces, removing as much pith as possible. Leave to soak in a bowl of water.",
+      "When the meat is tender, remove from the pan and when cool enough, remove the meat from the bones and shred the meat into strips with your hands. Return the meat to the pan.",
+      "Wash the short grain rice and then add to the pan with salt according to taste. The juices should cover the rice by about 2cm, add more water if necessary. Bring back to the boil, then reduce the heat to medium and cook with the lid off, stirring from time to time until the rice is \"al dente\" and the liquid is absorbed.",
+      "Add the natural yoghurt, and stir in well but carefully. Fry the crushed cloves of garlic in the oil and add to the dish along with the dill, black pepper, the chickpeas and extra salt to taste.",
+      "Mix in well, then cover the top of the pan with a clean thick cloth and the lid. Leave on a low heat for about half an hour to allow the flavours to absorb.",
+      "Enjoy with some warm nan bread for extra comfort."
     ],
-    "sourceName": "myforkinglife.com",
-    "sourceUrl": "https://www.myforkinglife.com/corned-beef-and-cabbage-jamaican-style/#recipe"
+    "sourceName": "afghanaid.org.uk",
+    "sourceUrl": "https://www.afghanaid.org.uk/mastawa-recipe",
+    "nutrients": [
+      {
+        "name": "Folate",
+        "from": [
+          "orange",
+          "chickpeas"
+        ]
+      },
+      {
+        "name": "Iron",
+        "from": [
+          "lamb",
+          "chickpeas"
+        ]
+      },
+      {
+        "name": "Calcium",
+        "from": [
+          "natural yoghurt"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "lamb",
+          "chickpeas"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "orange"
+        ]
+      }
+    ],
+    "allergens": [
+      "Milk"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks."
+    ]
   },
   {
     "id": "general-quick-1",
-    "title": "Chickpea, chorizo & spinach stew",
+    "title": "Chorizo & chickpea soup",
     "category": "quick",
-    "cookingTime": "About 20 minutes (estimated)",
+    "cookingTime": "About 15 minutes (estimated)",
     "description": "A Spanish pork dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/xvnx8j1763287209.jpg",
+    "image": "https://www.themealdb.com/images/media/meals/kggfo91763288633.jpg",
     "ingredients": [
-      "4 tablespoons Extra Virgin Olive Oil",
-      "1 chopped Onion",
-      "1 Diced Carrots",
-      "1 Diced Celery",
-      "3 Thyme",
-      "2 Bay Leaves",
-      "2 cloves chopped Garlic",
-      "200g Chorizo",
-      "1/4 tsp Cinnamon",
-      "1 teaspoon Paprika",
-      "800g Chickpeas",
-      "2 tblsp Sherry vinegar",
-      "400g Spinach"
+      "400g Tinned Tomatos",
+      "110g Chorizo",
+      "140g Savoy Cabbage",
+      "Sprinkling Chilli Flakes",
+      "400g can Chickpeas",
+      "1 Chicken Stock",
+      "To serve Crusty Bread"
     ],
     "instructions": [
-      "Heat the oil in a large pan, then gently fry the onion for 3-4 mins until it begins to soften. Stir in the carrot, celery, thyme and bay leaves. Season, then cook for 2-3 mins, stirring occasionally. Add the garlic, chorizo, cinnamon and smoked paprika. Gently fry until the vegetables soften and the chorizo starts to release its oils and crisp up.",
-      "Stir in the chickpeas, vinegar and 150ml water, then bring to a simmer for 1-2 mins until the chickpeas have heated up. Add the spinach, then stir through the chickpeas until it wilts a little. Remove from the heat, season to taste, then serve warm with crusty bread."
+      "Put a medium pan on the heat and tip in the tomatoes, followed by a can of water. While the tomatoes are heating, quickly chop the chorizo into chunky pieces (removing any skin) and shred the cabbage.",
+      "Pile the chorizo and cabbage into the pan with the chilli flakes and chickpeas, then crumble in the stock cube. Stir well, cover and leave to bubble over a high heat for 6 mins or until the cabbage is just tender. Ladle into bowls and eat with crusty or garlic bread."
     ],
     "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/chickpea-chorizo-spinach-stew"
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/chorizo-chickpea-soup",
+    "nutrients": [
+      {
+        "name": "Folate",
+        "from": [
+          "chickpeas"
+        ]
+      },
+      {
+        "name": "Iron",
+        "from": [
+          "chickpeas"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "chickpeas"
+        ]
+      },
+      {
+        "name": "Fibre",
+        "from": [
+          "savoy cabbage",
+          "chickpeas"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "savoy cabbage"
+        ]
+      }
+    ],
+    "allergens": [
+      "Wheat (gluten)"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Can be salty (chorizo). Go easy on any extra salt."
+    ]
   },
   {
     "id": "general-quick-2",
@@ -2266,96 +3160,242 @@ export const recipes = [
       "I prefer it not too dry, so I cook it for about 5 to 7 min."
     ],
     "sourceName": "recipesfromcostarica.com",
-    "sourceUrl": "https://www.recipesfromcostarica.com/recipes"
+    "sourceUrl": "https://www.recipesfromcostarica.com/recipes",
+    "nutrients": [
+      {
+        "name": "Folate",
+        "from": [
+          "black beans"
+        ]
+      },
+      {
+        "name": "Iron",
+        "from": [
+          "black beans"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "black beans"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "pepper"
+        ]
+      }
+    ],
+    "allergens": [],
+    "cautions": []
   },
   {
     "id": "general-quick-3",
-    "title": "Breadfruit in Butter Sauce",
+    "title": "Chickpea, chorizo & spinach stew",
     "category": "quick",
     "cookingTime": "About 20 minutes (estimated)",
-    "description": "A side dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/6utn1w1782237402.jpg",
+    "description": "A Spanish pork dish from TheMealDB recipe collection.",
+    "image": "https://www.themealdb.com/images/media/meals/xvnx8j1763287209.jpg",
     "ingredients": [
-      "1/2 Breadfruit",
-      "1/2 Onion",
-      "1 tablespoon Olive Oil",
-      "125g Butter",
-      "3 Medium Onions",
-      "1 tablespoon chopped Garlic",
-      "500ml Tinned Tomatos",
-      "3  tablespoons Parsley",
-      "1 tablespoon Lime juice",
-      "To taste Salt",
-      "To taste Pepper",
-      "250ml Water",
-      "To taste Red Pepper Sauce",
-      "Garnish Parsley"
+      "4 tablespoons Extra Virgin Olive Oil",
+      "1 chopped Onion",
+      "1 Diced Carrots",
+      "1 Diced Celery",
+      "3 Thyme",
+      "2 Bay Leaves",
+      "2 cloves chopped Garlic",
+      "200g Chorizo",
+      "1/4 tsp Cinnamon",
+      "1 teaspoon Paprika",
+      "800g Chickpeas",
+      "2 tblsp Sherry vinegar",
+      "400g Spinach"
     ],
     "instructions": [
-      "Cut the breadfruit, remove the seeds in the core, and peel. Boil in salted water with a little onion and oil, over high heat until tender and drain.",
-      "Meanwhile, melt the butter in a frying pan and lightly brown the onion rings. Add the garlic, tomatoes, parsley, lime juice, salt, and pepper. Continue to sauté for a couple of minutes. Add the water, bring to the boil and simmer for 5-10 minutes.",
-      "Slice the cooled breadfruit and place it in a serving dish. Pour the butter sauce over the breadfruit.",
-      "Garnish with chopped fresh parsley.",
-      "Serves 4"
+      "Heat the oil in a large pan, then gently fry the onion for 3-4 mins until it begins to soften. Stir in the carrot, celery, thyme and bay leaves. Season, then cook for 2-3 mins, stirring occasionally. Add the garlic, chorizo, cinnamon and smoked paprika. Gently fry until the vegetables soften and the chorizo starts to release its oils and crisp up.",
+      "Stir in the chickpeas, vinegar and 150ml water, then bring to a simmer for 1-2 mins until the chickpeas have heated up. Add the spinach, then stir through the chickpeas until it wilts a little. Remove from the heat, season to taste, then serve warm with crusty bread."
     ],
-    "sourceName": "totallybarbados.com",
-    "sourceUrl": "https://www.totallybarbados.com/articles/barbados-recipes/breadfruit-butter-sauce-recipe/"
+    "sourceName": "bbcgoodfood.com",
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/chickpea-chorizo-spinach-stew",
+    "nutrients": [
+      {
+        "name": "Folate",
+        "from": [
+          "chickpeas",
+          "spinach"
+        ]
+      },
+      {
+        "name": "Iron",
+        "from": [
+          "chickpeas",
+          "spinach"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "chickpeas"
+        ]
+      },
+      {
+        "name": "Fibre",
+        "from": [
+          "carrots",
+          "chickpeas",
+          "spinach"
+        ]
+      }
+    ],
+    "allergens": [],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Can be salty (chorizo). Go easy on any extra salt."
+    ]
   },
   {
     "id": "general-quick-4",
-    "title": "Chorizo & chickpea soup",
+    "title": "Matar Paneer",
     "category": "quick",
-    "cookingTime": "About 15 minutes (estimated)",
-    "description": "A Spanish pork dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/kggfo91763288633.jpg",
+    "cookingTime": "About 20 minutes (estimated)",
+    "description": "An India vegetarian dish from TheMealDB recipe collection.",
+    "image": "https://www.themealdb.com/images/media/meals/xxpqsy1511452222.jpg",
     "ingredients": [
-      "400g Tinned Tomatos",
-      "110g Chorizo",
-      "140g Savoy Cabbage",
-      "Sprinkling Chilli Flakes",
-      "400g can Chickpeas",
-      "1 Chicken Stock",
-      "To serve Crusty Bread"
+      "1 tbls Sunflower Oil",
+      "225g Paneer",
+      "2 Ginger",
+      "1 tsp Cumin",
+      "1 tsp Turmeric",
+      "1 tsp Coriander",
+      "1 Green Chilli",
+      "4 large Tomato",
+      "150g Peas",
+      "1 tsp Garam Masala",
+      "Small bunch Coriander",
+      "to serve Naan Bread"
     ],
     "instructions": [
-      "Put a medium pan on the heat and tip in the tomatoes, followed by a can of water. While the tomatoes are heating, quickly chop the chorizo into chunky pieces (removing any skin) and shred the cabbage.",
-      "Pile the chorizo and cabbage into the pan with the chilli flakes and chickpeas, then crumble in the stock cube. Stir well, cover and leave to bubble over a high heat for 6 mins or until the cabbage is just tender. Ladle into bowls and eat with crusty or garlic bread."
+      "Heat the oil in a frying pan over high heat until it’s shimmering hot. Add the paneer, then turn the heat down a little. Fry until it starts to brown at the edges, then turn it over and brown on each side – the paneer will brown faster than you think, so don’t walk away. Remove the paneer from the pan and drain on kitchen paper.",
+      "Put the ginger, cumin, turmeric, ground coriander and chilli in the pan, and fry everything for 1 min. Add the tomatoes, mashing them with the back of a spoon and simmer everything for 5 mins until the sauce smells fragrant. Add a splash of water if it’s too thick. Season well. Add the peas and simmer for a further 2 mins, then stir in the paneer and sprinkle over the garam masala. Divide between two bowls, top with coriander leaves and serve with naan bread, roti or rice."
     ],
     "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/chorizo-chickpea-soup"
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/matar-paneer",
+    "nutrients": [
+      {
+        "name": "Folate",
+        "from": [
+          "peas"
+        ]
+      },
+      {
+        "name": "Calcium",
+        "from": [
+          "paneer"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "paneer"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "tomato"
+        ]
+      }
+    ],
+    "allergens": [
+      "Milk",
+      "Wheat (gluten)"
+    ],
+    "cautions": [
+      "Use pasteurised paneer (check the label)."
+    ]
   },
   {
     "id": "general-elaborate-1",
-    "title": "Vegetarian Casserole",
+    "title": "Ribollita",
     "category": "elaborate",
-    "cookingTime": "About 50 minutes (estimated)",
-    "description": "A British vegetarian dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/vptwyt1511450962.jpg",
+    "cookingTime": "About 55 minutes (estimated)",
+    "description": "An Italian vegetarian dish from TheMealDB recipe collection.",
+    "image": "https://www.themealdb.com/images/media/meals/xrrwpx1487347049.jpg",
     "ingredients": [
-      "1 Rapeseed Oil",
-      "1 Onion",
-      "3 cloves Garlic",
-      "1 tsp Paprika",
-      "½ tsp Cumin",
-      "1 tblsp Thyme",
-      "3 Medium Carrots",
-      "2 small stalks Celery",
-      "1 Red Pepper",
-      "1 Yellow Pepper",
-      "2 x 400g tins Tomato",
-      "250ml Vegetable Stock Cube",
-      "2 sliced Courgettes",
-      "2 sprigs Thyme",
-      "250g Lentils"
+      "5 tablespoons Olive Oil",
+      "1 chopped Onion",
+      "1 chopped Carrots",
+      "1 stalk chopped Celery",
+      "1 tablespoon minced Garlic",
+      "2 cups Cannellini Beans",
+      "1 Canned tomatoes",
+      "4 cups Water",
+      "1 fresh sprig Rosemary",
+      "1 fresh sprig Thyme",
+      "1 pound chopped Kale",
+      "4 thick slices Wholegrain Bread",
+      "1 thinly sliced Red Onions",
+      "½ cup freshly grated Parmesan"
     ],
     "instructions": [
-      "Heat the oil in a large, heavy-based pan. Add the onions and cook gently for 5 – 10 mins until softened.",
-      "Add the garlic, spices, dried thyme, carrots, celery and peppers and cook for 5 minutes.",
-      "Add the tomatoes, stock, courgettes and fresh thyme and cook for 20 - 25 minutes.",
-      "Take out the thyme sprigs. Stir in the lentils and bring back to a simmer. Serve with wild and white basmati rice, mash or quinoa."
+      "Put 2 tablespoons of the oil in a large pot over medium heat. When it’s hot, add onion, carrot, celery and garlic; sprinkle with salt and pepper and cook, stirring occasionally, until vegetables are soft, 5 to 10 minutes.",
+      "Heat the oven to 500 degrees. Drain the beans; if they’re canned, rinse them as well. Add them to the pot along with tomatoes and their juices and stock, rosemary and thyme. Bring to a boil, then reduce heat so the soup bubbles steadily; cover and cook, stirring once or twice to break up the tomatoes, until the flavors meld, 15 to 20 minutes.",
+      "Fish out and discard rosemary and thyme stems, if you like, and stir in kale. Taste and adjust seasoning. Lay bread slices on top of the stew so they cover the top and overlap as little as possible. Scatter red onion slices over the top, drizzle with the remaining 3 tablespoons oil and sprinkle with Parmesan.",
+      "Put the pot in the oven and bake until the bread, onions and cheese are browned and crisp, 10 to 15 minutes. (If your pot fits under the broiler, you can also brown the top there.) Divide the soup and bread among 4 bowls and serve."
     ],
-    "sourceName": "bbcgoodfood.com",
-    "sourceUrl": "https://www.bbcgoodfood.com/recipes/1993645/vegetarian-casserole"
+    "sourceName": "cooking.nytimes.com",
+    "sourceUrl": "https://cooking.nytimes.com/recipes/1016052-ribollita",
+    "nutrients": [
+      {
+        "name": "Folate",
+        "from": [
+          "cannellini beans",
+          "kale"
+        ]
+      },
+      {
+        "name": "Iron",
+        "from": [
+          "cannellini beans",
+          "kale"
+        ]
+      },
+      {
+        "name": "Calcium",
+        "from": [
+          "kale",
+          "parmesan"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "cannellini beans"
+        ]
+      },
+      {
+        "name": "Fibre",
+        "from": [
+          "carrots",
+          "cannellini beans",
+          "kale",
+          "wholegrain bread"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "canned tomatoes",
+          "kale"
+        ]
+      }
+    ],
+    "allergens": [
+      "Milk",
+      "Wheat (gluten)"
+    ],
+    "cautions": []
   },
   {
     "id": "general-elaborate-2",
@@ -2389,68 +3429,180 @@ export const recipes = [
       "Serve with crushed-up crackers, torn up bread, or something else to add some extra thickness.  You could also use a traditional thickener (like cornstarch or flour), but I prefer to add crackers for some texture and saltiness.  Makes great leftovers, stays good in the fridge for about a week."
     ],
     "sourceName": "findingtimeforcooking.com",
-    "sourceUrl": "https://findingtimeforcooking.com/main-dishes/red-lentil-soup-corba/"
+    "sourceUrl": "https://findingtimeforcooking.com/main-dishes/red-lentil-soup-corba/",
+    "nutrients": [
+      {
+        "name": "Folate",
+        "from": [
+          "lentils"
+        ]
+      },
+      {
+        "name": "Iron",
+        "from": [
+          "lentils"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "lentils"
+        ]
+      },
+      {
+        "name": "Fibre",
+        "from": [
+          "lentils",
+          "carrots"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "tomato puree"
+        ]
+      }
+    ],
+    "allergens": [],
+    "cautions": []
   },
   {
     "id": "general-elaborate-3",
-    "title": "Ribollita",
+    "title": "Vegetarian Casserole",
     "category": "elaborate",
-    "cookingTime": "About 55 minutes (estimated)",
-    "description": "An Italian vegetarian dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/xrrwpx1487347049.jpg",
+    "cookingTime": "About 50 minutes (estimated)",
+    "description": "A British vegetarian dish from TheMealDB recipe collection.",
+    "image": "https://www.themealdb.com/images/media/meals/vptwyt1511450962.jpg",
     "ingredients": [
-      "5 tablespoons Olive Oil",
-      "1 chopped Onion",
-      "1 chopped Carrots",
-      "1 stalk chopped Celery",
-      "1 tablespoon minced Garlic",
-      "2 cups Cannellini Beans",
-      "1 Canned tomatoes",
-      "4 cups Water",
-      "1 fresh sprig Rosemary",
-      "1 fresh sprig Thyme",
-      "1 pound chopped Kale",
-      "4 thick slices Wholegrain Bread",
-      "1 thinly sliced Red Onions",
-      "½ cup freshly grated Parmesan"
+      "1 Rapeseed Oil",
+      "1 Onion",
+      "3 cloves Garlic",
+      "1 tsp Paprika",
+      "½ tsp Cumin",
+      "1 tblsp Thyme",
+      "3 Medium Carrots",
+      "2 small stalks Celery",
+      "1 Red Pepper",
+      "1 Yellow Pepper",
+      "2 x 400g tins Tomato",
+      "250ml Vegetable Stock Cube",
+      "2 sliced Courgettes",
+      "2 sprigs Thyme",
+      "250g Lentils"
     ],
     "instructions": [
-      "Put 2 tablespoons of the oil in a large pot over medium heat. When it’s hot, add onion, carrot, celery and garlic; sprinkle with salt and pepper and cook, stirring occasionally, until vegetables are soft, 5 to 10 minutes.",
-      "Heat the oven to 500 degrees. Drain the beans; if they’re canned, rinse them as well. Add them to the pot along with tomatoes and their juices and stock, rosemary and thyme. Bring to a boil, then reduce heat so the soup bubbles steadily; cover and cook, stirring once or twice to break up the tomatoes, until the flavors meld, 15 to 20 minutes.",
-      "Fish out and discard rosemary and thyme stems, if you like, and stir in kale. Taste and adjust seasoning. Lay bread slices on top of the stew so they cover the top and overlap as little as possible. Scatter red onion slices over the top, drizzle with the remaining 3 tablespoons oil and sprinkle with Parmesan.",
-      "Put the pot in the oven and bake until the bread, onions and cheese are browned and crisp, 10 to 15 minutes. (If your pot fits under the broiler, you can also brown the top there.) Divide the soup and bread among 4 bowls and serve."
+      "Heat the oil in a large, heavy-based pan. Add the onions and cook gently for 5 – 10 mins until softened.",
+      "Add the garlic, spices, dried thyme, carrots, celery and peppers and cook for 5 minutes.",
+      "Add the tomatoes, stock, courgettes and fresh thyme and cook for 20 - 25 minutes.",
+      "Take out the thyme sprigs. Stir in the lentils and bring back to a simmer. Serve with wild and white basmati rice, mash or quinoa."
     ],
-    "sourceName": "cooking.nytimes.com",
-    "sourceUrl": "https://cooking.nytimes.com/recipes/1016052-ribollita"
+    "sourceName": "bbcgoodfood.com",
+    "sourceUrl": "https://www.bbcgoodfood.com/recipes/1993645/vegetarian-casserole",
+    "nutrients": [
+      {
+        "name": "Folate",
+        "from": [
+          "lentils"
+        ]
+      },
+      {
+        "name": "Iron",
+        "from": [
+          "lentils"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "lentils"
+        ]
+      },
+      {
+        "name": "Fibre",
+        "from": [
+          "carrots",
+          "courgettes",
+          "lentils"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "red pepper",
+          "yellow pepper",
+          "tomato"
+        ]
+      }
+    ],
+    "allergens": [],
+    "cautions": [
+      "Can be salty (vegetable stock cube). Go easy on any extra salt."
+    ]
   },
   {
     "id": "general-elaborate-4",
-    "title": "Venezuelan turnovers",
+    "title": "Stovetop Eggplant With Harissa, Chickpeas, and Cumin Yogurt",
     "category": "elaborate",
-    "cookingTime": "About 30 minutes (estimated)",
-    "description": "A Venezuela side dish from TheMealDB recipe collection.",
-    "image": "https://www.themealdb.com/images/media/meals/zjtfp31764440795.jpg",
+    "cookingTime": "About 35 minutes (estimated)",
+    "description": "An United States vegetarian dish from TheMealDB recipe collection.",
+    "image": "https://www.themealdb.com/images/media/meals/yqwtvu1487426027.jpg",
     "ingredients": [
-      "450g Ground Beef",
-      "Pinch Pepper",
-      "Pinch Ground Cumin",
-      "1 tablespoon Vegetable Oil",
-      "1 cup Onion",
-      "1/2 cup Green Pepper",
-      "1/2 cup Red Pepper",
-      "1 tsp Garlic Powder",
-      "1/4 cup Capers",
-      "1 Can Tomato Sauce",
-      "1 Can Sazon",
-      "2 Yellow Masarepa",
-      "For frying Vegetable Oil"
+      "4 tablespoons Olive Oil",
+      "6 small Egg Plants",
+      "½ tablespoon Harissa Spice",
+      "1 can Chickpeas",
+      "2 cups halved Cherry Tomatoes",
+      "1 1/2 cups Greek yogurt",
+      "1 tablespoon Ground cumin",
+      "½ cup Parsley"
     ],
     "instructions": [
-      "Season meat with Adobo. In skillet, heat oil on medium high. Cook meat until pink is gone. Stir in onion, pepper, garlic, alcaparras, tomato sauce and Sazón. Cook, stirring often until most of the liquid has evaporated (about 20 minutes). Cool.",
-      "Prepared dough should be moist and should hold together, but it should not stick to your fingers. Start with about ½ cup of dough and roll into a ball between palms of your hands. Working on a sheet of non-stick parchment paper, form the ball into a 5-inch circle about ⅛ inch thick. Place a generous tbsp. of filling on one half of circle and using parchment paper close dough over to form a semi-circle. To seal and trim edges of the empanada, press lip of inverted bowl over semi-circle shaped patty. Repeat for all the Empanadas.",
-      "In large skillet on medium high, heat ½ inch of oil until hot but not smoking. Cook empanadas in batches, turning once or twice until lightly browned. Drain on paper towel. Do not over crowd skillet or let oil get too hot."
+      "Heat the oil in a 12-inch skillet over high heat until shimmering. Add the eggplants and lower the heat to medium. Season with salt and pepper as you rotate the eggplants, browning them on all sides. Continue to cook, turning regularly, until a fork inserted into the eggplant meets no resistance (you may have to stand them up on their fat end to finish cooking the thickest parts), about 20 minutes, lowering the heat and sprinkling water into the pan as necessary if the eggplants threaten to burn or smoke excessively.",
+      "Mix the harissa, chickpeas and tomatoes together, then add to the eggplants. Cook until the tomatoes have blistered and broken down, about 5 minutes more. Season with salt and pepper and add water as necessary to thin to a saucy consistency. Meanwhile, combine the yogurt and cumin in a serving bowl. Season with salt and pepper.",
+      "Top the eggplant mixture with the parsley, drizzle with more extra virgin olive oil, and serve with the yogurt on the side."
     ],
-    "sourceName": "goya.es",
-    "sourceUrl": "https://goya.es/en/recipes/venezuelan-turnovers"
+    "sourceName": "seriouseats.com",
+    "sourceUrl": "http://www.seriouseats.com/2014/09/one-pot-wonders-stovetop-eggplant-harissa-chickpeas-cumin.html",
+    "nutrients": [
+      {
+        "name": "Folate",
+        "from": [
+          "chickpeas"
+        ]
+      },
+      {
+        "name": "Iron",
+        "from": [
+          "chickpeas"
+        ]
+      },
+      {
+        "name": "Calcium",
+        "from": [
+          "greek yogurt"
+        ]
+      },
+      {
+        "name": "Protein",
+        "from": [
+          "egg plants",
+          "chickpeas",
+          "greek yogurt"
+        ]
+      },
+      {
+        "name": "Vitamin C",
+        "from": [
+          "cherry tomatoes"
+        ]
+      }
+    ],
+    "allergens": [
+      "Milk",
+      "Egg"
+    ],
+    "cautions": [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks."
+    ]
   }
 ];

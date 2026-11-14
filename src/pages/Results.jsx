@@ -6,7 +6,7 @@
 import { useEffect, useRef, useState } from "react";
 import RecipeCard from "../components/RecipeCard.jsx";
 import NearbyFood from "../components/NearbyFood.jsx";
-import { getFreshRecommendations, isAiEnabled, isKnownCraving } from "../services/recommendationService.js";
+import { getFreshRecommendations, isKnownCraving } from "../services/recommendationService.js";
 
 function Label({ title, detail }) {
   return (
@@ -27,21 +27,15 @@ export default function Results({ craving, onSelectRecipe }) {
   // Counts refreshes. Used as a key so NearbyFood loads a new option too.
   const [refreshCount, setRefreshCount] = useState(0);
 
-  const shownTitles = useRef([]); // titles already shown for this craving
-  const nextBatch = useRef(null); // the next refresh, requested ahead of time
   const visit = useRef(0); // lets us ignore answers that arrive after the craving changed
 
-  // Shows a batch of recommendations. With AI on, it also requests the next
-  // batch straight away, so pressing refresh does not mean another wait.
   async function show(batchPromise, thisVisit) {
     setIsLoading(true);
     const batch = await batchPromise;
     if (thisVisit !== visit.current) return;
-    shownTitles.current = [...shownTitles.current, batch.quick.title, batch.elaborate.title].slice(-20);
     setRecommendations(batch);
     setIsLoading(false);
-    nextBatch.current = batch.source === "ai" ? getFreshRecommendations(craving, shownTitles.current) : null;
-    remembered = { craving, batch, shownTitles: shownTitles.current, nextBatch: nextBatch.current };
+    remembered = { craving, batch };
   }
 
   useEffect(() => {
@@ -49,8 +43,6 @@ export default function Results({ craving, onSelectRecipe }) {
     setRefreshCount(0);
 
     if (remembered?.craving === craving) {
-      shownTitles.current = remembered.shownTitles;
-      nextBatch.current = remembered.nextBatch;
       setRecommendations(remembered.batch);
       setIsLoading(false);
       return () => {
@@ -58,11 +50,9 @@ export default function Results({ craving, onSelectRecipe }) {
       };
     }
 
-    shownTitles.current = [];
-    nextBatch.current = null;
     setRecommendations(null);
     // The timer stops React's development double-run from asking twice.
-    const timer = setTimeout(() => show(getFreshRecommendations(craving, []), thisVisit), 0);
+    const timer = setTimeout(() => show(getFreshRecommendations(craving), thisVisit), 0);
     return () => {
       clearTimeout(timer);
       visit.current++;
@@ -71,17 +61,15 @@ export default function Results({ craving, onSelectRecipe }) {
 
   function handleRefresh() {
     setRefreshCount((count) => count + 1);
-    show(nextBatch.current ?? getFreshRecommendations(craving, shownTitles.current), visit.current);
+    show(getFreshRecommendations(craving), visit.current);
   }
-
-  const fromAi = recommendations?.source === "ai";
 
   return (
     <section>
       <p className="text-sm text-ink-soft">Instead of</p>
       <h2 className="text-2xl font-bold leading-tight text-ink [overflow-wrap:anywhere]">{craving}</h2>
 
-      {recommendations && !fromAi && !isKnownCraving(craving) && (
+      {recommendations && !isKnownCraving(craving) && (
         <p className="mt-3 rounded-xl bg-sage-100 px-3 py-2 text-sm text-ink">
           We don't have ideas for that exact craving yet, so here are some all-round favourites.
         </p>
@@ -90,7 +78,7 @@ export default function Results({ craving, onSelectRecipe }) {
       <div className="mt-4 space-y-4" aria-live="polite" aria-busy={isLoading}>
         {!recommendations && (
           <p className="rounded-2xl bg-sage-100 px-4 py-8 text-center text-sm text-ink-soft">
-            {isAiEnabled() ? "Writing two recipes for you. This takes a few seconds…" : "Finding ideas…"}
+            Finding ideas…
           </p>
         )}
 
@@ -115,13 +103,6 @@ export default function Results({ craving, onSelectRecipe }) {
           <NearbyFood key={refreshCount} craving={craving} />
         </div>
       </div>
-
-      {fromAi && (
-        <p className="mt-3 px-1 text-xs text-ink-soft">
-          These recipes were written by AI and have not been reviewed. Check the ingredients and
-          cooking steps before you make them.
-        </p>
-      )}
 
       <button
         type="button"

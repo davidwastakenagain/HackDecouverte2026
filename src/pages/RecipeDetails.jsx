@@ -106,6 +106,39 @@ export default function RecipeDetails({ recipe }) {
         {saved ? "✓ Saved · Tap to remove" : "🔖 Save recipe"}
       </button>
 
+      {recipe.nutrients?.length > 0 && (
+        <section>
+          <h3 className="mb-2 text-lg font-semibold text-sage-700">
+            Good for pregnancy
+          </h3>
+          <ul className="space-y-1.5 rounded-2xl bg-white p-4">
+            {recipe.nutrients.map((nutrient) => (
+              <li key={nutrient.name} className="text-ink">
+                <span className="font-semibold">{nutrient.name}</span>
+                <span className="text-sm text-ink-soft"> from {nutrient.from.join(", ")}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {(recipe.cautions?.length > 0 || recipe.allergens?.length > 0) && (
+        <section>
+          <h3 className="mb-2 text-lg font-semibold text-sage-700">Keep in mind</h3>
+          <ul className="space-y-1.5 rounded-2xl bg-white p-4 text-sm text-ink">
+            {recipe.allergens?.length > 0 && (
+              <li>
+                <span className="font-semibold">Allergens:</span> {recipe.allergens.join(", ")}. Check
+                labels, as other ingredients may contain allergens too.
+              </li>
+            )}
+            {recipe.cautions?.map((caution) => (
+              <li key={caution}>{caution}</li>
+            ))}
+          </ul>
+        </section>
+      )}
+
       <section>
         <h3 className="mb-2 text-lg font-semibold text-sage-700">Ingredients</h3>
         <ul className="space-y-1.5 rounded-2xl bg-white p-4">

@@ -2,12 +2,13 @@
 // Props: onSubmitCraving(craving) — call with the craving text to open Results.
 
 import { useState } from "react";
+import { FoodPhoto } from "../components/RecipeCard.jsx";
 
 const SUGGESTIONS = ["Cheeseburger", "Ice cream", "Fries", "Pizza", "Chocolate"];
 
 const STEPS = [
-  { title: "Quick & Healthy", text: "A simple recipe ready in about 10–15 minutes." },
-  { title: "Worth the Wait", text: "A more elaborate recipe for when you have 30–45 minutes." },
+  { title: "Quick & Healthy", text: "A simple recipe ready in about 25 minutes or less." },
+  { title: "Worth the Wait", text: "A more elaborate recipe for when you have 30–60 minutes." },
   { title: "Nearby Food", text: "An option to look for at a place close to you." },
 ];
 
@@ -41,6 +42,13 @@ export default function Home({ onSubmitCraving }) {
           autoComplete="off"
           enterKeyHint="search"
           className="w-full rounded-2xl border border-sage-300 bg-white px-4 py-3 text-base text-ink placeholder:text-ink-soft focus:border-sage-700 focus:outline-none focus:ring-2 focus:ring-sage-300"
+        />
+        {/* Live photo of what's being typed, updated after a short pause. */}
+        <FoodPhoto
+          query={craving}
+          delay={400}
+          emoji="🍽️"
+          className="mt-3 aspect-video w-full rounded-2xl text-4xl"
         />
         <button
           type="submit"
