@@ -6,7 +6,16 @@
 import { useState } from "react";
 import FoodBuddy from "../components/FoodBuddy.jsx";
 import { FoodPhoto } from "../components/RecipeCard.jsx";
+import DietaryProfile from "../components/DietaryProfile.jsx";
 import { getCravingNutrition } from "../services/recommendationService.js";
+import {
+  addSearch,
+  clearSearchHistory,
+  clearUserData,
+  getProfile,
+  getSearchHistory,
+  isProfileEmpty,
+} from "../services/userDataService.js";
 
 // Popular cravings, each with its food buddy.
 const SUGGESTIONS = [
@@ -37,10 +46,30 @@ function BuddyGroup({ className = "" }) {
 export default function Home({ onSubmitCraving, onOpenAbout }) {
   const [value, setValue] = useState("");
   const craving = value.trim();
+  // Both are kept in this browser by userDataService.js.
+  const [profile, setProfile] = useState(getProfile);
+  const [history, setHistory] = useState(getSearchHistory);
+
+  // Remembers the search, then opens the results.
+  function search(text) {
+    addSearch(text);
+    onSubmitCraving(text);
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (craving) onSubmitCraving(craving);
+    if (craving) search(craving);
+  }
+
+  function handleClearHistory() {
+    clearSearchHistory();
+    setHistory([]);
+  }
+
+  function handleClearAll() {
+    clearUserData();
+    setProfile(getProfile());
+    setHistory([]);
   }
 
   return (
@@ -87,7 +116,7 @@ export default function Home({ onSubmitCraving, onOpenAbout }) {
               <button
                 key={suggestion.label}
                 type="button"
-                onClick={() => onSubmitCraving(suggestion.label)}
+                onClick={() => search(suggestion.label)}
                 className="group flex items-center gap-1 rounded-full border-2 border-line bg-surface py-1 pr-3.5 pl-1.5 font-bold text-ink shadow-[0_3px_0_0_var(--color-line)] transition-transform hover:-translate-y-0.5 active:translate-y-0.5"
               >
                 <FoodBuddy name={suggestion.buddy} className="h-8 w-8 group-hover:animate-wiggle" />
@@ -96,6 +125,31 @@ export default function Home({ onSubmitCraving, onOpenAbout }) {
             ))}
           </div>
         </div>
+
+        {history.length > 0 && (
+          <div className="mx-auto mt-5 max-w-xl lg:mx-0">
+            <p className="text-center text-sm font-bold text-ink-soft lg:text-left">Your recent searches</p>
+            <div className="mt-2 flex flex-wrap items-center justify-center gap-2 lg:justify-start">
+              {history.map((item) => (
+                <button
+                  key={item.craving}
+                  type="button"
+                  onClick={() => search(item.craving)}
+                  className="max-w-full truncate rounded-full border-2 border-line bg-surface px-3.5 py-1 font-bold text-ink shadow-[0_3px_0_0_var(--color-line)] transition-transform hover:-translate-y-0.5 active:translate-y-0.5"
+                >
+                  {item.craving}
+                </button>
+              ))}
+              <button
+                type="button"
+                onClick={handleClearHistory}
+                className="px-1 text-sm font-extrabold text-berry-700 underline decoration-2 underline-offset-4 hover:text-berry-600"
+              >
+                Clear
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* Live photo of what's being typed. Known cravings ("burger", "kit kat")
             use their stored Wikipedia photo straight away; anything else is
@@ -109,6 +163,20 @@ export default function Home({ onSubmitCraving, onOpenAbout }) {
             className="mx-auto mt-6 aspect-video w-full max-w-xl rounded-3xl border-2 border-line lg:mx-0"
           />
         )}
+
+        <div className="mx-auto max-w-xl lg:mx-0">
+          <DietaryProfile profile={profile} onChange={setProfile} />
+
+          {(history.length > 0 || !isProfileEmpty(profile)) && (
+            <button
+              type="button"
+              onClick={handleClearAll}
+              className="mt-3 text-sm font-bold text-ink-soft underline underline-offset-4 hover:text-ink"
+            >
+              Delete my food needs and search history from this browser
+            </button>
+          )}
+        </div>
       </div>
 
       <aside>

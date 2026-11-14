@@ -24,6 +24,8 @@
 import { recipes as publishedRecipes } from "../data/recipes.js";
 import { extraRecipes } from "../data/extraRecipes.js";
 import { cravingNutrition } from "../data/cravingNutrition.js";
+import { getProfile } from "./userDataService.js";
+import { checkRecipe, profileKey, restrictionLabels } from "./dietaryService.js";
 
 // Published recipes first, so they win ties; the extras fill gaps.
 const recipes = [...publishedRecipes, ...extraRecipes];
@@ -291,9 +293,14 @@ function understand(craving) {
   return { groupScores, traits, titleWords, unknownWords };
 }
 
-// Ranks the recipes of one category for a craving, best first.
-function rank(category, { groupScores, traits, titleWords, unknownWords }) {
-  const scored = INDEX.filter((entry) => entry.recipe.category === category).map((entry) => {
+// Ranks the recipes of one category for a craving, best first. Recipes that
+// the dietary profile rules out are left out before ranking, so the next-best
+// match takes their place. The pool is empty when no recipe is left.
+function rank(category, { groupScores, traits, titleWords, unknownWords }, profile) {
+  const allowed = INDEX.filter(
+    (entry) => entry.recipe.category === category && checkRecipe(entry.recipe, profile).allowed,
+  );
+  const scored = allowed.map((entry) => {
     let wordScore = 0;
     for (const word of titleWords) {
       if (entry.titleWords.has(word)) wordScore += 5;
@@ -313,9 +320,12 @@ function rank(category, { groupScores, traits, titleWords, unknownWords }) {
     Object.keys(traits).length > 0 ||
     scored.some((item) => item.wordScore > 0);
 
+  if (scored.length === 0) return { understood, pool: [] };
   if (!understood) {
     const fallback = scored.filter((item) => item.entry.groupId === FALLBACK_GROUP);
-    return { understood, pool: fallback.map((item) => item.entry.recipe) };
+    // If the profile rules out every all-round recipe, use any that is left.
+    const pool = fallback.length > 0 ? fallback : scored.slice(0, MAX_POOL);
+    return { understood, pool: pool.map((item) => item.entry.recipe) };
   }
   scored.sort((a, b) => b.score - a.score);
   const related = scored.filter((item) => item.score > 0).length;
@@ -324,15 +334,17 @@ function rank(category, { groupScores, traits, titleWords, unknownWords }) {
   return { understood, pool: scored.slice(0, size).map((item) => item.entry.recipe) };
 }
 
-// Remembers the ranked recipes and the refresh position for each craving.
+// Remembers the ranked recipes and the refresh position for each craving,
+// separately for each dietary profile.
 const cache = new Map();
 
 function lookUp(craving) {
-  const key = normalize(craving);
+  const profile = getProfile();
+  const key = `${normalize(craving)}|${profileKey(profile)}`;
   if (!cache.has(key)) {
     const meaning = understand(craving);
-    const quick = rank("quick", meaning);
-    const elaborate = rank("elaborate", meaning);
+    const quick = rank("quick", meaning, profile);
+    const elaborate = rank("elaborate", meaning, profile);
     cache.set(key, {
       quick: quick.pool,
       elaborate: elaborate.pool,
@@ -344,12 +356,15 @@ function lookUp(craving) {
 }
 
 // Every built-in recipe carries its own photo (recipe.image), so none is added here.
+// Recipes that conflict with the saved dietary profile (userDataService.js)
+// are never returned. quick or elaborate is null when the profile rules out
+// every recipe of that kind.
 export function getRecommendations(craving) {
   const entry = lookUp(craving);
   const position = entry.calls++;
   return {
-    quick: entry.quick[position % entry.quick.length],
-    elaborate: entry.elaborate[position % entry.elaborate.length],
+    quick: entry.quick[position % entry.quick.length] ?? null,
+    elaborate: entry.elaborate[position % entry.elaborate.length] ?? null,
   };
 }
 
@@ -467,7 +482,9 @@ async function askServer(craving, avoidTitles) {
     const response = await fetch(aiUrl(), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ craving, avoidTitles }),
+      // Only food restrictions are sent, so the recipes can leave those foods
+      // out. Medicines stay in this browser.
+      body: JSON.stringify({ craving, avoidTitles, avoidFoods: restrictionLabels(getProfile()) }),
       signal: controller.signal,
     });
     if (!response.ok) throw new Error(`Recommendation server responded ${response.status}`);
@@ -488,7 +505,19 @@ export async function getFreshRecommendations(craving, avoidTitles = []) {
     try {
       // AI recipes have no image; RecipeCard looks one up by the recipe's title.
       // Their nutrition figures are estimates (nutritionEstimated: true).
-      return { ...(await askServer(craving, avoidTitles)), source: "ai" };
+      const written = await askServer(craving, avoidTitles);
+      // The AI is asked to follow the dietary profile, but every recipe is
+      // checked here too. One that conflicts is swapped for a built-in recipe.
+      const profile = getProfile();
+      const fits = (recipe) => checkRecipe(recipe, profile).allowed;
+      if (fits(written.quick) && fits(written.elaborate)) return { ...written, source: "ai" };
+      const builtIn = getRecommendations(craving);
+      if (!fits(written.quick) && !fits(written.elaborate)) return { ...builtIn, source: "built-in" };
+      return {
+        quick: fits(written.quick) ? written.quick : builtIn.quick,
+        elaborate: fits(written.elaborate) ? written.elaborate : builtIn.elaborate,
+        source: "ai",
+      };
     } catch (error) {
       console.warn("AI recommendations unavailable, using the built-in recipes instead:", error);
     }
