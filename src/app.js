@@ -3,7 +3,7 @@ const themeToggle = document.getElementById("theme-toggle");
 
 function setTheme(theme) {
   document.documentElement.dataset.theme = theme;
-  themeToggle.textContent = theme === "dark" ? "☀️" : "🌙";
+  themeToggle.textContent = theme === "dark" ? "light" : "dark";
   localStorage.setItem("theme", theme);
 }
 
@@ -13,31 +13,6 @@ setTheme(localStorage.getItem("theme") || (prefersDark ? "dark" : "light"));
 themeToggle.addEventListener("click", () => {
   setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
 });
-
-// ----- Typing effect in the hero -----
-const words = ["discover.", "learn.", "connect.", "create."];
-const typedEl = document.getElementById("typed");
-let wordIndex = 0;
-let charIndex = 0;
-let deleting = false;
-
-function typeLoop() {
-  const word = words[wordIndex];
-  charIndex += deleting ? -1 : 1;
-  typedEl.textContent = word.slice(0, charIndex);
-
-  let delay = deleting ? 50 : 100;
-  if (!deleting && charIndex === word.length) {
-    deleting = true;
-    delay = 1500;
-  } else if (deleting && charIndex === 0) {
-    deleting = false;
-    wordIndex = (wordIndex + 1) % words.length;
-    delay = 300;
-  }
-  setTimeout(typeLoop, delay);
-}
-typeLoop();
 
 // ----- Idea board (saved in localStorage) -----
 const ideaForm = document.getElementById("idea-form");
@@ -51,6 +26,15 @@ function saveIdeas() {
   localStorage.setItem("ideas", JSON.stringify(ideas));
 }
 
+function makeButton(label, title, onClick) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.textContent = label;
+  button.title = title;
+  button.addEventListener("click", onClick);
+  return button;
+}
+
 function renderIdeas() {
   ideaList.innerHTML = "";
   emptyMsg.hidden = ideas.length > 0;
@@ -61,31 +45,22 @@ function renderIdeas() {
       const li = document.createElement("li");
       li.className = "idea";
 
-      const up = document.createElement("button");
-      up.textContent = "▲";
-      up.title = "Upvote";
-      up.addEventListener("click", () => vote(idea.id, 1));
-
       const votes = document.createElement("span");
       votes.className = "votes";
-      votes.textContent = idea.votes;
-
-      const down = document.createElement("button");
-      down.textContent = "▼";
-      down.title = "Downvote";
-      down.addEventListener("click", () => vote(idea.id, -1));
+      votes.textContent = idea.votes > 0 ? `+${idea.votes}` : idea.votes;
 
       // textContent (not innerHTML) so user input can't inject HTML
       const text = document.createElement("span");
       text.className = "idea-text";
       text.textContent = idea.text;
 
-      const remove = document.createElement("button");
-      remove.textContent = "✕";
-      remove.title = "Delete";
-      remove.addEventListener("click", () => deleteIdea(idea.id));
-
-      li.append(up, votes, down, text, remove);
+      li.append(
+        votes,
+        text,
+        makeButton("+1", "Upvote", () => vote(idea.id, 1)),
+        makeButton("-1", "Downvote", () => vote(idea.id, -1)),
+        makeButton("remove", "Delete", () => deleteIdea(idea.id)),
+      );
       ideaList.append(li);
     });
 }
@@ -117,22 +92,21 @@ renderIdeas();
 
 // ----- Team (edit this list with your teammates) -----
 const team = [
-  { name: "Teammate One", role: "Frontend" },
-  { name: "Teammate Two", role: "Backend" },
-  { name: "Teammate Three", role: "Design" },
+  { name: "Teammate One", role: "frontend" },
+  { name: "Teammate Two", role: "backend" },
+  { name: "Teammate Three", role: "design" },
 ];
 
 const teamList = document.getElementById("team-list");
 team.forEach((member) => {
-  const card = document.createElement("article");
-  card.className = "card";
-  const initials = member.name.split(" ").map((part) => part[0]).join("").slice(0, 2);
-  card.innerHTML = `
-    <div class="avatar">${initials}</div>
-    <h3>${member.name}</h3>
-    <p>${member.role}</p>
-  `;
-  teamList.append(card);
+  const li = document.createElement("li");
+  const name = document.createElement("span");
+  name.textContent = member.name;
+  const role = document.createElement("span");
+  role.className = "role";
+  role.textContent = member.role;
+  li.append(name, role);
+  teamList.append(li);
 });
 
 // ----- Footer year -----

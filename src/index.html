@@ -4,63 +4,79 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HackDecouverte 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="nav">
-    <a href="#" class="logo">Hack<span>Decouverte</span></a>
+  <header class="top">
+    <a href="#" class="logo">hackdecouverte/26</a>
     <nav>
-      <a href="#about">About</a>
-      <a href="#ideas">Ideas</a>
-      <a href="#team">Team</a>
-      <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+      <a href="#about">about</a>
+      <a href="#ideas">ideas</a>
+      <a href="#team">team</a>
+      <button id="theme-toggle" type="button">dark</button>
     </nav>
   </header>
 
   <main>
     <section class="hero">
-      <h1>We build things that help you <span id="typed"></span><span class="cursor">|</span></h1>
-      <p>Our project for HackDecouverte 2026.</p>
-      <a href="#ideas" class="btn">See our ideas</a>
+      <p class="label">HackDecouverte 2026 · weekend project</p>
+      <h1>Something we're building <em>this weekend.</em></h1>
+      <p class="lede">
+        We're a small team at HackDecouverte. This page is where we keep track of
+        what we're working on, what we've tried, and who's doing what.
+      </p>
     </section>
 
     <section id="about">
-      <h2>About</h2>
-      <div class="cards">
-        <article class="card">
-          <h3>🔍 Discover</h3>
-          <p>Find a real problem worth solving.</p>
-        </article>
-        <article class="card">
-          <h3>🛠️ Build</h3>
-          <p>Prototype fast and test with real people.</p>
-        </article>
-        <article class="card">
-          <h3>🚀 Ship</h3>
-          <p>Demo something that works by the end of the weekend.</p>
-        </article>
-      </div>
+      <h2>How we're doing it</h2>
+      <ol class="steps">
+        <li>
+          <span class="num">01</span>
+          <div>
+            <h3>Pick a problem</h3>
+            <p>Something one of us actually ran into, not something that just sounds good on a slide.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">02</span>
+          <div>
+            <h3>Build the smallest version</h3>
+            <p>Get one thing working end to end before adding anything else.</p>
+          </div>
+        </li>
+        <li>
+          <span class="num">03</span>
+          <div>
+            <h3>Show it to people</h3>
+            <p>Let someone outside the team try it, then fix whatever confuses them.</p>
+          </div>
+        </li>
+      </ol>
     </section>
 
     <section id="ideas">
-      <h2>Idea Board</h2>
-      <p class="muted">Add ideas and vote on them. Everything is saved in your browser.</p>
+      <h2>Idea board</h2>
+      <p class="note">Throw ideas in, vote them up or down. Saved in your browser only.</p>
       <form id="idea-form">
-        <input id="idea-input" type="text" placeholder="Type an idea…" maxlength="120" required>
-        <button type="submit" class="btn">Add</button>
+        <input id="idea-input" type="text" placeholder="an idea…" maxlength="120" required>
+        <button type="submit" class="btn">add</button>
       </form>
       <ul id="idea-list"></ul>
-      <p id="empty-msg" class="muted">No ideas yet. Add the first one!</p>
+      <p id="empty-msg" class="note">Nothing here yet.</p>
     </section>
 
     <section id="team">
       <h2>Team</h2>
-      <div class="cards" id="team-list"></div>
+      <ul id="team-list"></ul>
     </section>
   </main>
 
   <footer>
-    <p>© <span id="year"></span> HackDecouverte 2026 team</p>
+    <span>© <span id="year"></span> the HackDecouverte 2026 team</span>
+    <a href="#">back to top ↑</a>
   </footer>
 
   <script src="app.js"></script>
