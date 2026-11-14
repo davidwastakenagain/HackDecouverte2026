@@ -106,6 +106,38 @@ export default function RecipeDetails({ recipe }) {
         {saved ? "✓ Saved · Tap to remove" : "🔖 Save recipe"}
       </button>
 
+      {recipe.nutrition && (
+        <section>
+          <h3 className="mb-2 text-lg font-semibold text-sage-700">
+            Nutrition per serving
+          </h3>
+          <dl className="grid grid-cols-4 gap-2 rounded-2xl bg-white p-4 text-center">
+            {[
+              ["Calories", recipe.nutrition.kcal, "kcal"],
+              ["Fat", recipe.nutrition.fat, "g"],
+              ["Saturates", recipe.nutrition.saturates, "g"],
+              ["Carbs", recipe.nutrition.carbs, "g"],
+              ["Sugars", recipe.nutrition.sugars, "g"],
+              ["Fibre", recipe.nutrition.fibre, "g"],
+              ["Protein", recipe.nutrition.protein, "g"],
+              ["Salt", recipe.nutrition.salt, "g"],
+            ].map(([label, value, unit]) => (
+              <div key={label}>
+                <dd className="font-semibold text-ink">
+                  {value}
+                  <span className="text-xs font-normal"> {unit}</span>
+                </dd>
+                <dt className="text-xs text-ink-soft">{label}</dt>
+              </div>
+            ))}
+          </dl>
+          <p className="mt-1 px-1 text-xs text-ink-soft">
+            {recipe.servings ? `${recipe.servings}. ` : ""}Figures published by{" "}
+            {recipe.sourceName || "the recipe source"}. Cholesterol and trans fat are not published.
+          </p>
+        </section>
+      )}
+
       {recipe.nutrients?.length > 0 && (
         <section>
           <h3 className="mb-2 text-lg font-semibold text-sage-700">

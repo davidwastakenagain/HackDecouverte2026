@@ -6,7 +6,57 @@
 import { useEffect, useRef, useState } from "react";
 import RecipeCard from "../components/RecipeCard.jsx";
 import NearbyFood from "../components/NearbyFood.jsx";
-import { getFreshRecommendations, isKnownCraving } from "../services/recommendationService.js";
+import { getCravingNutrition, getFreshRecommendations, isKnownCraving } from "../services/recommendationService.js";
+
+// Nutrients compared between the craving and a recipe. For the last two, more is better.
+const COMPARED = [
+  { key: "kcal", label: "Calories", unit: " kcal" },
+  { key: "saturates", label: "Saturated fat", unit: " g" },
+  { key: "sugars", label: "Sugars", unit: " g" },
+  { key: "salt", label: "Salt", unit: " g" },
+  { key: "fibre", label: "Fibre", unit: " g", moreIsBetter: true },
+  { key: "protein", label: "Protein", unit: " g", moreIsBetter: true },
+];
+
+const tidy = (number) => Math.round(number * 10) / 10;
+
+// Nutrition of one recipe serving next to one portion of the craved food,
+// with the difference. Without craving figures it shows the recipe's alone.
+function Comparison({ recipe, cravingFood }) {
+  if (!recipe.nutrition) return null;
+  return (
+    <table className="mt-1.5 w-full rounded-xl bg-white px-2 text-xs text-ink">
+      <thead>
+        <tr className="text-left text-ink-soft">
+          <th className="px-2 py-1 font-medium">Per serving</th>
+          {cravingFood && <th className="px-2 py-1 text-right font-medium">Craving</th>}
+          <th className="px-2 py-1 text-right font-medium">This recipe</th>
+          {cravingFood && <th className="px-2 py-1 text-right font-medium">Difference</th>}
+        </tr>
+      </thead>
+      <tbody>
+        {COMPARED.map(({ key, label, unit, moreIsBetter }) => {
+          const recipeValue = recipe.nutrition[key];
+          const cravingValue = cravingFood?.[key];
+          const difference = cravingFood && cravingValue != null ? tidy(recipeValue - cravingValue) : null;
+          const better = difference !== null && difference !== 0 && difference > 0 === Boolean(moreIsBetter);
+          return (
+            <tr key={key} className="border-t border-sage-100">
+              <td className="px-2 py-1">{label}</td>
+              {cravingFood && <td className="px-2 py-1 text-right">{cravingValue != null ? `${cravingValue}${unit}` : "–"}</td>}
+              <td className="px-2 py-1 text-right">{recipeValue}{unit}</td>
+              {cravingFood && (
+                <td className={`px-2 py-1 text-right font-semibold ${difference === null || difference === 0 ? "text-ink-soft" : better ? "text-sage-700" : "text-red-700"}`}>
+                  {difference === null ? "–" : `${difference > 0 ? "+" : difference < 0 ? "−" : ""}${Math.abs(difference)}${unit}`}
+                </td>
+              )}
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  );
+}
 
 function Label({ title, detail }) {
   return (
@@ -64,6 +114,8 @@ export default function Results({ craving, onSelectRecipe }) {
     show(getFreshRecommendations(craving), visit.current);
   }
 
+  const cravingFood = getCravingNutrition(craving);
+
   return (
     <section>
       <p className="text-sm text-ink-soft">Instead of</p>
@@ -84,17 +136,24 @@ export default function Results({ craving, onSelectRecipe }) {
 
         {recommendations && (
           <div className={`space-y-4 transition-opacity ${isLoading ? "opacity-50" : ""}`}>
+            {cravingFood && (
+              <p className="rounded-xl bg-sage-100 px-3 py-2 text-sm text-ink">
+                Compared with <span className="font-semibold">{cravingFood.label}</span> ({cravingFood.portion}):{" "}
+                {cravingFood.kcal} kcal, {cravingFood.saturates} g saturated fat, {cravingFood.sugars} g sugars,{" "}
+                {cravingFood.salt} g salt, {cravingFood.cholesterol} mg cholesterol.
+              </p>
+            )}
             {/* RecipeCard shows the category and cooking time itself. */}
-            <RecipeCard
-              key={recommendations.quick.id}
-              recipe={recommendations.quick}
-              onSelect={onSelectRecipe}
-            />
-            <RecipeCard
-              key={recommendations.elaborate.id}
-              recipe={recommendations.elaborate}
-              onSelect={onSelectRecipe}
-            />
+            {[recommendations.quick, recommendations.elaborate].map((recipe) => (
+              <div key={recipe.id}>
+                <RecipeCard recipe={recipe} onSelect={onSelectRecipe} />
+                <Comparison recipe={recipe} cravingFood={cravingFood} />
+              </div>
+            ))}
+            <p className="px-1 text-xs text-ink-soft">
+              Recipe figures are per serving, as published by BBC Good Food.
+              {cravingFood && " Craving figures are for a typical portion, from USDA FoodData Central; brands and portion sizes vary."}
+            </p>
           </div>
         )}
 
