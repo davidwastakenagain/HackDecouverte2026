@@ -14,7 +14,8 @@
 //   5. The best-scoring recipes are returned first. Refresh moves down the list.
 //
 // Recipes live in src/data/recipes.js. A recipe belongs to a group through its
-// id: "burger-quick-1" is in the "burger" group.
+// id: "burger-quick-1" is in the "burger" group. They are real recipes from
+// TheMealDB, filtered for pregnancy food safety; each keeps its own photo.
 
 import { recipes } from "../data/recipes.js";
 
@@ -373,8 +374,11 @@ const AI_TIMEOUT_MS = 30000;
 const aiUrl = () => import.meta.env?.VITE_RECOMMENDATION_API_URL || "";
 
 // True when the app is set up to ask the recommendation server.
+// Turned off: the app only shows real, published recipes (src/data/recipes.js),
+// never recipes written by AI. The server code is kept in case the team decides
+// otherwise; remove `false &&` to turn it back on.
 export function isAiEnabled() {
-  return Boolean(aiUrl());
+  return false && Boolean(aiUrl());
 }
 
 const isText = (value, max) => typeof value === "string" && value.trim().length > 0 && value.length <= max;
