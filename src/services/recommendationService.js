@@ -503,7 +503,7 @@ async function askServer(craving, avoidTitles) {
 export async function getFreshRecommendations(craving, avoidTitles = []) {
   if (isAiEnabled() && String(craving ?? "").trim()) {
     try {
-      // AI recipes have no image; RecipeCard looks one up by the recipe's title.
+      // AI recipes have no image; RecipeCard shows a drawing of that kind of food.
       // Their nutrition figures are estimates (nutritionEstimated: true).
       const written = await askServer(craving, avoidTitles);
       // The AI is asked to follow the dietary profile, but every recipe is
