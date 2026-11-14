@@ -17,7 +17,11 @@ function Label({ title, detail }) {
   );
 }
 
-export default function Results({ craving, onSelectRecipe, onBack }) {
+// The last recommendations shown. Opening a recipe leaves this page, so this
+// lets Back return to the same recipes instead of loading different ones.
+let remembered = null;
+
+export default function Results({ craving, onSelectRecipe }) {
   const [recommendations, setRecommendations] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   // Counts refreshes. Used as a key so NearbyFood loads a new option too.
@@ -37,14 +41,26 @@ export default function Results({ craving, onSelectRecipe, onBack }) {
     setRecommendations(batch);
     setIsLoading(false);
     nextBatch.current = batch.source === "ai" ? getFreshRecommendations(craving, shownTitles.current) : null;
+    remembered = { craving, batch, shownTitles: shownTitles.current, nextBatch: nextBatch.current };
   }
 
   useEffect(() => {
     const thisVisit = ++visit.current;
+    setRefreshCount(0);
+
+    if (remembered?.craving === craving) {
+      shownTitles.current = remembered.shownTitles;
+      nextBatch.current = remembered.nextBatch;
+      setRecommendations(remembered.batch);
+      setIsLoading(false);
+      return () => {
+        visit.current++;
+      };
+    }
+
     shownTitles.current = [];
     nextBatch.current = null;
     setRecommendations(null);
-    setRefreshCount(0);
     // The timer stops React's development double-run from asking twice.
     const timer = setTimeout(() => show(getFreshRecommendations(craving, []), thisVisit), 0);
     return () => {
@@ -80,22 +96,17 @@ export default function Results({ craving, onSelectRecipe, onBack }) {
 
         {recommendations && (
           <div className={`space-y-4 transition-opacity ${isLoading ? "opacity-50" : ""}`}>
-            <div>
-              <Label title="Quick & Healthy" detail="about 10–15 min" />
-              <RecipeCard
-                key={recommendations.quick.id}
-                recipe={recommendations.quick}
-                onSelect={onSelectRecipe}
-              />
-            </div>
-            <div>
-              <Label title="Worth the Wait" detail="about 30–45 min" />
-              <RecipeCard
-                key={recommendations.elaborate.id}
-                recipe={recommendations.elaborate}
-                onSelect={onSelectRecipe}
-              />
-            </div>
+            {/* RecipeCard shows the category and cooking time itself. */}
+            <RecipeCard
+              key={recommendations.quick.id}
+              recipe={recommendations.quick}
+              onSelect={onSelectRecipe}
+            />
+            <RecipeCard
+              key={recommendations.elaborate.id}
+              recipe={recommendations.elaborate}
+              onSelect={onSelectRecipe}
+            />
           </div>
         )}
 
@@ -121,13 +132,6 @@ export default function Results({ craving, onSelectRecipe, onBack }) {
         {isLoading ? "Finding ideas…" : "↻ Show me 3 new ideas"}
       </button>
 
-      <button
-        type="button"
-        onClick={onBack}
-        className="mt-2 w-full rounded-full px-4 py-2 text-sm font-medium text-sage-700 hover:underline"
-      >
-        Try a different craving
-      </button>
     </section>
   );
 }
