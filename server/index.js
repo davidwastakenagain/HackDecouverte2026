@@ -20,8 +20,8 @@ const MODEL = process.env.RECOMMENDATION_MODEL || "claude-haiku-5-5";
 const INSTRUCTIONS = `You suggest lighter homemade alternatives to food cravings for an app used by pregnant women.
 
 Given a craving, write two recipes that satisfy the same craving:
-- "quick": a simple recipe that takes about 10 to 15 minutes in total.
-- "elaborate": a more involved recipe that takes about 30 to 45 minutes in total.
+- "quick": a simple recipe that takes 25 minutes or less in total.
+- "elaborate": a more involved recipe that takes about 30 to 60 minutes in total.
 
 Food safety rules, which always apply:
 - Meat, poultry, fish and eggs are always cooked all the way through. Say so in the steps.

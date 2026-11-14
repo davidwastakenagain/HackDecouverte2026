@@ -5,6 +5,7 @@
 // as a JSON array of full recipe objects.
 
 import { useState } from "react";
+import { FoodPhoto } from "../components/RecipeCard.jsx";
 
 const STORAGE_KEY = "cravebetter.savedRecipes";
 
@@ -59,20 +60,13 @@ export default function RecipeDetails({ recipe }) {
 
   return (
     <article className="space-y-5">
-      {recipe.image ? (
-        <img
-          src={recipe.image}
-          alt={recipe.title}
-          className="h-52 w-full rounded-2xl object-cover"
-        />
-      ) : (
-        <div
-          aria-hidden="true"
-          className="flex h-40 w-full items-center justify-center rounded-2xl bg-sage-100 text-6xl"
-        >
-          {recipe.category === "elaborate" ? "🍲" : "🥗"}
-        </div>
-      )}
+      <FoodPhoto
+        photo={recipe.image}
+        query={recipe.title}
+        emoji={recipe.category === "elaborate" ? "🍲" : "🥗"}
+        alt={recipe.title}
+        className="aspect-[4/3] w-full rounded-2xl text-3xl"
+      />
 
       <div>
         <span className="text-xs font-semibold tracking-wide text-sage-500 uppercase">
@@ -82,6 +76,19 @@ export default function RecipeDetails({ recipe }) {
         <p className="mt-1 text-sm text-ink-soft">⏱ {recipe.cookingTime}</p>
         {recipe.description && (
           <p className="mt-2 text-ink-soft">{recipe.description}</p>
+        )}
+        {recipe.sourceUrl && (
+          <p className="mt-2 text-sm text-ink-soft">
+            Recipe from{" "}
+            <a
+              href={recipe.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-sage-700 underline"
+            >
+              {recipe.sourceName || "the original source"}
+            </a>
+          </p>
         )}
       </div>
 
@@ -98,6 +105,39 @@ export default function RecipeDetails({ recipe }) {
       >
         {saved ? "✓ Saved · Tap to remove" : "🔖 Save recipe"}
       </button>
+
+      {recipe.nutrients?.length > 0 && (
+        <section>
+          <h3 className="mb-2 text-lg font-semibold text-sage-700">
+            Good for pregnancy
+          </h3>
+          <ul className="space-y-1.5 rounded-2xl bg-white p-4">
+            {recipe.nutrients.map((nutrient) => (
+              <li key={nutrient.name} className="text-ink">
+                <span className="font-semibold">{nutrient.name}</span>
+                <span className="text-sm text-ink-soft"> from {nutrient.from.join(", ")}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {(recipe.cautions?.length > 0 || recipe.allergens?.length > 0) && (
+        <section>
+          <h3 className="mb-2 text-lg font-semibold text-sage-700">Keep in mind</h3>
+          <ul className="space-y-1.5 rounded-2xl bg-white p-4 text-sm text-ink">
+            {recipe.allergens?.length > 0 && (
+              <li>
+                <span className="font-semibold">Allergens:</span> {recipe.allergens.join(", ")}. Check
+                labels, as other ingredients may contain allergens too.
+              </li>
+            )}
+            {recipe.cautions?.map((caution) => (
+              <li key={caution}>{caution}</li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <section>
         <h3 className="mb-2 text-lg font-semibold text-sage-700">Ingredients</h3>

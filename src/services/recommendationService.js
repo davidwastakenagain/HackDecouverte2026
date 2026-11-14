@@ -14,9 +14,16 @@
 //   5. The best-scoring recipes are returned first. Refresh moves down the list.
 //
 // Recipes live in src/data/recipes.js. A recipe belongs to a group through its
-// id: "burger-quick-1" is in the "burger" group.
+// id: "burger-quick-1" is in the "burger" group. They are real recipes from
+// TheMealDB, filtered for pregnancy food safety; each keeps its own photo.
+// When the optional AI server is running, getFreshRecommendations asks it
+// instead and falls back to these recipes (see the end of this file).
 
-import { recipes } from "../data/recipes.js";
+import { recipes as publishedRecipes } from "../data/recipes.js";
+import { extraRecipes } from "../data/extraRecipes.js";
+
+// Published recipes first, so they win ties; the extras fill gaps.
+const recipes = [...publishedRecipes, ...extraRecipes];
 
 // Each group: the words people use for that craving, and its taste profile.
 const CRAVING_GROUPS = {
@@ -333,26 +340,13 @@ function lookUp(craving) {
   return cache.get(key);
 }
 
-// Each craving group has one photo in public/images/cravings/ (see CREDITS.md there).
-const photoFor = (groupId) => `${import.meta.env?.BASE_URL ?? "/"}images/cravings/${groupId}.jpg`;
-
-// Gives a recipe its group's photo, unless it already has its own image.
-const withPhoto = (recipe, groupId) => (recipe.image ? recipe : { ...recipe, image: photoFor(groupId) });
-
-// The group a craving fits best, for choosing a photo. It is the group of the
-// best built-in match, so AI recipes get the same photo the built-in ones would.
-function bestGroup(craving) {
-  return groupOf(lookUp(craving).quick[0]);
-}
-
+// Every built-in recipe carries its own photo (recipe.image), so none is added here.
 export function getRecommendations(craving) {
   const entry = lookUp(craving);
   const position = entry.calls++;
-  const quick = entry.quick[position % entry.quick.length];
-  const elaborate = entry.elaborate[position % entry.elaborate.length];
   return {
-    quick: withPhoto(quick, groupOf(quick)),
-    elaborate: withPhoto(elaborate, groupOf(elaborate)),
+    quick: entry.quick[position % entry.quick.length],
+    elaborate: entry.elaborate[position % entry.elaborate.length],
   };
 }
 
@@ -434,9 +428,8 @@ async function askServer(craving, avoidTitles) {
 export async function getFreshRecommendations(craving, avoidTitles = []) {
   if (isAiEnabled() && String(craving ?? "").trim()) {
     try {
-      const { quick, elaborate } = await askServer(craving, avoidTitles);
-      const groupId = bestGroup(craving);
-      return { quick: withPhoto(quick, groupId), elaborate: withPhoto(elaborate, groupId), source: "ai" };
+      // AI recipes have no image; RecipeCard looks one up by the recipe's title.
+      return { ...(await askServer(craving, avoidTitles)), source: "ai" };
     } catch (error) {
       console.warn("AI recommendations unavailable, using the built-in recipes instead:", error);
     }

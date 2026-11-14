@@ -15,9 +15,15 @@ npm run dev
 
 Then open the address shown in the terminal (usually http://localhost:5173).
 
+## Recipes
+
+The built-in recipes in `src/data/recipes.js` are real, published recipes from [TheMealDB](https://www.themealdb.com), with their own photos, ingredients and steps, and a link to the original. Recipes with pregnancy food-safety risks were left out, and the list favours nutrients that matter in pregnancy. See the top of that file for details.
+
+TheMealDB has few or no recipes for some common cravings (ice cream, pizza, chocolate, chips, sandwiches, drinks), so `src/data/extraRecipes.js` adds team-written recipes for those.
+
 ## Optional: AI-written recipes
 
-Without any setup, the app suggests recipes from its built-in list. To have Claude write recipes for any craving:
+Without any setup, the app uses the built-in recipes. To have Claude write recipes for any craving:
 
 1. Create a file called `.env.local` in the project root with these two lines:
 
@@ -34,7 +40,7 @@ Without any setup, the app suggests recipes from its built-in list. To have Clau
    npm start
    ```
 
-`.env.local` is ignored by git, so the key is never pushed. Each request costs money on the key's account. If the server is not running, the app goes back to the built-in recipes.
+`.env.local` is ignored by git, so the key is never pushed. The server uses Claude Haiku 5.5 (about $0.001 per request) and prints a running cost estimate. If the server is not running, the app goes back to the built-in recipes. AI-written recipes are marked as unreviewed in the app.
 
 ## Working on it
 
