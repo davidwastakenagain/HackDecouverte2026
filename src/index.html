@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HackDecouverte 2026</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="nav">
+    <a href="#" class="logo">Hack<span>Decouverte</span></a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#ideas">Ideas</a>
+      <a href="#team">Team</a>
+      <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>We build things that help you <span id="typed"></span><span class="cursor">|</span></h1>
+      <p>Our project for HackDecouverte 2026.</p>
+      <a href="#ideas" class="btn">See our ideas</a>
+    </section>
+
+    <section id="about">
+      <h2>About</h2>
+      <div class="cards">
+        <article class="card">
+          <h3>🔍 Discover</h3>
+          <p>Find a real problem worth solving.</p>
+        </article>
+        <article class="card">
+          <h3>🛠️ Build</h3>
+          <p>Prototype fast and test with real people.</p>
+        </article>
+        <article class="card">
+          <h3>🚀 Ship</h3>
+          <p>Demo something that works by the end of the weekend.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="ideas">
+      <h2>Idea Board</h2>
+      <p class="muted">Add ideas and vote on them. Everything is saved in your browser.</p>
+      <form id="idea-form">
+        <input id="idea-input" type="text" placeholder="Type an idea…" maxlength="120" required>
+        <button type="submit" class="btn">Add</button>
+      </form>
+      <ul id="idea-list"></ul>
+      <p id="empty-msg" class="muted">No ideas yet. Add the first one!</p>
+    </section>
+
+    <section id="team">
+      <h2>Team</h2>
+      <div class="cards" id="team-list"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> HackDecouverte 2026 team</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
