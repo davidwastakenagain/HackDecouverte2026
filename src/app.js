@@ -14,17 +14,78 @@ themeToggle.addEventListener("click", () => {
   setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark");
 });
 
-// ----- Idea board (saved in localStorage) -----
+// ----- Idea board -----
+// Uses the SQLite server when the page is served by server.js, otherwise localStorage.
 const ideaForm = document.getElementById("idea-form");
 const ideaInput = document.getElementById("idea-input");
 const ideaList = document.getElementById("idea-list");
 const emptyMsg = document.getElementById("empty-msg");
+const storageNote = document.getElementById("storage-note");
 
-let ideas = JSON.parse(localStorage.getItem("ideas") || "[]");
+let ideas = [];
 
-function saveIdeas() {
-  localStorage.setItem("ideas", JSON.stringify(ideas));
+let addIdea, vote, deleteIdea;
+
+async function loadIdeas() {
+  const res = await fetch("/api/ideas");
+  if (!res.ok) throw new Error(`Server responded ${res.status}`);
+  ideas = await res.json();
+  renderIdeas();
 }
+
+// Server mode: ideas live in SQLite via server.js (npm start)
+function useServer() {
+  storageNote.textContent = "Shared with everyone on this server.";
+
+  const send = async (method, url, body) => {
+    try {
+      const res = await fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: body && JSON.stringify(body),
+      });
+      if (!res.ok) throw new Error(`Server responded ${res.status}`);
+      await loadIdeas();
+    } catch (error) {
+      console.error(error);
+      storageNote.textContent = "Couldn't reach the server (check the console).";
+    }
+  };
+
+  addIdea = (text) => send("POST", "/api/ideas", { text });
+  vote = (id, delta) => send("POST", `/api/ideas/${id}/vote`, { delta });
+  deleteIdea = (id) => send("DELETE", `/api/ideas/${id}`);
+
+  // Pick up other people's changes every few seconds
+  setInterval(() => loadIdeas().catch(console.error), 3000);
+}
+
+// Fallback when there's no server (file opened directly, or GitHub Pages)
+function useLocalStorage() {
+  ideas = JSON.parse(localStorage.getItem("ideas") || "[]");
+
+  const saveAndRender = () => {
+    localStorage.setItem("ideas", JSON.stringify(ideas));
+    renderIdeas();
+  };
+
+  addIdea = (text) => {
+    ideas.push({ id: Date.now(), text, votes: 0 });
+    saveAndRender();
+  };
+  vote = (id, delta) => {
+    ideas.find((i) => i.id === id).votes += delta;
+    saveAndRender();
+  };
+  deleteIdea = (id) => {
+    ideas = ideas.filter((i) => i.id !== id);
+    saveAndRender();
+  };
+
+  renderIdeas();
+}
+
+loadIdeas().then(useServer, useLocalStorage);
 
 function makeButton(label, title, onClick) {
   const button = document.createElement("button");
@@ -65,30 +126,13 @@ function renderIdeas() {
     });
 }
 
-function vote(id, delta) {
-  const idea = ideas.find((i) => i.id === id);
-  idea.votes += delta;
-  saveIdeas();
-  renderIdeas();
-}
-
-function deleteIdea(id) {
-  ideas = ideas.filter((i) => i.id !== id);
-  saveIdeas();
-  renderIdeas();
-}
-
 ideaForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const text = ideaInput.value.trim();
   if (!text) return;
-  ideas.push({ id: Date.now(), text, votes: 0 });
+  addIdea(text);
   ideaInput.value = "";
-  saveIdeas();
-  renderIdeas();
 });
-
-renderIdeas();
 
 // ----- Team (edit this list with your teammates) -----
 const team = [

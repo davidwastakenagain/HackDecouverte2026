@@ -1,0 +1,11 @@
+{
+  "name": "hackdecouverte2026",
+  "private": true,
+  "description": "HackDecouverte 2026 project site with a SQLite-backed idea board",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "start": "node server.js"
+  }
+}
