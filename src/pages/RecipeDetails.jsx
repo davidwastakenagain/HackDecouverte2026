@@ -5,6 +5,7 @@
 // as a JSON array of full recipe objects.
 
 import { useState } from "react";
+import { FoodPhoto } from "../components/RecipeCard.jsx";
 
 const STORAGE_KEY = "cravebetter.savedRecipes";
 
@@ -59,20 +60,13 @@ export default function RecipeDetails({ recipe }) {
 
   return (
     <article className="space-y-5">
-      {recipe.image ? (
-        <img
-          src={recipe.image}
-          alt={recipe.title}
-          className="h-52 w-full rounded-2xl object-cover"
-        />
-      ) : (
-        <div
-          aria-hidden="true"
-          className="flex h-40 w-full items-center justify-center rounded-2xl bg-sage-100 text-6xl"
-        >
-          {recipe.category === "elaborate" ? "🍲" : "🥗"}
-        </div>
-      )}
+      <FoodPhoto
+        query={recipe.title}
+        fallback={recipe.image}
+        emoji={recipe.category === "elaborate" ? "🍲" : "🥗"}
+        alt={recipe.title}
+        className="aspect-[4/3] w-full rounded-2xl text-3xl"
+      />
 
       <div>
         <span className="text-xs font-semibold tracking-wide text-sage-500 uppercase">
