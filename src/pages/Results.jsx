@@ -6,7 +6,124 @@
 import { useEffect, useRef, useState } from "react";
 import RecipeCard from "../components/RecipeCard.jsx";
 import NearbyFood from "../components/NearbyFood.jsx";
-import { getFreshRecommendations, isAiEnabled, isKnownCraving } from "../services/recommendationService.js";
+import {
+  getCravingNutrition,
+  getFreshRecommendations,
+  isAiEnabled,
+  isKnownCraving,
+} from "../services/recommendationService.js";
+
+// Nutrients compared between the craving and the recipes. For the last two, more is better.
+const COMPARED = [
+  { key: "kcal", label: "Calories", unit: " kcal" },
+  { key: "saturates", label: "Saturated fat", unit: " g" },
+  { key: "sugars", label: "Sugars", unit: " g" },
+  { key: "salt", label: "Salt", unit: " g" },
+  { key: "fibre", label: "Fibre", unit: " g", moreIsBetter: true },
+  { key: "protein", label: "Protein", unit: " g", moreIsBetter: true },
+];
+
+const tidy = (number) => Math.round(number * 10) / 10;
+
+// One recipe's figure for a nutrient, with the difference from the craving
+// underneath. A dash means the recipe has no published figures.
+function RecipeFigure({ recipe, cravingFood, row }) {
+  const value = recipe.nutrition?.[row.key];
+  if (value == null) return <span className="text-ink-soft">–</span>;
+  const cravingValue = cravingFood?.[row.key];
+  const difference = cravingValue != null ? tidy(value - cravingValue) : null;
+  const better = difference > 0 === Boolean(row.moreIsBetter);
+  return (
+    <>
+      {value}
+      {row.unit}
+      {difference !== null && (
+        <span
+          className={`block text-sm ${difference === 0 ? "text-ink-soft" : better ? "text-good" : "text-warn"}`}
+        >
+          {difference === 0 ? "same" : `${difference > 0 ? "+" : "−"}${Math.abs(difference)}${row.unit}`}
+        </span>
+      )}
+    </>
+  );
+}
+
+// Nutrition of one serving of each recipe next to one portion of the craved
+// food. Recipes without published figures (team-written or AI-written) show a
+// dash; if neither recipe has figures, only the craving's figures are given.
+function Comparison({ cravingFood, quick, elaborate }) {
+  const hasRecipeFigures = Boolean(quick.nutrition || elaborate.nutrition);
+  if (!cravingFood && !hasRecipeFigures) return null;
+
+  if (!hasRecipeFigures) {
+    return (
+      <p className="mt-6 max-w-2xl text-[0.95rem] text-ink-soft">
+        For reference, {cravingFood.label} ({cravingFood.portion}) has about {cravingFood.kcal}{" "}
+        kcal, {cravingFood.saturates} g saturated fat, {cravingFood.sugars} g sugars and{" "}
+        {cravingFood.salt} g salt (USDA FoodData Central; brands and portion sizes vary). These
+        recipes have no published nutrition figures to compare.
+      </p>
+    );
+  }
+
+  return (
+    <section className="mt-8 max-w-3xl">
+      <h2 className="text-xl text-ink">How they compare</h2>
+      <p className="mt-1 text-[0.95rem] text-ink-soft">
+        {cravingFood
+          ? `One serving of each recipe next to ${cravingFood.label} (${cravingFood.portion}).`
+          : "Nutrition for one serving of each recipe."}
+      </p>
+      <table className="mt-3 w-full border-collapse text-sm sm:text-[0.95rem]">
+        <thead>
+          <tr className="border-b border-line text-left align-bottom text-ink-soft">
+            <th scope="col" className="py-2 pr-2 font-semibold">
+              Per serving
+            </th>
+            {cravingFood && (
+              <th scope="col" className="px-2 py-2 text-right font-semibold">
+                Your craving
+              </th>
+            )}
+            <th scope="col" className="px-2 py-2 text-right font-semibold">
+              Quick &amp; Healthy
+            </th>
+            <th scope="col" className="py-2 pl-2 text-right font-semibold">
+              Worth the Wait
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {COMPARED.map((row) => (
+            <tr key={row.key} className="border-b border-line align-top">
+              <th scope="row" className="py-2 pr-2 text-left font-normal text-ink">
+                {row.label}
+              </th>
+              {cravingFood && (
+                <td className="px-2 py-2 text-right text-ink">
+                  {cravingFood[row.key] != null ? `${cravingFood[row.key]}${row.unit}` : "–"}
+                </td>
+              )}
+              <td className="px-2 py-2 text-right text-ink">
+                <RecipeFigure recipe={quick} cravingFood={cravingFood} row={row} />
+              </td>
+              <td className="py-2 pl-2 text-right text-ink">
+                <RecipeFigure recipe={elaborate} cravingFood={cravingFood} row={row} />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p className="mt-2 text-sm text-ink-soft">
+        Recipe figures are per serving, as published by BBC Good Food.
+        {cravingFood &&
+          " Craving figures are for a typical portion, from USDA FoodData Central; brands and portion sizes vary."}
+        {(!quick.nutrition || !elaborate.nutrition) &&
+          " A dash means the recipe has no published figures."}
+      </p>
+    </section>
+  );
+}
 
 // The last recommendations shown. Opening a recipe leaves this page, so this
 // lets Back return to the same recipes instead of loading different ones.
@@ -66,6 +183,9 @@ export default function Results({ craving, onSelectRecipe }) {
   }
 
   const fromAi = recommendations?.source === "ai";
+  // Only when the craving names a food we have figures for, so the comparison
+  // is with what was typed and not with a different food of the same kind.
+  const cravingFood = getCravingNutrition(craving, { keywordsOnly: true });
 
   return (
     <section>
@@ -114,6 +234,14 @@ export default function Results({ craving, onSelectRecipe }) {
         <p className="mt-4 text-ink-soft" role="status">
           {isAiEnabled() ? "Writing two recipes for you. This takes a few seconds." : "Finding ideas."}
         </p>
+      )}
+
+      {recommendations && (
+        <Comparison
+          cravingFood={cravingFood}
+          quick={recommendations.quick}
+          elaborate={recommendations.elaborate}
+        />
       )}
 
       {fromAi && (

@@ -9,12 +9,12 @@ export const SWAP_EXAMPLES = [
   {
     craving: "Sushi",
     concern: "Raw fish",
-    instead: "Fish dishes that are cooked through, such as pan-fried salmon with avocado.",
+    instead: "Fish and seafood dishes that are cooked through, such as baked salmon with fennel and tomatoes.",
   },
   {
     craving: "Cookie dough",
     concern: "Raw egg",
-    instead: "Biscuits that are baked and oat pancakes that are cooked through.",
+    instead: "Treats that are baked or cooked through, such as baked apple and cinnamon donuts.",
   },
   {
     craving: "A deli sandwich",
@@ -123,8 +123,8 @@ export default function About({ onStart }) {
 
       <Section title="Recipes are filtered before you see them">
         <p>
-          Most recipes come from TheMealDB, a public collection of published recipes. A recipe was
-          left out of CraveBetter if it uses any of these, or if it is deep-fried:
+          The published recipes are BBC Good Food recipes, taken from TheMealDB, a public recipe
+          collection. A recipe was left out of CraveBetter if it uses any of these:
         </p>
         <ul className="grid gap-x-6 gap-y-1 sm:grid-cols-2">
           {LEFT_OUT.map((item) => (
@@ -144,16 +144,25 @@ export default function About({ onStart }) {
           .
         </p>
         <p>
-          TheMealDB has few recipes for some common cravings, such as ice cream, pizza and
-          chocolate. For those, our team wrote recipes to the same rules: meat, fish and eggs
-          cooked through, pasteurised dairy, no alcohol and no coffee. These have no link to a
-          published source.
+          Published recipes were also left out if the food is fried, or if one serving is high in
+          saturated fat (over 6 g), sugars (over 27 g), salt (over 1.5 g) or calories (over 700
+          kcal).
+        </p>
+        <p>
+          The published recipes do not cover every craving. For the rest, such as burgers, ice
+          cream, pizza and chocolate, our team wrote recipes to the same food-safety rules: meat,
+          fish and eggs cooked through, pasteurised dairy, no alcohol and no coffee. These have no
+          published nutrition figures and no link to a source.
         </p>
       </Section>
 
       <Section title="Each published recipe shows what it gives you">
-        <p>On the page of a recipe from TheMealDB you will find:</p>
+        <p>On the page of a published recipe you will find:</p>
         <ul className="space-y-3">
+          <li>
+            <span className="font-semibold">Nutrition per serving.</span> Calories, fat, saturates,
+            carbs, sugars, fibre, protein and salt, as published by BBC Good Food.
+          </li>
           <li>
             <span className="font-semibold">Good for pregnancy.</span> Which of these nutrients the
             recipe provides, and which ingredients they come from: {NUTRIENTS.join(", ")}. The
@@ -173,17 +182,23 @@ export default function About({ onStart }) {
             originally published.
           </li>
         </ul>
+        <p>
+          When you type a common craving, the results page also puts one serving of each published
+          recipe next to a typical portion of the food you craved, using figures from USDA
+          FoodData Central, so you can see the difference in calories, saturated fat, sugars, salt,
+          fibre and protein.
+        </p>
       </Section>
 
       <Section title="Three options, depending on your time">
         <ul className="space-y-3">
           <li>
-            <span className="font-semibold">Quick &amp; Healthy.</span> A recipe that takes about 25
+            <span className="font-semibold">Quick &amp; Healthy.</span> A recipe that takes 30
             minutes or less.
           </li>
           <li>
             <span className="font-semibold">Worth the Wait.</span> A more involved recipe for when
-            you have 30 to 60 minutes.
+            you have 30 to 90 minutes.
           </li>
           <li>
             <span className="font-semibold">Nearby Food.</span> A map search for places close to

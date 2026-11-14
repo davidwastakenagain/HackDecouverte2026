@@ -16,6 +16,8 @@
     bg-berry-600     accent: primary buttons, active states
     text-berry-700   accent text and links
     bg-berry-50      soft tinted fill
+    text-good        a figure that is better than the comparison
+    text-warn        a figure that is worse than the comparison
 */
 @theme {
   --color-page: #faf8f6;
@@ -27,6 +29,8 @@
   --color-berry-100: #f6dfe6;
   --color-berry-600: #9b2c50;
   --color-berry-700: #7f2141;
+  --color-good: #2f6b3a;
+  --color-warn: #a4401f;
 
   /*
     Names from the two earlier themes. They still work so older code keeps

@@ -29,7 +29,7 @@ This is a FIVE-HOUR MVP. Keep everything simple. Do not add features unless expl
 - LocalStorage for saved recipes
 - Browser Geolocation API for location
 - Google Maps search links as the location fallback
-- TheMealDB (https://www.themealdb.com, free, no key) as the source of real recipes and food photos.
+- Real recipe data: BBC Good Food recipes via TheMealDB (recipes, photos, published nutrition), USDA FoodData Central (nutrition of typical craving foods) and Wikipedia (craving photos). All free, no keys.
 - Optional: a small local Node server in `server/` that asks Claude to write recipes for any craving. The app works without it, using the built-in recipes. The API key lives in `.env.local`, which is never committed.
 
 Do not introduce additional frameworks or libraries without approval from the team lead (Member 1).
@@ -110,6 +110,8 @@ The placeholder files in `src/pages/`, `src/components/` and `src/services/` exi
 Recipes in `src/data/recipes.js` also have these fields (all generated from the real recipe, see the top of that file):
 
 - `sourceName`, `sourceUrl`: where the original recipe is published.
+- `servings`: for example `"Serves 4"`.
+- `nutrition`: per serving, as published by the source: `{ kcal, fat, saturates, carbs, sugars, fibre, protein, salt }` (grams, except kcal).
 - `nutrients`: `[{ name: "Iron", from: ["lentils", "spinach"] }]`, the pregnancy nutrients the ingredients provide.
 - `allergens`: `["Milk", "Wheat (gluten)"]`.
 - `cautions`: short pregnancy notes, such as cooking through, oily fish limits or pasteurised cheese.
@@ -157,7 +159,8 @@ There is no router library. `App.jsx` keeps track of the current screen, the cur
 | Function | Returns |
 | --- | --- |
 | `getRecommendations(craving)` in `recommendationService.js` | `{ quick: recipe, elaborate: recipe }` — calling it again for the same craving returns different options (refresh) |
-| `getFreshRecommendations(craving, avoidTitles)` in `recommendationService.js` | a Promise of `{ quick, elaborate, source }`, where `source` is `"ai"` or `"built-in"`. Uses the local AI server when it is set up, otherwise the built-in recipes. AI recipes have no `image`, `sourceUrl`, `nutrients`, `allergens` or `cautions` |
+| `getFreshRecommendations(craving, avoidTitles)` in `recommendationService.js` | a Promise of `{ quick, elaborate, source }`, where `source` is `"ai"` or `"built-in"`. Uses the local AI server when it is set up, otherwise the built-in recipes. AI recipes have no `image`, `sourceUrl`, `nutrition`, `nutrients`, `allergens` or `cautions` |
+| `getCravingNutrition(craving, { keywordsOnly })` in `recommendationService.js` | typical nutrition of the craved food per usual portion (`{ label, portion, kcal, saturates, sugars, salt, ... , image }`, from `src/data/cravingNutrition.js`), or `null` if the craving is not recognised. With `keywordsOnly: true` it only matches a food named in the craving, not its wider craving group |
 | `getNearbyFood(craving)` in `locationService.js` | a Promise that resolves to a restaurant object |
 
 ### Saved recipes

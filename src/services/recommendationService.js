@@ -14,13 +14,16 @@
 //   5. The best-scoring recipes are returned first. Refresh moves down the list.
 //
 // Recipes live in src/data/recipes.js. A recipe belongs to a group through its
-// id: "burger-quick-1" is in the "burger" group. They are real recipes from
-// TheMealDB, filtered for pregnancy food safety; each keeps its own photo.
+// id: "burger-quick-1" is in the "burger" group. The published ones are real
+// BBC Good Food recipes (via TheMealDB) with nutrition per serving, filtered
+// for pregnancy food safety; each keeps its own photo. extraRecipes.js fills
+// the craving groups those do not cover.
 // When the optional AI server is running, getFreshRecommendations asks it
 // instead and falls back to these recipes (see the end of this file).
 
 import { recipes as publishedRecipes } from "../data/recipes.js";
 import { extraRecipes } from "../data/extraRecipes.js";
+import { cravingNutrition } from "../data/cravingNutrition.js";
 
 // Published recipes first, so they win ties; the extras fill gaps.
 const recipes = [...publishedRecipes, ...extraRecipes];
@@ -354,6 +357,37 @@ export function getRecommendations(craving) {
 // getRecommendations returns general all-round ideas.
 export function isKnownCraving(craving) {
   return lookUp(craving).understood;
+}
+
+/**
+ * Typical nutrition of the food being craved, per usual portion, from USDA
+ * data (src/data/cravingNutrition.js), or null if the craving is not recognised.
+ * Returns { label, portion, usdaName, kcal, fat, saturates, carbs, sugars,
+ * fibre, protein, salt, cholesterol, image }. Used to compare with a recommended recipe.
+ * keywordsOnly: only match foods named in the craving, not its wider craving group.
+ */
+export function getCravingNutrition(craving, { keywordsOnly = false } = {}) {
+  const text = ` ${normalize(craving)} `;
+  if (!text.trim()) return null;
+
+  // The longest keyword found in the craving wins ("chicken sandwich" over "sandwich").
+  let best = null;
+  let bestLength = 0;
+  for (const food of cravingNutrition) {
+    for (const keyword of food.keywords) {
+      const phrase = normalize(keyword);
+      if (phrase.length > bestLength && (text.includes(` ${phrase} `) || text.includes(` ${phrase}s `))) {
+        best = food;
+        bestLength = phrase.length;
+      }
+    }
+  }
+  if (best || keywordsOnly) return best;
+
+  // Otherwise the typical food of the craving's group ("whopper" -> burger).
+  const { groupScores } = understand(craving);
+  const [groupId] = Object.entries(groupScores).sort((a, b) => b[1] - a[1])[0] ?? [];
+  return (groupId && cravingNutrition.find((food) => food.group === groupId)) || null;
 }
 
 // ---------------------------------------------------------------------------

@@ -107,6 +107,37 @@ export default function RecipeDetails({ recipe }) {
       </div>
 
       <div className="space-y-8">
+        {recipe.nutrition && (
+          <section>
+            <h2 className="text-xl text-ink">Nutrition per serving</h2>
+            <dl className="mt-3 grid grid-cols-4 gap-y-4 border-y border-line py-4 text-center">
+              {[
+                ["Calories", recipe.nutrition.kcal, "kcal"],
+                ["Fat", recipe.nutrition.fat, "g"],
+                ["Saturates", recipe.nutrition.saturates, "g"],
+                ["Carbs", recipe.nutrition.carbs, "g"],
+                ["Sugars", recipe.nutrition.sugars, "g"],
+                ["Fibre", recipe.nutrition.fibre, "g"],
+                ["Protein", recipe.nutrition.protein, "g"],
+                ["Salt", recipe.nutrition.salt, "g"],
+              ].map(([label, value, unit]) => (
+                <div key={label} className="flex flex-col-reverse">
+                  <dt className="text-sm text-ink-soft">{label}</dt>
+                  <dd className="font-semibold text-ink">
+                    {value}
+                    <span className="text-sm font-normal"> {unit}</span>
+                  </dd>
+                </div>
+              ))}
+            </dl>
+            <p className="mt-2 text-sm text-ink-soft">
+              {recipe.servings ? `${recipe.servings}. ` : ""}Figures published by{" "}
+              {recipe.sourceName || "the recipe source"}. Cholesterol and trans fat are not
+              published.
+            </p>
+          </section>
+        )}
+
         {recipe.nutrients?.length > 0 && (
           <section>
             <h2 className="text-xl text-ink">Good for pregnancy</h2>

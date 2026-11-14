@@ -5,12 +5,13 @@
 
 import { useState } from "react";
 import { FoodPhoto } from "../components/RecipeCard.jsx";
+import { getCravingNutrition } from "../services/recommendationService.js";
 
 const SUGGESTIONS = ["Cheeseburger", "Ice cream", "Fries", "Pizza", "Chocolate"];
 
 const OPTIONS = [
-  { title: "Quick & Healthy", text: "A recipe ready in about 25 minutes or less." },
-  { title: "Worth the Wait", text: "A more involved recipe for when you have 30 to 60 minutes." },
+  { title: "Quick & Healthy", text: "A recipe ready in 30 minutes or less." },
+  { title: "Worth the Wait", text: "A more involved recipe for when you have 30 to 90 minutes." },
   { title: "Nearby Food", text: "A map search for places close to you." },
 ];
 
@@ -66,11 +67,14 @@ export default function Home({ onSubmitCraving, onOpenAbout }) {
           ))}
         </div>
 
-        {/* Live photo of what's being typed, updated after a short pause. */}
+        {/* Live photo of what's being typed. Known cravings ("burger", "kit kat")
+            use their stored Wikipedia photo straight away; anything else is
+            searched for after a short pause. */}
         {craving && (
           <FoodPhoto
+            photo={getCravingNutrition(craving, { keywordsOnly: true })?.image}
             query={craving}
-            delay={400}
+            delay={600}
             alt=""
             className="mt-6 aspect-video w-full max-w-xl rounded-xl border border-line"
           />

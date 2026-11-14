@@ -1,7 +1,7 @@
 // Recipe card (owned by Member 3). Used by Results and SavedRecipes.
 // Props: recipe (recipe object), onSelect(recipe).
-// Also exports FoodPhoto, which shows a live photo of a food from TheMealDB
-// (free, no key). RecipeDetails uses it, and Home can use it for the craving input.
+// Also exports FoodPhoto, which shows a live photo of a food from Wikipedia or
+// TheMealDB (both free, no key). RecipeDetails uses it, and Home can use it for the craving input.
 
 import { useEffect, useState } from "react";
 
@@ -68,81 +68,70 @@ async function findDishPhoto(key) {
   return "";
 }
 
-// Branded foods ("Hershey's chocolate bar", "Doritos") come from Open Food Facts
-// (free, no key), which looks products up by brand. Its search allows about
-// 10 requests a minute, so it is only asked when no dish matched.
-const PRODUCTS_URL =
-  "https://world.openfoodfacts.org/api/v2/search?fields=product_name,image_front_url,image_front_small_url&page_size=24&brands_tags=";
+// Everyday foods and brands ("burger", "Hershey's chocolate bar", "Doritos")
+// come from Wikipedia (free, no key): the lead picture of the article, if
+// Wikipedia describes it as a food or drink.
+const WIKI_PAGE_URL = "https://en.wikipedia.org/api/rest_v1/page/summary/";
+const WIKI_URL =
+  "https://en.wikipedia.org/w/api.php?action=query&format=json&origin=*&generator=search&gsrlimit=10&prop=pageimages|description&piprop=thumbnail&pithumbsize=600&gsrsearch=";
 
-// Open Food Facts brand tags: "Hershey's" -> "hershey-s", "Kit Kat" -> "kit-kat".
-const brandTag = (text) => text.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const FOOD_DESCRIPTION =
+  /\b(food|dish|dishes|sandwich|dessert|snack|drink|beverage|confection|confectionery|chocolate|candy|sweet|fruit|vegetable|cuisine|bread|cheese|meat|pasta|sauce|soup|cake|pastry|cookie|biscuit|cereal|chips|crisps|noodles?|rice|pizza|ice cream|frozen|potato|potatoes|egg|fish|seafood|burger|soda|soft drink|juice|spread|condiment|pickle|pie|dough|fried|baked|meal|breakfast|pancake|dumpling|stew|salad|sausage|chicken|beef|pork|nut|berry|bean|yogurt|milk|tortilla|wafer|patty|bar|roll|cracker|pretzel|popcorn|syrup|butter|cream|doughnut|donut|waffle|gum|jelly|lollipop|licorice|marshmallow)\b/i;
+const NOT_FOOD_DESCRIPTION =
+  /\b(restaurant|chain|company|corporation|manufacturer|film|song|album|band|episode|series|character|video game|novel|book|city|town|village|person|player|politician|singer|actor|species|genus|family of|disambiguation|list of)\b/i;
 
-// The brand is usually the first word or two: "hersheys chocolate bar".
-function brandGuesses(text) {
-  const words = text.split(/\s+/).filter(Boolean);
-  const first = brandTag(words[0] ?? "");
-  const guesses = words.length >= 2 ? [brandTag(`${words[0]} ${words[1]}`), first] : [first];
-  // Brands are tagged both ways: "hersheys" and "hershey-s".
-  guesses.push(first.endsWith("-s") ? first.replace(/-s$/, "s") : first.replace(/([a-z])s$/, "$1-s"));
-  return [...new Set(guesses)].filter((tag) => tag.length >= 3);
-}
+// Short cravings that mean something more specific on Wikipedia.
+const WIKI_ALIASES = {
+  burger: "hamburger", fries: "french fries", chips: "potato chips", soda: "soft drink", pop: "soft drink",
+  wings: "buffalo wing", nuggets: "chicken nugget", shake: "milkshake", coke: "coca-cola",
+};
 
-// Photo of a branded product, "" if none matches, or null if the request failed.
-async function findProductPhoto(key) {
-  for (const brand of brandGuesses(key)) {
-    let products;
-    try {
-      const response = await fetch(PRODUCTS_URL + encodeURIComponent(brand));
-      if (!response.ok) return null; // e.g. too many requests
-      products = (await response.json()).products ?? [];
-    } catch {
-      return null;
+const isFoodPage = (description) => FOOD_DESCRIPTION.test(description ?? "") && !NOT_FOOD_DESCRIPTION.test(description ?? "");
+
+// Photo of a food from Wikipedia, "" if no result is a food, or null if the request failed.
+async function findWikipediaPhoto(text) {
+  const key = WIKI_ALIASES[text] ?? text;
+  // 1. The article with exactly this name ("pizza", "kit kat"). These answers
+  //    are cached by Wikipedia, so this is fast and rarely refused.
+  try {
+    const response = await fetch(WIKI_PAGE_URL + encodeURIComponent(key.replace(/ /g, "_")) + "?redirect=true");
+    if (response.ok) {
+      const page = await response.json();
+      if (page.type === "standard" && page.thumbnail && isFoodPage(page.description)) return page.thumbnail.source;
     }
-    // When more than the brand was typed ("hersheys chocolate bar"), the
-    // product name must share one of those other words.
-    const otherWords = wordsOf(key).filter((word) => word.length >= 3 && !brand.includes(word));
-    const shared = (product) => otherWords.filter((word) => (product.product_name ?? "").toLowerCase().includes(word)).length;
-    const withPhoto = products.filter((product) => product.image_front_url || product.image_front_small_url);
-    const matches = otherWords.length ? withPhoto.filter((product) => shared(product) > 0) : withPhoto;
-    if (!matches.length) continue;
-    const best = matches.reduce((a, b) => (shared(b) > shared(a) ? b : a));
-    return best.image_front_url || best.image_front_small_url;
+  } catch {
+    return null; // offline or blocked
   }
-  return "";
+  // 2. A search, for longer text ("hersheys chocolate bar"): the first result
+  //    that is a food. Wikipedia limits how many searches it accepts per minute.
+  try {
+    const response = await fetch(WIKI_URL + encodeURIComponent(key));
+    if (!response.ok) return null; // too many requests: the caller falls back
+    const pages = Object.values((await response.json()).query?.pages ?? {});
+    const food = pages.sort((a, b) => a.index - b.index).find((page) => page.thumbnail && isFoodPage(page.description));
+    return food ? food.thumbnail.source : "";
+  } catch {
+    return null;
+  }
 }
-
-// Photos of popular craving brands, looked up once on Open Food Facts so they
-// show instantly without a request. aliases are what people type.
-const BRAND_PHOTOS = [
-  // BRAND_PHOTOS_START
-  // BRAND_PHOTOS_END
-];
-
-const brandPhotoFor = (key) =>
-  BRAND_PHOTOS.find(({ aliases }) =>
-    aliases.some((alias) => new RegExp(`(^|[^a-z])${alias.replace(/[.*+?^${}()|[\]\\&]/g, "\\$&")}($|[^a-z])`).test(key))
-  )?.image ?? "";
 
 const photoCache = new Map(); // text -> Promise of a photo URL, or "" if none found
 
 // Finds a photo URL for a food or branded product, or "" if there is none.
-// Order: a known brand, a dish matching every word typed, any branded product
-// (Open Food Facts), then a dish matching some of the words.
+// Order: Wikipedia (everyday foods and brands), then a TheMealDB dish.
 function findFoodPhoto(text) {
   const key = String(text ?? "").trim().toLowerCase();
-  const brand = brandPhotoFor(key);
-  if (brand) return Promise.resolve(brand);
+  if (key.length < 3) return Promise.resolve("");
   if (!photoCache.has(key)) {
     photoCache.set(
       key,
       (async () => {
+        const wiki = await findWikipediaPhoto(key);
+        if (wiki) return wiki;
         const dish = await findDishPhoto(key);
-        if (dish?.full) return dish.url;
-        const product = await findProductPhoto(key);
-        if (product) return product;
         if (dish) return dish.url;
         // Don't remember failed requests, so the next try can succeed.
-        if (dish === null || product === null) photoCache.delete(key);
+        if (wiki === null || dish === null) photoCache.delete(key);
         return "";
       })()
     );
@@ -233,7 +222,10 @@ export default function RecipeCard({ recipe, onSelect }) {
         {recipe.description && (
           <span className="mt-1 line-clamp-2 text-[0.95rem] text-ink-soft">{recipe.description}</span>
         )}
-        <span className="mt-2 block text-sm text-ink-soft">{recipe.cookingTime}</span>
+        <span className="mt-2 block text-sm text-ink-soft">
+          {recipe.cookingTime}
+          {recipe.nutrition && ` · ${recipe.nutrition.kcal} kcal per serving`}
+        </span>
       </span>
     </button>
   );
