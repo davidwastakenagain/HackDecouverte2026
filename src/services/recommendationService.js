@@ -321,12 +321,35 @@ function lookUp(craving) {
   return cache.get(key);
 }
 
+// Each craving group has one photo in public/images/cravings/ (see CREDITS.md there).
+const photoFor = (groupId) => `${import.meta.env?.BASE_URL ?? "/"}images/cravings/${groupId}.jpg`;
+
+// Gives a recipe its group's photo, unless it already has its own image.
+const withPhoto = (recipe, groupId) => (recipe.image ? recipe : { ...recipe, image: photoFor(groupId) });
+
+// The group a craving fits best, for choosing a photo.
+function bestGroup(craving) {
+  const { groupScores, traits } = understand(craving);
+  let best = FALLBACK_GROUP;
+  let bestScore = 0;
+  for (const [groupId, group] of Object.entries(CRAVING_GROUPS)) {
+    const score = (groupScores[groupId] ?? 0) + similarity(traits, group.traits);
+    if (score > bestScore) {
+      best = groupId;
+      bestScore = score;
+    }
+  }
+  return best;
+}
+
 export function getRecommendations(craving) {
   const entry = lookUp(craving);
   const position = entry.calls++;
+  const quick = entry.quick[position % entry.quick.length];
+  const elaborate = entry.elaborate[position % entry.elaborate.length];
   return {
-    quick: entry.quick[position % entry.quick.length],
-    elaborate: entry.elaborate[position % entry.elaborate.length],
+    quick: withPhoto(quick, groupOf(quick)),
+    elaborate: withPhoto(elaborate, groupOf(elaborate)),
   };
 }
 
@@ -408,7 +431,9 @@ async function askServer(craving, avoidTitles) {
 export async function getFreshRecommendations(craving, avoidTitles = []) {
   if (isAiEnabled() && String(craving ?? "").trim()) {
     try {
-      return { ...(await askServer(craving, avoidTitles)), source: "ai" };
+      const { quick, elaborate } = await askServer(craving, avoidTitles);
+      const groupId = bestGroup(craving);
+      return { quick: withPhoto(quick, groupId), elaborate: withPhoto(elaborate, groupId), source: "ai" };
     } catch (error) {
       console.warn("AI recommendations unavailable, using the built-in recipes instead:", error);
     }
