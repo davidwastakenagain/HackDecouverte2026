@@ -7,7 +7,7 @@ Four people are building CraveBetter in five hours. This file says who owns what
 | Member | Name | Branch | Responsibility |
 | --- | --- | --- | --- |
 | Member 1 | _add name_ | `main` (integration) | Team lead: project setup, app shell, navigation, global styles, shared components, merging and final testing |
-| Member 2 | David | `david` | Craving input, three recommendations, recommendation cards, refresh |
+| Member 2 | David | `member-2-recommendations` | Craving input, three recommendations, recommendation cards, refresh |
 | Member 3 | Stephen | `stephen` | Recipe details, saving and removing recipes, saved recipes page |
 | Member 4 | Jeremy | `Jeremy` | Location permission, nearby food options, Google Maps fallback |
 

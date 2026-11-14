@@ -1,26 +1,120 @@
 @import "tailwindcss";
 
 /*
-  Shared CraveBetter colors (owned by Member 1).
-  Use them as Tailwind classes, for example:
-    bg-cream, bg-sage-500, text-ink, border-sage-300
+  Shared theme (owned by Member 1).
+
+  Soft blush background, white rounded cards, near-black pill buttons
+  and a floating dark navigation bar.
+
+  Colors — use them as Tailwind classes, for example:
+    bg-blush-50      page background
+    bg-surface       cards
+    bg-blush-100     soft tinted fill (chips, highlights)
+    border-blush-200 soft borders
+    bg-blush-500     pink accent
+    text-ink         main text, and bg-ink for primary buttons
+    text-ink-soft    secondary text
+    bg-sky-soft      pale blue highlight
 */
 @theme {
-  --color-cream: #faf6ec;
-  --color-cream-dark: #f0e9d8;
-  --color-sage-100: #e4ecdf;
-  --color-sage-300: #b5c7ac;
-  --color-sage-500: #7f9b76;
-  --color-sage-700: #54704d;
-  --color-ink: #2f3a2c;
-  --color-ink-soft: #66735f;
+  --color-blush-50: #fff3f6;
+  --color-blush-100: #fde3ea;
+  --color-blush-200: #f8c9d6;
+  --color-blush-500: #e67a9b;
+  --color-blush-700: #b84d70;
+  --color-sky-soft: #d3e6f3;
+  --color-surface: #ffffff;
+  --color-ink: #1d1b22;
+  --color-ink-soft: #6f6a78;
 
-  --font-sans: ui-rounded, "Segoe UI", system-ui, -apple-system, sans-serif;
+  /*
+    Old names from the first (sage and cream) theme. They still work so
+    existing code keeps running, but they now show the new colors.
+    Prefer the names above in new code.
+  */
+  --color-cream: #fff3f6;
+  --color-cream-dark: #fde3ea;
+  --color-sage-100: #fde3ea;
+  --color-sage-300: #f8c9d6;
+  --color-sage-500: #e67a9b;
+  --color-sage-700: #1d1b22;
+
+  --font-sans: "Plus Jakarta Sans", ui-rounded, "Segoe UI", system-ui,
+    -apple-system, sans-serif;
 }
 
 body {
   margin: 0;
-  background-color: var(--color-cream-dark);
+  background-color: var(--color-blush-200);
   color: var(--color-ink);
   font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/*
+  Shared building blocks. Add these class names to get the same look
+  on every screen:
+    card           white rounded panel
+    btn-primary    black pill button
+    btn-secondary  white pill button with a soft border
+    chip           small rounded label
+    field          text input
+*/
+@utility card {
+  background-color: var(--color-surface);
+  border-radius: 1.5rem;
+  padding: 1rem;
+  box-shadow: 0 8px 24px -12px rgb(184 77 112 / 0.25);
+}
+
+@utility btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  background-color: var(--color-ink);
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+@utility btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid var(--color-blush-200);
+  background-color: var(--color-surface);
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+@utility chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 9999px;
+  background-color: var(--color-blush-100);
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-blush-700);
+}
+
+@utility field {
+  width: 100%;
+  border-radius: 1rem;
+  border: 1px solid var(--color-blush-200);
+  background-color: var(--color-surface);
+  padding: 0.75rem 1rem;
+  color: var(--color-ink);
+  outline: none;
+
+  &:focus {
+    border-color: var(--color-blush-500);
+    box-shadow: 0 0 0 3px var(--color-blush-100);
+  }
 }

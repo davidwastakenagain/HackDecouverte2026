@@ -139,7 +139,7 @@ There is no router library. `App.jsx` keeps track of the current screen, the cur
 | --- | --- | --- |
 | `RecipeCard` | `recipe` (recipe object), `onSelect(recipe)` | `Results`, `SavedRecipes` |
 | `NearbyFood` | `craving` (string) | `Results`, as the third recommendation |
-| `Header` | `title`, `onBack` (optional) | `App.jsx` only |
+| `Header` | `title`, `onBack` (optional), `brand` (optional) | `App.jsx` only |
 | `BottomNavigation` | `current`, `onNavigate(screen)` | `App.jsx` only |
 
 ### Services
@@ -174,7 +174,36 @@ This application is for pregnant users. It is a food suggestion tool, not a medi
 
 ## 8. Design Direction
 
-Clean, warm, welcoming and mobile-first, with a soft sage-green and cream palette. It must not look like a complicated medical application. Use the shared colors and typography from `src/styles/global.css`.
+Clean, warm, welcoming and mobile-first: a soft blush-pink background, white cards with large rounded corners, near-black pill buttons and a floating dark navigation bar. It must not look like a complicated medical application.
+
+All colors, the font and the shared building blocks live in `src/styles/global.css`. Do not hardcode hex colors or add your own palette.
+
+### Colors (Tailwind classes)
+
+| Use | Class |
+| --- | --- |
+| Page background (already set by the app shell) | `bg-blush-50` |
+| Cards and panels | `bg-surface` |
+| Soft tinted fill | `bg-blush-100` |
+| Soft borders | `border-blush-200` |
+| Pink accent | `bg-blush-500`, `text-blush-700` |
+| Main text, primary buttons | `text-ink`, `bg-ink` |
+| Secondary text | `text-ink-soft` |
+| Pale blue highlight | `bg-sky-soft` |
+
+The older names `cream`, `cream-dark`, `sage-100`, `sage-300`, `sage-500` and `sage-700` still work and now show the new colors, so existing code does not need to change. Use the names in the table for new code.
+
+### Building blocks (class names)
+
+| Class | What it gives you |
+| --- | --- |
+| `card` | White rounded panel with a soft shadow |
+| `btn-primary` | Black pill button with white text |
+| `btn-secondary` | White pill button with a soft border |
+| `chip` | Small rounded label, for example a category or cooking time |
+| `field` | Text input with a rounded border and pink focus ring |
+
+Use these instead of restyling cards, buttons and inputs on each page, so every screen matches. Do not add a page title or a back button inside a page; the app shell's header already shows both.
 
 ## 9. Before Finishing Your Task
 

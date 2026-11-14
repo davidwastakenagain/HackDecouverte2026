@@ -41,10 +41,14 @@ export default function App() {
   if (screen === "recipe") onBack = () => setScreen(recipeOpenedFrom);
 
   return (
-    <div className="mx-auto flex min-h-screen max-w-md flex-col bg-cream shadow-sm">
-      <Header title={TITLES[screen]} onBack={onBack} />
+    <div className="mx-auto flex min-h-screen max-w-md flex-col bg-blush-50 shadow-xl">
+      <Header
+        title={TITLES[screen]}
+        onBack={onBack}
+        brand={screen === "home"}
+      />
 
-      <main className="flex-1 px-4 pt-4 pb-24">
+      <main className="flex-1 px-4 pt-2 pb-28">
         {screen === "home" && <Home onSubmitCraving={handleSubmitCraving} />}
 
         {screen === "results" && (
