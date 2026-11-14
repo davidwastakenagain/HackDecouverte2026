@@ -109,23 +109,7 @@ export default function Home({ onSubmitCraving, onOpenAbout }) {
           </button>
         </form>
 
-        <div className="mx-auto mt-6 max-w-xl lg:mx-0">
-          <p className="text-center text-sm font-bold text-ink-soft lg:text-left">Popular cravings</p>
-          <div className="mt-2 flex flex-wrap justify-center gap-2 lg:justify-start">
-            {SUGGESTIONS.map((suggestion) => (
-              <button
-                key={suggestion.label}
-                type="button"
-                onClick={() => search(suggestion.label)}
-                className="group flex items-center gap-1 rounded-full border-2 border-line bg-surface py-1 pr-3.5 pl-1.5 font-bold text-ink shadow-[0_3px_0_0_var(--color-line)] transition-transform hover:-translate-y-0.5 active:translate-y-0.5"
-              >
-                <FoodBuddy name={suggestion.buddy} className="h-8 w-8 group-hover:animate-wiggle" />
-                {suggestion.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
+        {/* Order below the search box: recent searches, food needs, then popular cravings. */}
         {history.length > 0 && (
           <div className="mx-auto mt-5 max-w-xl lg:mx-0">
             <p className="text-center text-sm font-bold text-ink-soft lg:text-left">Your recent searches</p>
@@ -176,6 +160,23 @@ export default function Home({ onSubmitCraving, onOpenAbout }) {
               Delete my food needs and search history from this browser
             </button>
           )}
+        </div>
+
+        <div className="mx-auto mt-6 max-w-xl lg:mx-0">
+          <p className="text-center text-sm font-bold text-ink-soft lg:text-left">Popular cravings</p>
+          <div className="mt-2 flex flex-wrap justify-center gap-2 lg:justify-start">
+            {SUGGESTIONS.map((suggestion) => (
+              <button
+                key={suggestion.label}
+                type="button"
+                onClick={() => search(suggestion.label)}
+                className="group flex items-center gap-1 rounded-full border-2 border-line bg-surface py-1 pr-3.5 pl-1.5 font-bold text-ink shadow-[0_3px_0_0_var(--color-line)] transition-transform hover:-translate-y-0.5 active:translate-y-0.5"
+              >
+                <FoodBuddy name={suggestion.buddy} className="h-8 w-8 group-hover:animate-wiggle" />
+                {suggestion.label}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 

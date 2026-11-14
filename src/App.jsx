@@ -112,7 +112,7 @@ export default function App() {
         <div className="mx-auto flex w-full max-w-6xl items-center gap-3 px-4 py-4 sm:px-6 lg:px-8">
           <FoodBuddy name="avocado" className="h-10 w-10 shrink-0" />
           <p className="text-sm text-ink-soft">
-            CraveBetter offers food suggestions only. It is not medical advice. Check with your
+            Cravely offers food suggestions only. It is not medical advice. Check with your
             healthcare provider about what is right for you.
           </p>
         </div>

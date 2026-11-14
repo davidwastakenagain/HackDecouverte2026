@@ -19,7 +19,7 @@ export default function Header({ items, current, onNavigate }) {
         >
           <FoodBuddy name="strawberry" className="h-10 w-10" />
           <span>
-            Crave<span className="text-berry-600">Better</span>
+            Crave<span className="text-berry-600">ly</span>
           </span>
         </button>
 

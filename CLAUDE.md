@@ -1,10 +1,10 @@
-# CLAUDE.md — CraveBetter Project Instructions
+# CLAUDE.md — Cravely Project Instructions
 
 Every AI coding assistant working in this repository must follow these rules. Team roles, branches and file ownership are also listed in [TEAM.md](TEAM.md).
 
 ## 1. Project Overview
 
-CraveBetter is a mobile-first web application that helps pregnant women find healthier alternatives to their food cravings.
+Cravely is a mobile-first web application that helps pregnant women find healthier alternatives to their food cravings.
 
 The user enters a craving and the app shows three alternatives:
 

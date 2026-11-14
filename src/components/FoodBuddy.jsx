@@ -1,5 +1,5 @@
 // Food buddies and food art: the site's cute food drawings (shared component).
-// Original drawings made for CraveBetter, in a sticker style: a thick plum
+// Original drawings made for Cravely, in a sticker style: a thick plum
 // outline and a white sticker border.
 //
 // The same drawings are used in two ways:

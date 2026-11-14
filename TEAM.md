@@ -1,6 +1,6 @@
-# CraveBetter — Team
+# Cravely — Team
 
-Four people are building CraveBetter in five hours. This file says who owns what. The full project rules are in [CLAUDE.md](CLAUDE.md).
+Four people are building Cravely in five hours. This file says who owns what. The full project rules are in [CLAUDE.md](CLAUDE.md).
 
 ## Who does what
 

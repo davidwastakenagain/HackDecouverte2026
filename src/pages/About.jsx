@@ -1,5 +1,5 @@
 // "How it helps" page (Member 2).
-// Explains, with concrete examples, what CraveBetter does for pregnant users
+// Explains, with concrete examples, what Cravely does for pregnant users
 // and where its limits are.
 // Props: onStart() — called by the button that leads back to the craving input.
 
@@ -90,18 +90,18 @@ export default function About({ onStart }) {
           <FoodBuddy name="strawberry" className="h-full w-auto animate-float" />
           <FoodBuddy name="icecream" className="h-[80%] w-auto rotate-6 animate-float [animation-delay:-2s]" />
         </div>
-        <h1 className="mt-3 text-4xl text-ink sm:text-5xl">How CraveBetter helps during pregnancy</h1>
+        <h1 className="mt-3 text-4xl text-ink sm:text-5xl">How Cravely helps during pregnancy</h1>
         <p className="mx-auto mt-4 max-w-2xl text-lg text-ink-soft">
           Cravings are a normal part of pregnancy for many people. The trouble is that some of the
           foods people crave are the same ones pregnancy food-safety guidance says to avoid or
-          limit. CraveBetter suggests something you can make instead that goes after the same
+          limit. Cravely suggests something you can make instead that goes after the same
           craving.
         </p>
       </header>
 
       <Section title="It swaps the risky part, not the craving" buddy="burger">
         <p>
-          You type what you feel like eating. CraveBetter works out what kind of food that is and
+          You type what you feel like eating. Cravely works out what kind of food that is and
           shows recipes of the same kind that leave out the part that is a concern in pregnancy.
         </p>
 
@@ -109,7 +109,7 @@ export default function About({ onStart }) {
           <div className="hidden gap-6 pb-2 text-sm font-extrabold text-ink-soft md:grid md:grid-cols-[9rem_1fr_1.6fr]">
             <span>If you crave</span>
             <span>The concern in pregnancy</span>
-            <span>CraveBetter suggests</span>
+            <span>Cravely suggests</span>
           </div>
           <ul>
             {SWAP_EXAMPLES.map((example) => (
@@ -135,7 +135,7 @@ export default function About({ onStart }) {
       <Section title="Recipes are filtered before you see them" buddy="avocado">
         <p>
           The published recipes are BBC Good Food recipes, taken from TheMealDB, a public recipe
-          collection. A recipe was left out of CraveBetter if it uses any of these:
+          collection. A recipe was left out of Cravely if it uses any of these:
         </p>
         <ul className="grid gap-x-6 gap-y-1 sm:grid-cols-2">
           {LEFT_OUT.map((item) => (
@@ -224,7 +224,7 @@ export default function About({ onStart }) {
         </p>
       </Section>
 
-      <Section title="What CraveBetter does not do" buddy="cookie">
+      <Section title="What Cravely does not do" buddy="cookie">
         <ul className="space-y-3">
           <li>
             It does not give medical or nutrition advice, and no doctor or dietitian has reviewed

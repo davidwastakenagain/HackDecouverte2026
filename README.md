@@ -1,4 +1,4 @@
-# CraveBetter
+# Cravely
 
 A mobile-first web app that helps pregnant women find healthier alternatives to their food cravings. Enter a craving and get three options: a quick healthy recipe, a more elaborate recipe, and a nearby food option.
 
@@ -79,4 +79,4 @@ src/
 
 ## Disclaimer
 
-CraveBetter offers food suggestions only. It is not medical advice. Check with your healthcare provider about what is right for you.
+Cravely offers food suggestions only. It is not medical advice. Check with your healthcare provider about what is right for you.
