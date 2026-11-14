@@ -7,6 +7,7 @@
 // with location-based results; the props stay the same.
 
 import { useEffect, useState } from "react";
+import FoodBuddy from "./FoodBuddy.jsx";
 import { getNearbyFood } from "../services/locationService.js";
 
 export default function NearbyFood({ craving }) {
@@ -23,9 +24,12 @@ export default function NearbyFood({ craving }) {
   }, [craving]);
 
   return (
-    <div className="flex h-full flex-col rounded-xl border border-line bg-surface p-4">
-      <span className="chip self-start">Nearby Food</span>
-      <p className="mt-2 font-display text-lg leading-snug font-semibold text-ink">
+    <div className="flex h-full flex-col rounded-3xl border-2 border-line bg-lilac/60 p-4 shadow-[0_5px_0_0_var(--color-berry-100)]">
+      <div className="flex items-start justify-between gap-2">
+        <span className="chip bg-surface">Nearby Food</span>
+        <FoodBuddy name="boba" className="-mt-1 h-16 w-16 animate-wiggle" />
+      </div>
+      <p className="mt-1 font-display text-xl leading-snug font-bold text-ink">
         Find a place close to you
       </p>
       <p className="mt-1 text-[0.95rem] text-ink-soft">

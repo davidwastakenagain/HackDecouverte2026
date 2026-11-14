@@ -6,16 +6,21 @@
 //   current     the screen name of the highlighted link
 //   onNavigate  (screen) => void
 
+import FoodBuddy from "./FoodBuddy.jsx";
+
 export default function Header({ items, current, onNavigate }) {
   return (
-    <header className="sticky top-0 z-20 border-b border-line bg-surface/95 backdrop-blur">
-      <div className="mx-auto flex h-14 w-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-20 border-b-2 border-line bg-surface/95 backdrop-blur">
+      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <button
           type="button"
           onClick={() => onNavigate("home")}
-          className="rounded font-display text-xl font-semibold tracking-tight text-ink"
+          className="flex items-center gap-1.5 rounded-full pr-2 font-display text-2xl leading-none font-bold text-ink"
         >
-          Crave<span className="text-berry-600">Better</span>
+          <FoodBuddy name="strawberry" className="h-10 w-10" />
+          <span>
+            Crave<span className="text-berry-600">Better</span>
+          </span>
         </button>
 
         <nav aria-label="Main" className="hidden gap-1 md:flex">
@@ -28,8 +33,8 @@ export default function Header({ items, current, onNavigate }) {
                 onClick={() => onNavigate(item.screen)}
                 aria-current={isActive ? "page" : undefined}
                 className={
-                  "rounded-md px-3 py-2 text-[0.95rem] font-semibold transition-colors " +
-                  (isActive ? "bg-berry-50 text-berry-700" : "text-ink-soft hover:text-ink")
+                  "rounded-full px-4 py-2 font-extrabold transition-colors " +
+                  (isActive ? "bg-berry-100 text-berry-700" : "text-ink-soft hover:bg-berry-50 hover:text-ink")
                 }
               >
                 {item.label}

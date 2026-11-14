@@ -21,6 +21,7 @@ Only edit the files in your own row. If you need a change in someone else's file
 - `src/main.jsx`
 - `src/components/Header.jsx`
 - `src/components/BottomNavigation.jsx`
+- `src/components/FoodBuddy.jsx` (the food drawings; anyone may use them)
 - `src/styles/global.css`
 - `src/data/recipes.js` (Member 2 may add recipe entries)
 - `index.html`, `package.json`, `vite.config.js`

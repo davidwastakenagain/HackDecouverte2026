@@ -38,6 +38,8 @@ export const SWAP_EXAMPLES = [
   },
 ];
 
+import FoodBuddy from "../components/FoodBuddy.jsx";
+
 const LEFT_OUT = [
   "Alcohol",
   "Liver and pâté",
@@ -53,11 +55,15 @@ const LEFT_OUT = [
 
 const NUTRIENTS = ["Folate", "Iron", "Calcium", "Protein", "Omega-3", "Fibre", "Vitamin C"];
 
-function Section({ title, children }) {
+// One panel of the page, with a food buddy beside its title.
+function Section({ title, buddy, children }) {
   return (
-    <section className="border-t border-line pt-8">
-      <h2 className="text-2xl text-ink">{title}</h2>
-      <div className="mt-3 space-y-4 text-ink">{children}</div>
+    <section className="card sm:p-7">
+      <h2 className="flex items-center gap-3 text-2xl text-ink sm:text-3xl">
+        <FoodBuddy name={buddy} className="h-12 w-12 shrink-0 sm:h-14 sm:w-14" />
+        {title}
+      </h2>
+      <div className="mt-4 space-y-4 text-ink">{children}</div>
     </section>
   );
 }
@@ -68,7 +74,7 @@ function SourceLink({ href, children }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="font-semibold text-berry-700 underline underline-offset-2 hover:text-berry-600"
+      className="font-extrabold text-berry-700 underline decoration-2 underline-offset-4 hover:text-berry-600"
     >
       {children}
     </a>
@@ -77,10 +83,15 @@ function SourceLink({ href, children }) {
 
 export default function About({ onStart }) {
   return (
-    <article className="mx-auto max-w-3xl space-y-10">
-      <header>
-        <h1 className="text-3xl text-ink sm:text-4xl">How CraveBetter helps during pregnancy</h1>
-        <p className="mt-4 text-lg text-ink-soft">
+    <article className="mx-auto max-w-3xl space-y-6">
+      <header className="text-center">
+        <div className="flex h-24 items-end justify-center" aria-hidden="true">
+          <FoodBuddy name="burger" className="h-[70%] w-auto -rotate-6 animate-float [animation-delay:-1s]" />
+          <FoodBuddy name="strawberry" className="h-full w-auto animate-float" />
+          <FoodBuddy name="icecream" className="h-[80%] w-auto rotate-6 animate-float [animation-delay:-2s]" />
+        </div>
+        <h1 className="mt-3 text-4xl text-ink sm:text-5xl">How CraveBetter helps during pregnancy</h1>
+        <p className="mx-auto mt-4 max-w-2xl text-lg text-ink-soft">
           Cravings are a normal part of pregnancy for many people. The trouble is that some of the
           foods people crave are the same ones pregnancy food-safety guidance says to avoid or
           limit. CraveBetter suggests something you can make instead that goes after the same
@@ -88,14 +99,14 @@ export default function About({ onStart }) {
         </p>
       </header>
 
-      <Section title="It swaps the risky part, not the craving">
+      <Section title="It swaps the risky part, not the craving" buddy="burger">
         <p>
           You type what you feel like eating. CraveBetter works out what kind of food that is and
           shows recipes of the same kind that leave out the part that is a concern in pregnancy.
         </p>
 
         <div>
-          <div className="hidden gap-6 pb-2 text-sm font-semibold text-ink-soft md:grid md:grid-cols-[9rem_1fr_1.6fr]">
+          <div className="hidden gap-6 pb-2 text-sm font-extrabold text-ink-soft md:grid md:grid-cols-[9rem_1fr_1.6fr]">
             <span>If you crave</span>
             <span>The concern in pregnancy</span>
             <span>CraveBetter suggests</span>
@@ -104,9 +115,9 @@ export default function About({ onStart }) {
             {SWAP_EXAMPLES.map((example) => (
               <li
                 key={example.craving}
-                className="grid gap-1 border-t border-line py-3 md:grid-cols-[9rem_1fr_1.6fr] md:gap-6"
+                className="grid gap-1 border-t-2 border-dashed border-line py-3 md:grid-cols-[9rem_1fr_1.6fr] md:gap-6"
               >
-                <span className="font-semibold text-ink">{example.craving}</span>
+                <span className="font-extrabold text-ink">{example.craving}</span>
                 <span className="text-ink-soft">
                   <span className="md:hidden">Concern: </span>
                   {example.concern}
@@ -121,7 +132,7 @@ export default function About({ onStart }) {
         </div>
       </Section>
 
-      <Section title="Recipes are filtered before you see them">
+      <Section title="Recipes are filtered before you see them" buddy="avocado">
         <p>
           The published recipes are BBC Good Food recipes, taken from TheMealDB, a public recipe
           collection. A recipe was left out of CraveBetter if it uses any of these:
@@ -157,7 +168,7 @@ export default function About({ onStart }) {
         </p>
       </Section>
 
-      <Section title="Each recipe shows what it gives you">
+      <Section title="Each recipe shows what it gives you" buddy="strawberry">
         <p>On a recipe's page you will find:</p>
         <ul className="space-y-3">
           <li>
@@ -192,7 +203,7 @@ export default function About({ onStart }) {
         </p>
       </Section>
 
-      <Section title="Three options, depending on your time">
+      <Section title="Three options, depending on your time" buddy="pizza">
         <ul className="space-y-3">
           <li>
             <span className="font-semibold">Quick &amp; Healthy.</span> A recipe that takes 30
@@ -213,7 +224,7 @@ export default function About({ onStart }) {
         </p>
       </Section>
 
-      <Section title="What CraveBetter does not do">
+      <Section title="What CraveBetter does not do" buddy="cookie">
         <ul className="space-y-3">
           <li>
             It does not give medical or nutrition advice, and no doctor or dietitian has reviewed
@@ -234,7 +245,7 @@ export default function About({ onStart }) {
         </ul>
       </Section>
 
-      <div className="border-t border-line pt-8">
+      <div className="pt-2 text-center">
         <button type="button" onClick={onStart} className="btn-primary">
           Enter a craving
         </button>

@@ -4,6 +4,7 @@
 // TheMealDB (both free, no key). RecipeDetails uses it, and Home can use it for the craving input.
 
 import { useEffect, useState } from "react";
+import FoodBuddy, { foodArtFor } from "./FoodBuddy.jsx";
 
 const CATEGORY_LABELS = {
   quick: "Quick & Healthy",
@@ -142,19 +143,21 @@ function findFoodPhoto(text) {
 /**
  * Shows a photo of a food in a box whose size is set with className.
  * Props: photo (the recipe's own image URL; when given, no search is made),
- * query (food name to search for when there is no photo), fallback (image URL
+ * query (food name to search for when there is no photo), search (false to
+ * skip the search and show a drawing of that kind of food instead), fallback (image URL
  * to use if the search finds nothing), fit ("contain" scales the photo to fit
  * inside the box without cropping; "cover" fills the box and crops the edges),
  * delay (ms to wait after query changes, useful while typing), alt, className.
  * While a new photo loads, the previous one stays visible. If there is no
- * photo at all, a plain plate outline is shown.
+ * photo at all, a drawing of that kind of food is shown (no face, so it reads
+ * as a picture of the food, not a character).
  */
-export function FoodPhoto({ photo = "", query, fallback = "", fit = "contain", delay = 0, alt = "", className = "" }) {
+export function FoodPhoto({ photo = "", query, search = true, fallback = "", fit = "contain", delay = 0, alt = "", className = "" }) {
   const [found, setFound] = useState(null); // { query, url }
   const [broken, setBroken] = useState([]); // URLs that failed to load
 
   useEffect(() => {
-    if (photo) return undefined;
+    if (photo || !search) return undefined;
     let current = true;
     const timer = setTimeout(() => {
       findFoodPhoto(query).then((url) => current && setFound({ query, url }));
@@ -163,10 +166,10 @@ export function FoodPhoto({ photo = "", query, fallback = "", fit = "contain", d
       current = false;
       clearTimeout(timer);
     };
-  }, [photo, query, delay]);
+  }, [photo, query, search, delay]);
 
-  const isLoading = !photo && found?.query !== query;
-  const src = [photo, found?.url, fallback].find((url) => url && !broken.includes(url));
+  const isLoading = search && !photo && found?.query !== query;
+  const src = [photo, search ? found?.url : "", fallback].find((url) => url && !broken.includes(url));
 
   return (
     <span className={`relative block overflow-hidden bg-berry-50 ${className}`}>
@@ -182,12 +185,9 @@ export function FoodPhoto({ photo = "", query, fallback = "", fit = "contain", d
       ) : (
         <span
           aria-hidden="true"
-          className={`absolute inset-0 flex items-center justify-center text-berry-600/30 ${isLoading ? "animate-pulse" : ""}`}
+          className={`absolute inset-0 flex items-center justify-center bg-berry-100 ${isLoading ? "animate-pulse" : ""}`}
         >
-          <svg viewBox="0 0 24 24" className="h-1/3 max-h-12 w-1/3 max-w-12" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <circle cx="12" cy="12" r="9" />
-            <circle cx="12" cy="12" r="5" />
-          </svg>
+          <FoodBuddy name={foodArtFor(query)} face={false} className="h-2/3 w-2/3" />
         </span>
       )}
     </span>
@@ -205,18 +205,21 @@ export default function RecipeCard({ recipe, onSelect }) {
     <button
       type="button"
       onClick={() => onSelect(recipe)}
-      className="flex h-full w-full items-start gap-4 overflow-hidden rounded-xl border border-line bg-surface p-3 text-left transition-colors hover:border-ink-soft md:flex-col md:items-stretch md:gap-0 md:p-0"
+      className="flex h-full w-full items-start gap-4 overflow-hidden rounded-3xl border-2 border-line bg-surface p-3 text-left shadow-[0_5px_0_0_var(--color-berry-100)] transition-transform hover:-translate-y-1 active:translate-y-0.5 md:flex-col md:items-stretch md:gap-0 md:p-0"
     >
+      {/* A recipe without its own photo shows a drawing of its kind of food, not a photo of
+          some other dish found by searching for its name. */}
       <FoodPhoto
         photo={recipe.image}
         query={recipe.title}
+        search={false}
         fit="cover"
-        className="h-24 w-24 shrink-0 rounded-lg md:aspect-[4/3] md:h-auto md:w-full md:rounded-none"
+        className="h-24 w-24 shrink-0 rounded-2xl md:aspect-[4/3] md:h-auto md:w-full md:rounded-none"
       />
 
       <span className="block min-w-0 flex-1 md:p-4">
         <span className="chip">{CATEGORY_LABELS[recipe.category] || recipe.category}</span>
-        <span className="mt-2 block font-display text-lg leading-snug font-semibold text-ink">
+        <span className="mt-2 block font-display text-xl leading-snug font-bold text-ink">
           {recipe.title}
         </span>
         {recipe.description && (

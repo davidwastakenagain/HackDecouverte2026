@@ -9,6 +9,7 @@
 import { useEffect, useState } from "react";
 import Header from "./components/Header.jsx";
 import BottomNavigation from "./components/BottomNavigation.jsx";
+import FoodBuddy from "./components/FoodBuddy.jsx";
 import Home from "./pages/Home.jsx";
 import Results from "./pages/Results.jsx";
 import RecipeDetails from "./pages/RecipeDetails.jsx";
@@ -71,7 +72,7 @@ export default function App() {
           <button
             type="button"
             onClick={onBack}
-            className="mb-5 inline-flex items-center gap-1.5 text-[0.95rem] font-semibold text-ink-soft hover:text-ink"
+            className="mb-5 inline-flex items-center gap-1.5 rounded-full border-2 border-line bg-surface py-1.5 pr-4 pl-3 text-[0.95rem] font-extrabold text-ink-soft shadow-[0_3px_0_0_var(--color-line)] transition-transform hover:-translate-y-0.5 hover:text-ink active:translate-y-0.5"
           >
             <svg
               viewBox="0 0 24 24"
@@ -107,11 +108,14 @@ export default function App() {
       </main>
 
       {/* The bottom padding keeps the footer clear of the phone tab bar. */}
-      <footer className="border-t border-line pb-24 md:pb-0">
-        <p className="mx-auto w-full max-w-6xl px-4 py-5 text-sm text-ink-soft sm:px-6 lg:px-8">
-          CraveBetter offers food suggestions only. It is not medical advice. Check with your
-          healthcare provider about what is right for you.
-        </p>
+      <footer className="border-t-2 border-line bg-surface/70 pb-24 md:pb-0">
+        <div className="mx-auto flex w-full max-w-6xl items-center gap-3 px-4 py-4 sm:px-6 lg:px-8">
+          <FoodBuddy name="avocado" className="h-10 w-10 shrink-0" />
+          <p className="text-sm text-ink-soft">
+            CraveBetter offers food suggestions only. It is not medical advice. Check with your
+            healthcare provider about what is right for you.
+          </p>
+        </div>
       </footer>
 
       <BottomNavigation items={NAV_ITEMS} current={section} onNavigate={setScreen} />

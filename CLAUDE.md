@@ -189,9 +189,22 @@ This application is for pregnant users. It is a food suggestion tool, not a medi
 
 ## 8. Design Direction
 
-Plain and readable, not decorative: white cards on a warm off-white page, dark text, one berry accent, thin borders instead of shadows, and modest corner rounding. Headings use the serif Source Serif 4; everything else uses Source Sans 3. No emoji as icons. It must not look like a complicated medical application.
+Cute, soft and friendly, in a sticker style: a pale pink page with a faint grid, white rounded cards with a "puffy" lower edge, pill buttons, a dark plum for text and outlines, and pastel panels. Headings use Baloo 2; everything else uses Nunito. It must not look like a complicated medical application.
 
 All colors, the fonts and the shared building blocks live in `src/styles/global.css`. Do not hardcode hex colors or add your own palette.
+
+### Food buddies and food art
+
+The site's food drawings are in `src/components/FoodBuddy.jsx`. They are original drawings made for this project; do not copy characters from other artists. There are 33, used in two ways:
+
+- **Characters, with a face**, as decoration (logo, home page, section titles): `<FoodBuddy name="boba" className="h-16 w-16" />`. Add `animate-float` or `animate-wiggle` for gentle movement. `buddyFor(text)` picks one that suits a food name.
+- **Pictures of a food, without a face**, wherever a recipe has no photo of its own: `<FoodBuddy name={foodArtFor(recipe.title)} face={false} />`. `foodArtFor` matches the recipe name to a drawing ("Garlic Tomato Spaghetti" gives noodles) and returns a plain plate when nothing fits, never a different food.
+
+Rules for recipe pictures:
+
+- A published recipe shows its own photo (`recipe.image`).
+- A recipe without a photo (team-written or AI-written) shows the faceless drawing. `RecipeCard` and `RecipeDetails` do this through `FoodPhoto` with `search={false}`. Do not look up a photo by the recipe's name: it finds pictures of other dishes.
+- Do not use emoji as icons; use a food drawing or a simple line icon.
 
 ### Layout on different screens
 
@@ -212,7 +225,9 @@ The site fills the browser width and adapts to the device:
 | Secondary text | `text-ink-soft` |
 | Accent: primary buttons, active states | `bg-berry-600` |
 | Accent text and links | `text-berry-700` |
-| Soft tinted fill | `bg-berry-50` |
+| Soft pink fills | `bg-berry-50`, `bg-berry-100` |
+| Pastel panels | `bg-mint`, `bg-butter`, `bg-lilac`, `bg-peach` |
+| Better / worse figures | `text-good`, `text-warn` |
 
 The older names (`blush-*`, `sky-soft`, `cream`, `cream-dark`, `sage-*`) still work and show the current colors, so existing code does not need to change. Use the names in the table for new code.
 
@@ -220,12 +235,12 @@ The older names (`blush-*`, `sky-soft`, `cream`, `cream-dark`, `sage-*`) still w
 
 | Class | What it gives you |
 | --- | --- |
-| `card` | White panel with a thin border |
-| `btn-primary` | Berry button with white text |
-| `btn-secondary` | White button with a border |
-| `chip` | Small label, for example a category |
-| `field` | Text input with a border and a berry focus ring |
-| `font-display` | The serif heading font, for card titles that are not `h1` or `h2` |
+| `card` | White rounded panel with a pink border and a puffy lower edge |
+| `btn-primary` | Pink pill button that presses down when tapped |
+| `btn-secondary` | White pill button with a pink border |
+| `chip` | Small pill label, for example a category |
+| `field` | Rounded text input with a pink focus ring |
+| `font-display` | The rounded heading font, for card titles that are not `h1` or `h2` |
 
 Use these instead of restyling cards, buttons and inputs on each page, so every screen matches.
 

@@ -4,6 +4,7 @@
 // for the third recommendation.
 
 import { useEffect, useRef, useState } from "react";
+import FoodBuddy, { buddyFor } from "../components/FoodBuddy.jsx";
 import RecipeCard from "../components/RecipeCard.jsx";
 import NearbyFood from "../components/NearbyFood.jsx";
 import {
@@ -58,7 +59,7 @@ function Comparison({ cravingFood, quick, elaborate }) {
 
   if (!hasRecipeFigures) {
     return (
-      <p className="mt-6 max-w-2xl text-[0.95rem] text-ink-soft">
+      <p className="card mt-6 max-w-2xl text-[0.95rem] text-ink-soft">
         For reference, {cravingFood.label} ({cravingFood.portion}) has about {cravingFood.kcal}{" "}
         kcal, {cravingFood.saturates} g saturated fat, {cravingFood.sugars} g sugars and{" "}
         {cravingFood.salt} g salt (USDA FoodData Central; brands and portion sizes vary). These
@@ -68,8 +69,8 @@ function Comparison({ cravingFood, quick, elaborate }) {
   }
 
   return (
-    <section className="mt-8 max-w-3xl">
-      <h2 className="text-xl text-ink">How they compare</h2>
+    <section className="card mt-8 max-w-3xl sm:p-6">
+      <h2 className="text-2xl text-ink">How they compare</h2>
       <p className="mt-1 text-[0.95rem] text-ink-soft">
         {cravingFood
           ? `One serving of each recipe next to ${cravingFood.label} (${cravingFood.portion}).`
@@ -196,25 +197,34 @@ export default function Results({ craving, onSelectRecipe }) {
 
   return (
     <section>
-      <p className="text-ink-soft">Instead of</p>
-      <h1 className="text-3xl text-ink [overflow-wrap:anywhere] sm:text-4xl">{craving}</h1>
+      <div className="flex items-center gap-3">
+        <FoodBuddy name={buddyFor(craving)} className="h-16 w-16 shrink-0 animate-float sm:h-20 sm:w-20" />
+        <div className="min-w-0">
+          <p className="font-bold text-ink-soft">Instead of</p>
+          <h1 className="text-4xl text-ink [overflow-wrap:anywhere] sm:text-5xl">{craving}</h1>
+        </div>
+      </div>
 
       {recommendations && !fromAi && !isKnownCraving(craving) && (
-        <p className="mt-4 max-w-2xl rounded-lg bg-berry-50 px-4 py-3 text-ink">
+        <p className="mt-4 max-w-2xl rounded-2xl border-2 border-line bg-butter px-4 py-3 text-ink">
           We don't have ideas for that exact craving yet, so here are some all-round favourites.
         </p>
       )}
 
       {/* One column on phones, three across from tablet width up. */}
       <div
-        className={`mt-6 grid gap-4 transition-opacity md:grid-cols-3 md:gap-5 ${isLoading && recommendations ? "opacity-50" : ""}`}
+        className={`mt-6 grid gap-5 transition-opacity md:grid-cols-3 ${isLoading && recommendations ? "opacity-50" : ""}`}
         aria-live="polite"
         aria-busy={isLoading}
       >
         {!recommendations && (
           <>
-            <div className="h-28 animate-pulse rounded-xl bg-line/60 md:h-80" />
-            <div className="h-28 animate-pulse rounded-xl bg-line/60 md:h-80" />
+            <div className="flex h-28 animate-pulse items-center justify-center rounded-3xl border-2 border-line bg-berry-50 md:h-80">
+              <FoodBuddy name="avocado" className="h-16 w-16 md:h-24 md:w-24" />
+            </div>
+            <div className="flex h-28 animate-pulse items-center justify-center rounded-3xl border-2 border-line bg-berry-50 md:h-80">
+              <FoodBuddy name="pizza" className="h-16 w-16 md:h-24 md:w-24" />
+            </div>
           </>
         )}
 
@@ -238,7 +248,7 @@ export default function Results({ craving, onSelectRecipe }) {
       </div>
 
       {!recommendations && (
-        <p className="mt-4 text-ink-soft" role="status">
+        <p className="mt-4 font-bold text-ink-soft" role="status">
           {isAiEnabled() ? "Writing two recipes for you. This takes a few seconds." : "Finding ideas."}
         </p>
       )}

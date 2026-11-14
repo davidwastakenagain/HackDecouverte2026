@@ -58,6 +58,7 @@ src/
   main.jsx                 entry point
   components/
     Header.jsx
+    FoodBuddy.jsx          the food drawings: characters, and pictures for recipes with no photo
     BottomNavigation.jsx
     RecipeCard.jsx
     NearbyFood.jsx
