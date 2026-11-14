@@ -30,6 +30,7 @@ Only edit the files in your own row. If you need a change in someone else's file
 
 - `src/pages/Home.jsx`
 - `src/pages/Results.jsx`
+- `src/pages/About.jsx` (the How it helps page)
 - `src/services/recommendationService.js`
 - `src/data/extraRecipes.js` (recipes for cravings `recipes.js` does not cover)
 - `server/` (optional local AI recipe server)

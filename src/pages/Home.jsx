@@ -1,18 +1,20 @@
 // Home page (Member 2).
-// Props: onSubmitCraving(craving) — call with the craving text to open Results.
+// Props:
+//   onSubmitCraving(craving) — call with the craving text to open Results.
+//   onOpenAbout()            — optional; opens the "How it helps" page.
 
 import { useState } from "react";
 import { FoodPhoto } from "../components/RecipeCard.jsx";
 
 const SUGGESTIONS = ["Cheeseburger", "Ice cream", "Fries", "Pizza", "Chocolate"];
 
-const STEPS = [
-  { title: "Quick & Healthy", text: "A simple recipe ready in about 25 minutes or less." },
-  { title: "Worth the Wait", text: "A more elaborate recipe for when you have 30–60 minutes." },
-  { title: "Nearby Food", text: "An option to look for at a place close to you." },
+const OPTIONS = [
+  { title: "Quick & Healthy", text: "A recipe ready in about 25 minutes or less." },
+  { title: "Worth the Wait", text: "A more involved recipe for when you have 30 to 60 minutes." },
+  { title: "Nearby Food", text: "A map search for places close to you." },
 ];
 
-export default function Home({ onSubmitCraving }) {
+export default function Home({ onSubmitCraving, onOpenAbout }) {
   const [value, setValue] = useState("");
   const craving = value.trim();
 
@@ -22,72 +24,84 @@ export default function Home({ onSubmitCraving }) {
   }
 
   return (
-    <section>
-      <h2 className="text-2xl font-bold leading-tight text-ink">What are you craving?</h2>
-      <p className="mt-1 text-sm text-ink-soft">
-        Tell us what you feel like eating and we'll suggest three lighter ways to enjoy it.
-      </p>
+    <section className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:items-start lg:gap-16">
+      <div>
+        <h1 className="text-4xl text-ink sm:text-5xl">What are you craving?</h1>
+        <p className="mt-4 max-w-xl text-lg text-ink-soft">
+          Type it in. You'll get two recipes that go after the same craving, picked with pregnancy
+          food-safety guidance in mind, and a place to look nearby.
+        </p>
 
-      <form onSubmit={handleSubmit} className="mt-4">
-        <label htmlFor="craving-input" className="sr-only">
-          Your craving
-        </label>
-        <input
-          id="craving-input"
-          type="text"
-          value={value}
-          onChange={(event) => setValue(event.target.value)}
-          placeholder="e.g. cheeseburger"
-          maxLength={60}
-          autoComplete="off"
-          enterKeyHint="search"
-          className="w-full rounded-2xl border border-sage-300 bg-white px-4 py-3 text-base text-ink placeholder:text-ink-soft focus:border-sage-700 focus:outline-none focus:ring-2 focus:ring-sage-300"
-        />
-        {/* Live photo of what's being typed, updated after a short pause. */}
-        <FoodPhoto
-          query={craving}
-          delay={400}
-          emoji="🍽️"
-          className="mt-3 aspect-video w-full rounded-2xl text-4xl"
-        />
-        <button
-          type="submit"
-          disabled={!craving}
-          className="mt-3 w-full rounded-full bg-sage-700 px-4 py-3 text-base font-semibold text-white transition hover:bg-ink disabled:cursor-not-allowed disabled:opacity-50"
-        >
-          Find alternatives
-        </button>
-      </form>
-
-      <p className="mt-5 text-sm font-medium text-ink">Popular cravings</p>
-      <div className="mt-2 flex flex-wrap gap-2">
-        {SUGGESTIONS.map((suggestion) => (
-          <button
-            key={suggestion}
-            type="button"
-            onClick={() => onSubmitCraving(suggestion)}
-            className="rounded-full border border-sage-300 bg-white px-3 py-1.5 text-sm text-ink transition hover:border-sage-700 hover:bg-sage-100"
-          >
-            {suggestion}
+        <form onSubmit={handleSubmit} className="mt-6 flex max-w-xl flex-col gap-3 sm:flex-row">
+          <label htmlFor="craving-input" className="sr-only">
+            Your craving
+          </label>
+          <input
+            id="craving-input"
+            type="text"
+            value={value}
+            onChange={(event) => setValue(event.target.value)}
+            placeholder="e.g. cheeseburger"
+            maxLength={60}
+            autoComplete="off"
+            enterKeyHint="search"
+            className="field min-w-0 flex-1 text-base"
+          />
+          <button type="submit" disabled={!craving} className="btn-primary shrink-0">
+            Find alternatives
           </button>
-        ))}
+        </form>
+
+        <div className="mt-5 flex max-w-xl flex-wrap items-center gap-2">
+          <span className="text-sm text-ink-soft">Popular:</span>
+          {SUGGESTIONS.map((suggestion) => (
+            <button
+              key={suggestion}
+              type="button"
+              onClick={() => onSubmitCraving(suggestion)}
+              className="rounded-md border border-line bg-surface px-3 py-1 text-[0.95rem] text-ink transition-colors hover:border-ink-soft"
+            >
+              {suggestion}
+            </button>
+          ))}
+        </div>
+
+        {/* Live photo of what's being typed, updated after a short pause. */}
+        {craving && (
+          <FoodPhoto
+            query={craving}
+            delay={400}
+            alt=""
+            className="mt-6 aspect-video w-full max-w-xl rounded-xl border border-line"
+          />
+        )}
       </div>
 
-      <div className="mt-6 rounded-2xl bg-sage-100 p-4">
-        <p className="text-sm font-semibold text-ink">You'll get three options</p>
-        <ol className="mt-2 space-y-2">
-          {STEPS.map((step, index) => (
-            <li key={step.title} className="flex gap-3 text-sm">
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-sage-700 text-xs font-semibold text-white">
+      <aside className="card">
+        <h2 className="text-xl text-ink">What you get</h2>
+        <ol className="mt-4 space-y-4">
+          {OPTIONS.map((option, index) => (
+            <li key={option.title} className="flex gap-3">
+              <span className="font-display text-xl leading-6 font-semibold text-berry-600">
                 {index + 1}
               </span>
-              <span className="text-ink-soft">
-                <span className="font-semibold text-ink">{step.title}.</span> {step.text}
+              <span>
+                <span className="block font-semibold text-ink">{option.title}</span>
+                <span className="block text-ink-soft">{option.text}</span>
               </span>
             </li>
           ))}
         </ol>
-      </div>
+        {onOpenAbout && (
+          <button
+            type="button"
+            onClick={onOpenAbout}
+            className="mt-5 font-semibold text-berry-700 underline underline-offset-2 hover:text-berry-600"
+          >
+            How it helps during pregnancy
+          </button>
+        )}
+      </aside>
     </section>
   );
 }

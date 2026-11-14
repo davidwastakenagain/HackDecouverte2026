@@ -1,37 +1,35 @@
-// Shared bottom navigation (owned by Member 1). Used only by App.jsx.
-// A floating dark pill; the active tab is highlighted and shows its label.
-// Props: current ("home" or "saved"), onNavigate(screen).
+// Shared tab bar for phones (owned by Member 1). Used only by App.jsx.
+// Fixed to the bottom of the screen and hidden on wider screens, where the
+// same links are in the Header.
+// Props:
+//   items       [{ screen, label }] — the tabs
+//   current     the screen name of the highlighted tab
+//   onNavigate  (screen) => void
 
-const TABS = [
-  {
-    screen: "home",
-    label: "Cravings",
-    // house icon
-    path: "M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z",
-  },
-  {
-    screen: "saved",
-    label: "Saved",
-    // bookmark icon
-    path: "M7 4h10a1 1 0 0 1 1 1v15l-6-4-6 4V5a1 1 0 0 1 1-1z",
-  },
-];
+// One line-drawn icon per screen name.
+const ICON_PATHS = {
+  home: "M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z",
+  saved: "M7 4h10a1 1 0 0 1 1 1v15l-6-4-6 4V5a1 1 0 0 1 1-1z",
+  about: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 11v5M12 7.5v.5",
+};
 
-export default function BottomNavigation({ current, onNavigate }) {
+export default function BottomNavigation({ items, current, onNavigate }) {
   return (
-    <nav className="fixed bottom-4 left-1/2 z-20 flex -translate-x-1/2 gap-1 rounded-full bg-ink p-1.5 shadow-lg">
-      {TABS.map((tab) => {
-        const isActive = tab.screen === current;
+    <nav
+      aria-label="Sections"
+      className="fixed inset-x-0 bottom-0 z-20 flex border-t border-line bg-surface pb-[env(safe-area-inset-bottom)] md:hidden"
+    >
+      {items.map((item) => {
+        const isActive = item.screen === current;
         return (
           <button
-            key={tab.screen}
+            key={item.screen}
             type="button"
-            onClick={() => onNavigate(tab.screen)}
-            aria-label={tab.label}
+            onClick={() => onNavigate(item.screen)}
             aria-current={isActive ? "page" : undefined}
             className={
-              "flex h-12 items-center justify-center gap-2 rounded-full px-5 text-sm font-semibold transition-colors " +
-              (isActive ? "bg-sky-soft text-ink" : "text-white/70")
+              "flex min-h-14 flex-1 flex-col items-center justify-center gap-0.5 px-1 py-2 text-xs font-semibold transition-colors " +
+              (isActive ? "text-berry-700" : "text-ink-soft")
             }
           >
             <svg
@@ -44,9 +42,9 @@ export default function BottomNavigation({ current, onNavigate }) {
               strokeLinejoin="round"
               aria-hidden="true"
             >
-              <path d={tab.path} />
+              <path d={ICON_PATHS[item.screen]} />
             </svg>
-            {isActive && <span>{tab.label}</span>}
+            {item.label}
           </button>
         );
       })}

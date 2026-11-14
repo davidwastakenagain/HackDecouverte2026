@@ -8,15 +8,6 @@ import RecipeCard from "../components/RecipeCard.jsx";
 import NearbyFood from "../components/NearbyFood.jsx";
 import { getFreshRecommendations, isAiEnabled, isKnownCraving } from "../services/recommendationService.js";
 
-function Label({ title, detail }) {
-  return (
-    <p className="mb-1.5 flex items-baseline justify-between gap-2 px-1">
-      <span className="text-xs font-semibold uppercase tracking-wide text-sage-700">{title}</span>
-      <span className="text-xs text-ink-soft">{detail}</span>
-    </p>
-  );
-}
-
 // The last recommendations shown. Opening a recipe leaves this page, so this
 // lets Back return to the same recipes instead of loading different ones.
 let remembered = null;
@@ -78,24 +69,30 @@ export default function Results({ craving, onSelectRecipe }) {
 
   return (
     <section>
-      <p className="text-sm text-ink-soft">Instead of</p>
-      <h2 className="text-2xl font-bold leading-tight text-ink [overflow-wrap:anywhere]">{craving}</h2>
+      <p className="text-ink-soft">Instead of</p>
+      <h1 className="text-3xl text-ink [overflow-wrap:anywhere] sm:text-4xl">{craving}</h1>
 
       {recommendations && !fromAi && !isKnownCraving(craving) && (
-        <p className="mt-3 rounded-xl bg-sage-100 px-3 py-2 text-sm text-ink">
+        <p className="mt-4 max-w-2xl rounded-lg bg-berry-50 px-4 py-3 text-ink">
           We don't have ideas for that exact craving yet, so here are some all-round favourites.
         </p>
       )}
 
-      <div className="mt-4 space-y-4" aria-live="polite" aria-busy={isLoading}>
+      {/* One column on phones, three across from tablet width up. */}
+      <div
+        className={`mt-6 grid gap-4 transition-opacity md:grid-cols-3 md:gap-5 ${isLoading && recommendations ? "opacity-50" : ""}`}
+        aria-live="polite"
+        aria-busy={isLoading}
+      >
         {!recommendations && (
-          <p className="rounded-2xl bg-sage-100 px-4 py-8 text-center text-sm text-ink-soft">
-            {isAiEnabled() ? "Writing two recipes for you. This takes a few seconds…" : "Finding ideas…"}
-          </p>
+          <>
+            <div className="h-28 animate-pulse rounded-xl bg-line/60 md:h-80" />
+            <div className="h-28 animate-pulse rounded-xl bg-line/60 md:h-80" />
+          </>
         )}
 
         {recommendations && (
-          <div className={`space-y-4 transition-opacity ${isLoading ? "opacity-50" : ""}`}>
+          <>
             {/* RecipeCard shows the category and cooking time itself. */}
             <RecipeCard
               key={recommendations.quick.id}
@@ -107,17 +104,20 @@ export default function Results({ craving, onSelectRecipe }) {
               recipe={recommendations.elaborate}
               onSelect={onSelectRecipe}
             />
-          </div>
+          </>
         )}
 
-        <div>
-          <Label title="Nearby Food" detail="close to you" />
-          <NearbyFood key={refreshCount} craving={craving} />
-        </div>
+        <NearbyFood key={refreshCount} craving={craving} />
       </div>
 
+      {!recommendations && (
+        <p className="mt-4 text-ink-soft" role="status">
+          {isAiEnabled() ? "Writing two recipes for you. This takes a few seconds." : "Finding ideas."}
+        </p>
+      )}
+
       {fromAi && (
-        <p className="mt-3 px-1 text-xs text-ink-soft">
+        <p className="mt-4 max-w-2xl text-sm text-ink-soft">
           These recipes were written by AI and have not been reviewed. Check the ingredients and
           cooking steps before you make them.
         </p>
@@ -127,11 +127,10 @@ export default function Results({ craving, onSelectRecipe }) {
         type="button"
         onClick={handleRefresh}
         disabled={isLoading}
-        className="mt-5 w-full rounded-full bg-sage-700 px-4 py-3 text-base font-semibold text-white transition hover:bg-ink disabled:cursor-not-allowed disabled:opacity-60"
+        className="btn-primary mt-6 w-full sm:w-auto"
       >
-        {isLoading ? "Finding ideas…" : "↻ Show me 3 new ideas"}
+        {isLoading ? "Finding ideas…" : "Show three new ideas"}
       </button>
-
     </section>
   );
 }

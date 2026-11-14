@@ -3,68 +3,103 @@
 /*
   Shared theme (owned by Member 1).
 
-  Soft blush background, white rounded cards, near-black pill buttons
-  and a floating dark navigation bar.
+  White cards on a warm off-white page, dark text, one berry accent,
+  thin borders instead of shadows, and modest corner rounding.
+  Headings use Source Serif 4; everything else uses Source Sans 3.
 
-  Colors — use them as Tailwind classes, for example:
-    bg-blush-50      page background
-    bg-surface       cards
-    bg-blush-100     soft tinted fill (chips, highlights)
-    border-blush-200 soft borders
-    bg-blush-500     pink accent
-    text-ink         main text, and bg-ink for primary buttons
+  Colors, as Tailwind classes:
+    bg-page          page background
+    bg-surface       cards and panels
+    border-line      borders and dividers
+    text-ink         main text
     text-ink-soft    secondary text
-    bg-sky-soft      pale blue highlight
+    bg-berry-600     accent: primary buttons, active states
+    text-berry-700   accent text and links
+    bg-berry-50      soft tinted fill
 */
 @theme {
-  --color-blush-50: #fff3f6;
-  --color-blush-100: #fde3ea;
-  --color-blush-200: #f8c9d6;
-  --color-blush-500: #e67a9b;
-  --color-blush-700: #b84d70;
-  --color-sky-soft: #d3e6f3;
+  --color-page: #faf8f6;
   --color-surface: #ffffff;
-  --color-ink: #1d1b22;
-  --color-ink-soft: #6f6a78;
+  --color-line: #e6e0dc;
+  --color-ink: #211c1e;
+  --color-ink-soft: #675e62;
+  --color-berry-50: #fbf1f4;
+  --color-berry-100: #f6dfe6;
+  --color-berry-600: #9b2c50;
+  --color-berry-700: #7f2141;
 
   /*
-    Old names from the first (sage and cream) theme. They still work so
-    existing code keeps running, but they now show the new colors.
-    Prefer the names above in new code.
+    Names from the two earlier themes. They still work so older code keeps
+    running, and they show the current colors. Use the names above in new code.
   */
-  --color-cream: #fff3f6;
-  --color-cream-dark: #fde3ea;
-  --color-sage-100: #fde3ea;
-  --color-sage-300: #f8c9d6;
-  --color-sage-500: #e67a9b;
-  --color-sage-700: #1d1b22;
+  --color-blush-50: #faf8f6;
+  --color-blush-100: #fbf1f4;
+  --color-blush-200: #e6e0dc;
+  --color-blush-500: #9b2c50;
+  --color-blush-700: #7f2141;
+  --color-sky-soft: #f1eeeb;
+  --color-cream: #faf8f6;
+  --color-cream-dark: #f1eeeb;
+  --color-sage-100: #fbf1f4;
+  --color-sage-300: #e6e0dc;
+  --color-sage-500: #9b2c50;
+  --color-sage-700: #211c1e;
 
-  --font-sans: "Plus Jakarta Sans", ui-rounded, "Segoe UI", system-ui,
-    -apple-system, sans-serif;
+  --font-sans: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
 }
 
-body {
-  margin: 0;
-  background-color: var(--color-blush-200);
-  color: var(--color-ink);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-page);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  button:disabled {
+    cursor: not-allowed;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-berry-600);
+    outline-offset: 2px;
+  }
 }
 
 /*
   Shared building blocks. Add these class names to get the same look
   on every screen:
-    card           white rounded panel
-    btn-primary    black pill button
-    btn-secondary  white pill button with a soft border
-    chip           small rounded label
+    card           white panel with a thin border
+    btn-primary    berry button with white text
+    btn-secondary  white button with a border
+    chip           small label, for example a category
     field          text input
 */
 @utility card {
   background-color: var(--color-surface);
-  border-radius: 1.5rem;
-  padding: 1rem;
-  box-shadow: 0 8px 24px -12px rgb(184 77 112 / 0.25);
+  border: 1px solid var(--color-line);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
 }
 
 @utility btn-primary {
@@ -72,11 +107,21 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  border-radius: 9999px;
-  background-color: var(--color-ink);
-  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  background-color: var(--color-berry-600);
+  padding: 0.7rem 1.25rem;
   font-weight: 600;
   color: #ffffff;
+  transition: background-color 150ms;
+
+  &:hover {
+    background-color: var(--color-berry-700);
+  }
+
+  &:disabled {
+    background-color: var(--color-berry-600);
+    opacity: 0.5;
+  }
 }
 
 @utility btn-secondary {
@@ -84,37 +129,50 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  border-radius: 9999px;
-  border: 1px solid var(--color-blush-200);
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-line);
   background-color: var(--color-surface);
-  padding: 0.75rem 1.5rem;
+  padding: 0.7rem 1.25rem;
   font-weight: 600;
   color: var(--color-ink);
+  transition: border-color 150ms;
+
+  &:hover {
+    border-color: var(--color-ink-soft);
+  }
+
+  &:disabled {
+    border-color: var(--color-line);
+    opacity: 0.5;
+  }
 }
 
 @utility chip {
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
-  border-radius: 9999px;
-  background-color: var(--color-blush-100);
-  padding: 0.25rem 0.75rem;
-  font-size: 0.75rem;
+  border-radius: 0.375rem;
+  background-color: var(--color-berry-50);
+  padding: 0.125rem 0.5rem;
+  font-size: 0.8125rem;
   font-weight: 600;
-  color: var(--color-blush-700);
+  color: var(--color-berry-700);
 }
 
 @utility field {
   width: 100%;
-  border-radius: 1rem;
-  border: 1px solid var(--color-blush-200);
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-line);
   background-color: var(--color-surface);
-  padding: 0.75rem 1rem;
+  padding: 0.7rem 0.9rem;
   color: var(--color-ink);
-  outline: none;
+
+  &::placeholder {
+    color: var(--color-ink-soft);
+  }
 
   &:focus {
-    border-color: var(--color-blush-500);
-    box-shadow: 0 0 0 3px var(--color-blush-100);
+    border-color: var(--color-berry-600);
+    outline: 2px solid var(--color-berry-100);
+    outline-offset: 0;
   }
 }

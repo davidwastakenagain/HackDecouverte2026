@@ -59,118 +59,118 @@ export default function RecipeDetails({ recipe }) {
   }
 
   return (
-    <article className="space-y-5">
-      <FoodPhoto
-        photo={recipe.image}
-        query={recipe.title}
-        emoji={recipe.category === "elaborate" ? "🍲" : "🥗"}
-        alt={recipe.title}
-        className="aspect-[4/3] w-full rounded-2xl text-3xl"
-      />
+    // One column on phones; on wide screens the photo, title and Save button
+    // stay in view on the left while the recipe scrolls on the right.
+    <article className="grid gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-12">
+      <div className="lg:sticky lg:top-20 lg:self-start">
+        <FoodPhoto
+          photo={recipe.image}
+          query={recipe.title}
+          fit="cover"
+          alt={recipe.title}
+          className="aspect-[4/3] w-full rounded-xl border border-line"
+        />
 
-      <div>
-        <span className="text-xs font-semibold tracking-wide text-sage-500 uppercase">
-          {CATEGORY_LABELS[recipe.category] || recipe.category}
-        </span>
-        <h2 className="mt-1 text-2xl font-semibold text-ink">{recipe.title}</h2>
-        <p className="mt-1 text-sm text-ink-soft">⏱ {recipe.cookingTime}</p>
-        {recipe.description && (
-          <p className="mt-2 text-ink-soft">{recipe.description}</p>
-        )}
-        {recipe.sourceUrl && (
+        <div className="mt-5">
+          <span className="chip">{CATEGORY_LABELS[recipe.category] || recipe.category}</span>
+          <h1 className="mt-2 text-3xl text-ink [overflow-wrap:anywhere]">{recipe.title}</h1>
+          <p className="mt-2 text-ink-soft">{recipe.cookingTime}</p>
+          {recipe.description && <p className="mt-2 text-ink-soft">{recipe.description}</p>}
+          {recipe.sourceUrl && (
+            <p className="mt-2 text-[0.95rem] text-ink-soft">
+              Recipe from{" "}
+              <a
+                href={recipe.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-berry-700 underline underline-offset-2 hover:text-berry-600"
+              >
+                {recipe.sourceName || "the original source"}
+              </a>
+            </p>
+          )}
+        </div>
+
+        <button
+          type="button"
+          onClick={toggleSaved}
+          aria-pressed={saved}
+          className={(saved ? "btn-secondary" : "btn-primary") + " mt-5 w-full sm:w-auto"}
+        >
+          {saved ? "Saved. Remove from saved" : "Save recipe"}
+        </button>
+        {saved && (
           <p className="mt-2 text-sm text-ink-soft">
-            Recipe from{" "}
-            <a
-              href={recipe.sourceUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-sage-700 underline"
-            >
-              {recipe.sourceName || "the original source"}
-            </a>
+            Saved in this browser. It will still be here when you come back.
           </p>
         )}
       </div>
 
-      <button
-        type="button"
-        onClick={toggleSaved}
-        aria-pressed={saved}
-        className={
-          "w-full rounded-full px-4 py-3 font-medium transition " +
-          (saved
-            ? "border border-sage-500 bg-white text-sage-700"
-            : "bg-sage-500 text-white hover:bg-sage-700")
-        }
-      >
-        {saved ? "✓ Saved · Tap to remove" : "🔖 Save recipe"}
-      </button>
+      <div className="space-y-8">
+        {recipe.nutrients?.length > 0 && (
+          <section>
+            <h2 className="text-xl text-ink">Good for pregnancy</h2>
+            <ul className="mt-3 divide-y divide-line border-y border-line">
+              {recipe.nutrients.map((nutrient) => (
+                <li key={nutrient.name} className="py-2.5">
+                  <span className="font-semibold text-ink">{nutrient.name}</span>
+                  <span className="text-ink-soft"> from {nutrient.from.join(", ")}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
-      {recipe.nutrients?.length > 0 && (
+        {(recipe.cautions?.length > 0 || recipe.allergens?.length > 0) && (
+          <section>
+            <h2 className="text-xl text-ink">Keep in mind</h2>
+            <ul className="mt-3 space-y-2 rounded-lg bg-berry-50 p-4 text-ink">
+              {recipe.allergens?.length > 0 && (
+                <li>
+                  <span className="font-semibold">Allergens:</span> {recipe.allergens.join(", ")}.
+                  Check labels, as other ingredients may contain allergens too.
+                </li>
+              )}
+              {recipe.cautions?.map((caution) => (
+                <li key={caution}>{caution}</li>
+              ))}
+            </ul>
+          </section>
+        )}
+
         <section>
-          <h3 className="mb-2 text-lg font-semibold text-sage-700">
-            Good for pregnancy
-          </h3>
-          <ul className="space-y-1.5 rounded-2xl bg-white p-4">
-            {recipe.nutrients.map((nutrient) => (
-              <li key={nutrient.name} className="text-ink">
-                <span className="font-semibold">{nutrient.name}</span>
-                <span className="text-sm text-ink-soft"> from {nutrient.from.join(", ")}</span>
+          <h2 className="text-xl text-ink">Ingredients</h2>
+          <ul className="mt-3 divide-y divide-line border-y border-line">
+            {recipe.ingredients.map((ingredient, index) => (
+              <li key={index} className="py-2.5 text-ink">
+                {ingredient}
               </li>
             ))}
           </ul>
         </section>
-      )}
 
-      {(recipe.cautions?.length > 0 || recipe.allergens?.length > 0) && (
         <section>
-          <h3 className="mb-2 text-lg font-semibold text-sage-700">Keep in mind</h3>
-          <ul className="space-y-1.5 rounded-2xl bg-white p-4 text-sm text-ink">
-            {recipe.allergens?.length > 0 && (
-              <li>
-                <span className="font-semibold">Allergens:</span> {recipe.allergens.join(", ")}. Check
-                labels, as other ingredients may contain allergens too.
+          <h2 className="text-xl text-ink">Instructions</h2>
+          <ol className="mt-3 space-y-4">
+            {recipe.instructions.map((step, index) => (
+              <li key={index} className="flex gap-4">
+                <span
+                  aria-hidden="true"
+                  className="w-6 shrink-0 font-display text-xl leading-7 font-semibold text-berry-600"
+                >
+                  {index + 1}
+                </span>
+                <span className="text-ink">{step}</span>
               </li>
-            )}
-            {recipe.cautions?.map((caution) => (
-              <li key={caution}>{caution}</li>
             ))}
-          </ul>
+          </ol>
         </section>
-      )}
 
-      <section>
-        <h3 className="mb-2 text-lg font-semibold text-sage-700">Ingredients</h3>
-        <ul className="space-y-1.5 rounded-2xl bg-white p-4">
-          {recipe.ingredients.map((ingredient, index) => (
-            <li key={index} className="flex gap-2 text-ink">
-              <span className="text-sage-500">•</span>
-              {ingredient}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section>
-        <h3 className="mb-2 text-lg font-semibold text-sage-700">
-          Instructions
-        </h3>
-        <ol className="space-y-3">
-          {recipe.instructions.map((step, index) => (
-            <li key={index} className="flex gap-3 rounded-2xl bg-white p-4">
-              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-sage-100 text-sm font-semibold text-sage-700">
-                {index + 1}
-              </span>
-              <span className="text-ink">{step}</span>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      <p className="rounded-2xl bg-cream-dark p-3 text-sm text-ink-soft">
-        Check ingredient labels for allergens, and ask your healthcare provider
-        about any dietary restrictions that apply to you.
-      </p>
+        <p className="border-t border-line pt-4 text-[0.95rem] text-ink-soft">
+          Check ingredient labels for allergens, and ask your healthcare provider about any dietary
+          restrictions that apply to you.
+        </p>
+      </div>
     </article>
   );
 }

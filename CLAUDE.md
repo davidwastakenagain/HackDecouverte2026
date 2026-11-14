@@ -78,7 +78,7 @@ Only implement what is assigned to you. No authentication, dashboards, payments,
 | Member | Area | Files |
 | --- | --- | --- |
 | **Member 1** — team lead / integration | App shell, navigation, global styles, shared components, project config, integration, final testing | `src/App.jsx`, `src/main.jsx`, `src/components/Header.jsx`, `src/components/BottomNavigation.jsx`, `src/styles/global.css`, `src/data/recipes.js`, `index.html`, `package.json`, `vite.config.js`, `CLAUDE.md`, `TEAM.md`, `README.md` |
-| **Member 2** — craving and recommendations | Craving input, generating three recommendations, recommendation cards, refresh | `src/pages/Home.jsx`, `src/pages/Results.jsx`, `src/services/recommendationService.js`, `src/data/extraRecipes.js` (recipes for cravings `recipes.js` does not cover), `server/` (optional local AI recipe server, approved by the team lead) |
+| **Member 2** — craving and recommendations | Craving input, generating three recommendations, recommendation cards, refresh | `src/pages/Home.jsx`, `src/pages/Results.jsx`, `src/services/recommendationService.js`, `src/pages/About.jsx` (the How it helps page), `src/data/extraRecipes.js` (recipes for cravings `recipes.js` does not cover), `server/` (optional local AI recipe server, approved by the team lead) |
 | **Member 3** — recipes and saved recipes | Recipe details, ingredients, instructions, saving and removing recipes, saved recipes page, LocalStorage | `src/pages/RecipeDetails.jsx`, `src/pages/SavedRecipes.jsx`, `src/components/RecipeCard.jsx` |
 | **Member 4** — location and nearby food | Location permission, geolocation, nearby food options, Google Maps fallback | `src/components/NearbyFood.jsx`, `src/services/locationService.js` |
 
@@ -137,10 +137,11 @@ There is no router library. `App.jsx` keeps track of the current screen, the cur
 
 | Component | Props it receives |
 | --- | --- |
-| `Home` | `onSubmitCraving(craving)` — call with the craving text to go to the results screen |
+| `Home` | `onSubmitCraving(craving)` — call with the craving text to go to the results screen, `onOpenAbout()` — opens the How it helps page |
 | `Results` | `craving` (string), `onSelectRecipe(recipe)` — call with a full recipe object to open its details, `onBack()` |
 | `RecipeDetails` | `recipe` (full recipe object), `onBack()` |
 | `SavedRecipes` | `onSelectRecipe(recipe)` — call with a full recipe object to open its details |
+| `About` | `onStart()` — goes to the home screen. The "How it helps" page: what the site does for pregnant users and its limits |
 
 ### Shared components
 
@@ -148,8 +149,8 @@ There is no router library. `App.jsx` keeps track of the current screen, the cur
 | --- | --- | --- |
 | `RecipeCard` | `recipe` (recipe object), `onSelect(recipe)` | `Results`, `SavedRecipes` |
 | `NearbyFood` | `craving` (string) | `Results`, as the third recommendation |
-| `Header` | `title`, `onBack` (optional), `brand` (optional) | `App.jsx` only |
-| `BottomNavigation` | `current`, `onNavigate(screen)` | `App.jsx` only |
+| `Header` | `items` (`[{ screen, label }]`), `current` (screen name), `onNavigate(screen)`. Site name plus the navigation links on wider screens | `App.jsx` only |
+| `BottomNavigation` | `items`, `current`, `onNavigate(screen)`. Tab bar shown on phones only | `App.jsx` only |
 
 ### Services
 
@@ -184,36 +185,47 @@ This application is for pregnant users. It is a food suggestion tool, not a medi
 
 ## 8. Design Direction
 
-Clean, warm, welcoming and mobile-first: a soft blush-pink background, white cards with large rounded corners, near-black pill buttons and a floating dark navigation bar. It must not look like a complicated medical application.
+Plain and readable, not decorative: white cards on a warm off-white page, dark text, one berry accent, thin borders instead of shadows, and modest corner rounding. Headings use the serif Source Serif 4; everything else uses Source Sans 3. No emoji as icons. It must not look like a complicated medical application.
 
-All colors, the font and the shared building blocks live in `src/styles/global.css`. Do not hardcode hex colors or add your own palette.
+All colors, the fonts and the shared building blocks live in `src/styles/global.css`. Do not hardcode hex colors or add your own palette.
+
+### Layout on different screens
+
+The site fills the browser width and adapts to the device:
+
+- The app shell centers each page in a column that grows up to 72rem (`max-w-6xl`), with side padding that increases on wider screens.
+- Phones show one column and a tab bar fixed to the bottom. From tablet width (`md`, 768px) the tab bar is replaced by links in the header.
+- Build pages mobile-first, then add columns with Tailwind's `md:` and `lg:` prefixes, for example `grid gap-4 md:grid-cols-3`. Do not set a fixed pixel width on a page.
 
 ### Colors (Tailwind classes)
 
 | Use | Class |
 | --- | --- |
-| Page background (already set by the app shell) | `bg-blush-50` |
+| Page background (already set by the app shell) | `bg-page` |
 | Cards and panels | `bg-surface` |
-| Soft tinted fill | `bg-blush-100` |
-| Soft borders | `border-blush-200` |
-| Pink accent | `bg-blush-500`, `text-blush-700` |
-| Main text, primary buttons | `text-ink`, `bg-ink` |
+| Borders and dividers | `border-line` |
+| Main text | `text-ink` |
 | Secondary text | `text-ink-soft` |
-| Pale blue highlight | `bg-sky-soft` |
+| Accent: primary buttons, active states | `bg-berry-600` |
+| Accent text and links | `text-berry-700` |
+| Soft tinted fill | `bg-berry-50` |
 
-The older names `cream`, `cream-dark`, `sage-100`, `sage-300`, `sage-500` and `sage-700` still work and now show the new colors, so existing code does not need to change. Use the names in the table for new code.
+The older names (`blush-*`, `sky-soft`, `cream`, `cream-dark`, `sage-*`) still work and show the current colors, so existing code does not need to change. Use the names in the table for new code.
 
 ### Building blocks (class names)
 
 | Class | What it gives you |
 | --- | --- |
-| `card` | White rounded panel with a soft shadow |
-| `btn-primary` | Black pill button with white text |
-| `btn-secondary` | White pill button with a soft border |
-| `chip` | Small rounded label, for example a category or cooking time |
-| `field` | Text input with a rounded border and pink focus ring |
+| `card` | White panel with a thin border |
+| `btn-primary` | Berry button with white text |
+| `btn-secondary` | White button with a border |
+| `chip` | Small label, for example a category |
+| `field` | Text input with a border and a berry focus ring |
+| `font-display` | The serif heading font, for card titles that are not `h1` or `h2` |
 
-Use these instead of restyling cards, buttons and inputs on each page, so every screen matches. Do not add a page title or a back button inside a page; the app shell's header already shows both.
+Use these instead of restyling cards, buttons and inputs on each page, so every screen matches.
+
+Each page starts with its own `h1`. Do not add a back button inside a page; the app shell shows a Back link above the page on the results and recipe screens.
 
 ## 9. Before Finishing Your Task
 

@@ -64,6 +64,7 @@ src/
     Results.jsx
     RecipeDetails.jsx
     SavedRecipes.jsx
+    About.jsx              the How it helps page
   services/
     recommendationService.js
     locationService.js

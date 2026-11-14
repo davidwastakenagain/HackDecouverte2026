@@ -11,12 +11,6 @@ const CATEGORY_LABELS = {
   nearby: "Nearby Food",
 };
 
-const CATEGORY_EMOJI = {
-  quick: "🥗",
-  elaborate: "🍲",
-  nearby: "📍",
-};
-
 // ---------------------------------------------------------------------------
 // Live food photos
 // ---------------------------------------------------------------------------
@@ -157,15 +151,16 @@ function findFoodPhoto(text) {
 }
 
 /**
- * Shows a photo of a food, scaled to fit inside its box without cropping
- * (set the box size with className).
+ * Shows a photo of a food in a box whose size is set with className.
  * Props: photo (the recipe's own image URL; when given, no search is made),
  * query (food name to search for when there is no photo), fallback (image URL
- * to use if the search finds nothing), emoji (shown if there is no image at
- * all), delay (ms to wait after query changes, useful while typing), alt, className.
- * While a new photo loads, the previous one stays visible.
+ * to use if the search finds nothing), fit ("contain" scales the photo to fit
+ * inside the box without cropping; "cover" fills the box and crops the edges),
+ * delay (ms to wait after query changes, useful while typing), alt, className.
+ * While a new photo loads, the previous one stays visible. If there is no
+ * photo at all, a plain plate outline is shown.
  */
-export function FoodPhoto({ photo = "", query, fallback = "", emoji = "🍽️", delay = 0, alt = "", className = "" }) {
+export function FoodPhoto({ photo = "", query, fallback = "", fit = "contain", delay = 0, alt = "", className = "" }) {
   const [found, setFound] = useState(null); // { query, url }
   const [broken, setBroken] = useState([]); // URLs that failed to load
 
@@ -185,21 +180,25 @@ export function FoodPhoto({ photo = "", query, fallback = "", emoji = "🍽️",
   const src = [photo, found?.url, fallback].find((url) => url && !broken.includes(url));
 
   return (
-    <span className={`relative block overflow-hidden bg-sage-100 ${className}`}>
+    <span className={`relative block overflow-hidden bg-berry-50 ${className}`}>
       {src ? (
         <img
           key={src}
           src={src}
           alt={alt}
+          loading="lazy"
           onError={() => setBroken((list) => [...list, src])}
-          className={`h-full w-full object-contain transition-opacity duration-300 ${isLoading ? "opacity-60" : ""}`}
+          className={`absolute inset-0 h-full w-full transition-opacity duration-300 ${fit === "cover" ? "object-cover" : "object-contain"} ${isLoading ? "opacity-60" : ""}`}
         />
       ) : (
         <span
           aria-hidden="true"
-          className={`flex h-full w-full items-center justify-center text-[2em] ${isLoading ? "animate-pulse" : ""}`}
+          className={`absolute inset-0 flex items-center justify-center text-berry-600/30 ${isLoading ? "animate-pulse" : ""}`}
         >
-          {emoji}
+          <svg viewBox="0 0 24 24" className="h-1/3 max-h-12 w-1/3 max-w-12" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <circle cx="12" cy="12" r="9" />
+            <circle cx="12" cy="12" r="5" />
+          </svg>
         </span>
       )}
     </span>
@@ -208,6 +207,8 @@ export function FoodPhoto({ photo = "", query, fallback = "", emoji = "🍽️",
 
 // ---------------------------------------------------------------------------
 
+// A row on phones (photo on the left); from tablet width up, a card with the
+// photo on top, so cards sit side by side in a grid.
 export default function RecipeCard({ recipe, onSelect }) {
   if (!recipe) return null;
 
@@ -215,28 +216,24 @@ export default function RecipeCard({ recipe, onSelect }) {
     <button
       type="button"
       onClick={() => onSelect(recipe)}
-      className="flex w-full items-center gap-3 rounded-2xl border border-sage-100 bg-white p-3 text-left shadow-sm transition hover:border-sage-300 active:scale-[0.99]"
+      className="flex h-full w-full items-start gap-4 overflow-hidden rounded-xl border border-line bg-surface p-3 text-left transition-colors hover:border-ink-soft md:flex-col md:items-stretch md:gap-0 md:p-0"
     >
       <FoodPhoto
         photo={recipe.image}
         query={recipe.title}
-        emoji={CATEGORY_EMOJI[recipe.category] || "🍽️"}
-        className="h-20 w-20 shrink-0 rounded-xl text-2xl"
+        fit="cover"
+        className="h-24 w-24 shrink-0 rounded-lg md:aspect-[4/3] md:h-auto md:w-full md:rounded-none"
       />
 
-      <span className="min-w-0 flex-1">
-        <span className="block text-xs font-semibold tracking-wide text-sage-500 uppercase">
-          {CATEGORY_LABELS[recipe.category] || recipe.category}
+      <span className="block min-w-0 flex-1 md:p-4">
+        <span className="chip">{CATEGORY_LABELS[recipe.category] || recipe.category}</span>
+        <span className="mt-2 block font-display text-lg leading-snug font-semibold text-ink">
+          {recipe.title}
         </span>
-        <span className="block font-semibold text-ink">{recipe.title}</span>
         {recipe.description && (
-          <span className="block truncate text-sm text-ink-soft">
-            {recipe.description}
-          </span>
+          <span className="mt-1 line-clamp-2 text-[0.95rem] text-ink-soft">{recipe.description}</span>
         )}
-        <span className="mt-1 block text-xs text-ink-soft">
-          ⏱ {recipe.cookingTime}
-        </span>
+        <span className="mt-2 block text-sm text-ink-soft">{recipe.cookingTime}</span>
       </span>
     </button>
   );
