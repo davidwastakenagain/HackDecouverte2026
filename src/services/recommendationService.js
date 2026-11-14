@@ -25,7 +25,7 @@ const CRAVING_GROUPS = {
     traits: { savory: 1, meaty: 1, cheesy: 0.5, warm: 0.5, carb: 0.5, fried: 0.3 },
   },
   "ice-cream": {
-    terms: ["ice cream", "icecream", "gelato", "sundae", "milkshake", "shake", "frozen yogurt", "froyo", "popsicle", "mcflurry", "sorbet", "blizzard", "dairy queen", "frosty", "ice", "ice pop", "soft serve", "creamsicle", "banana split", "yogurt", "parfait"],
+    terms: ["ice cream", "ice cream sandwich", "icecream", "gelato", "sundae", "milkshake", "shake", "frozen yogurt", "froyo", "popsicle", "mcflurry", "sorbet", "blizzard", "dairy queen", "frosty", "ice", "ice pop", "soft serve", "creamsicle", "banana split", "yogurt", "parfait"],
     traits: { sweet: 1, cold: 1, creamy: 1 },
   },
   fries: {
@@ -37,7 +37,7 @@ const CRAVING_GROUPS = {
     traits: { cheesy: 1, savory: 1, carb: 0.8, warm: 0.6 },
   },
   chocolate: {
-    terms: ["chocolate", "brownie", "nutella", "cocoa", "fudge", "kit kat", "snickers", "oreo", "reeses", "twix", "hershey", "mousse", "hot chocolate", "kinder", "ferrero", "truffle", "chocolate bar", "mars bar", "toblerone", "smores", "chocolate milk", "pudding"],
+    terms: ["chocolate", "chocolate cake", "chocolate chip cookies", "chocolate cookies", "brownie", "nutella", "cocoa", "fudge", "kit kat", "snickers", "oreo", "reeses", "twix", "hershey", "mousse", "hot chocolate", "kinder", "ferrero", "truffle", "chocolate bar", "mars bar", "toblerone", "smores", "chocolate milk", "pudding"],
     traits: { chocolate: 1, sweet: 1, creamy: 0.3 },
   },
   "fried-chicken": {
@@ -220,14 +220,26 @@ function understand(craving) {
 
   // Exact words and phrases. Longer phrases are checked first, so
   // "fish and chips" is seafood rather than chips.
+  let lastFood = null; // the food named last, e.g. "burger" in "cheese burger"
+  let lastFoodEnd = -1;
   for (const term of TERMS) {
     for (let start = 0; start + term.words.length <= words.length; start++) {
       const matches = term.words.every((word, i) => !used[start + i] && words[start + i] === word);
       if (!matches) continue;
       term.words.forEach((_, i) => (used[start + i] = true));
       groupScores[term.groupId] = Math.max(groupScores[term.groupId] ?? 0, 10 * term.words.length);
+      const end = start + term.words.length - 1;
+      if (end > lastFoodEnd) {
+        lastFood = term.groupId;
+        lastFoodEnd = end;
+      }
     }
   }
+
+  // When a craving names several foods, the last one is usually the dish and
+  // the others describe it: "cheese burger", "peanut butter cookies",
+  // "chicken noodle soup". Give the last one a clear lead.
+  if (lastFood && Object.keys(groupScores).length > 1) groupScores[lastFood] += 15;
 
   words.forEach((word, i) => {
     if (used[i] || STOP_WORDS.has(word)) return;
@@ -327,19 +339,10 @@ const photoFor = (groupId) => `${import.meta.env?.BASE_URL ?? "/"}images/craving
 // Gives a recipe its group's photo, unless it already has its own image.
 const withPhoto = (recipe, groupId) => (recipe.image ? recipe : { ...recipe, image: photoFor(groupId) });
 
-// The group a craving fits best, for choosing a photo.
+// The group a craving fits best, for choosing a photo. It is the group of the
+// best built-in match, so AI recipes get the same photo the built-in ones would.
 function bestGroup(craving) {
-  const { groupScores, traits } = understand(craving);
-  let best = FALLBACK_GROUP;
-  let bestScore = 0;
-  for (const [groupId, group] of Object.entries(CRAVING_GROUPS)) {
-    const score = (groupScores[groupId] ?? 0) + similarity(traits, group.traits);
-    if (score > bestScore) {
-      best = groupId;
-      bestScore = score;
-    }
-  }
-  return best;
+  return groupOf(lookUp(craving).quick[0]);
 }
 
 export function getRecommendations(craving) {

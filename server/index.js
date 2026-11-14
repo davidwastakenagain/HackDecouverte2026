@@ -14,7 +14,8 @@ import { z } from "zod";
 import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
 
 const PORT = Number(process.env.RECOMMENDATION_PORT) || 8787;
-const MODEL = "claude-opus-5-5";
+// Override with RECOMMENDATION_MODEL in .env.local to try another model.
+const MODEL = process.env.RECOMMENDATION_MODEL || "claude-haiku-5-5";
 
 const INSTRUCTIONS = `You suggest lighter homemade alternatives to food cravings for an app used by pregnant women.
 
@@ -50,6 +51,16 @@ const Answer = z.object({ quick: Recipe, elaborate: Recipe });
 
 const client = new Anthropic(); // reads ANTHROPIC_API_KEY from the environment
 
+// Dollars per million tokens (input, output) for the models this server is meant for.
+// Used only for the running estimate in the log; the real balance is in the Anthropic Console.
+const PRICES = {
+  "claude-haiku-5-5": [0.1, 0.5],
+  "claude-sonnet-5-5": [2, 10],
+  "claude-opus-5-5": [4, 20],
+};
+let requests = 0;
+let estimatedDollars = 0;
+
 async function writeRecipes(craving, avoidTitles) {
   const response = await client.messages.parse({
     model: MODEL,
@@ -58,6 +69,14 @@ async function writeRecipes(craving, avoidTitles) {
     output_config: { effort: "low", format: zodOutputFormat(Answer) },
     messages: [{ role: "user", content: JSON.stringify({ craving, avoidTitles }) }],
   });
+  const { input_tokens, output_tokens } = response.usage;
+  requests++;
+  const price = PRICES[MODEL];
+  if (price) estimatedDollars += (input_tokens * price[0] + output_tokens * price[1]) / 1e6;
+  console.log(
+    `  ${MODEL}: ${input_tokens} tokens in, ${output_tokens} out` +
+      (price ? `. Since start: ${requests} requests, about $${estimatedDollars.toFixed(4)}` : ""),
+  );
   if (response.stop_reason === "refusal") throw new Error("The model declined this request");
   if (!response.parsed_output) throw new Error(`No usable answer (stop reason: ${response.stop_reason})`);
   return response.parsed_output;
