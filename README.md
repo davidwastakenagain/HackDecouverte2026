@@ -1,0 +1,51 @@
+# CraveBetter
+
+A mobile-first web app that helps pregnant women find healthier alternatives to their food cravings. Enter a craving and get three options: a quick healthy recipe, a more elaborate recipe, and a nearby food option.
+
+Built for HackDecouverte 2026 with React, Vite and Tailwind CSS.
+
+## Run it
+
+You need [Node.js](https://nodejs.org/) 20 or newer.
+
+```
+npm install
+npm run dev
+```
+
+Then open the address shown in the terminal (usually http://localhost:5173).
+
+## Working on it
+
+- Read [TEAM.md](TEAM.md) to see which files are yours.
+- Read [CLAUDE.md](CLAUDE.md) for the project rules, data structures and component interfaces. AI assistants started in this folder read it automatically.
+- Work on your own branch and only edit your own files. Member 1 merges into `main`.
+
+## Project structure
+
+```
+src/
+  App.jsx                  app shell and screen switching
+  main.jsx                 entry point
+  components/
+    Header.jsx
+    BottomNavigation.jsx
+    RecipeCard.jsx
+    NearbyFood.jsx
+  pages/
+    Home.jsx
+    Results.jsx
+    RecipeDetails.jsx
+    SavedRecipes.jsx
+  services/
+    recommendationService.js
+    locationService.js
+  data/
+    recipes.js
+  styles/
+    global.css
+```
+
+## Disclaimer
+
+CraveBetter offers food suggestions only. It is not medical advice. Check with your healthcare provider about what is right for you.

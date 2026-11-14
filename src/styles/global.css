@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+/*
+  Shared CraveBetter colors (owned by Member 1).
+  Use them as Tailwind classes, for example:
+    bg-cream, bg-sage-500, text-ink, border-sage-300
+*/
+@theme {
+  --color-cream: #faf6ec;
+  --color-cream-dark: #f0e9d8;
+  --color-sage-100: #e4ecdf;
+  --color-sage-300: #b5c7ac;
+  --color-sage-500: #7f9b76;
+  --color-sage-700: #54704d;
+  --color-ink: #2f3a2c;
+  --color-ink-soft: #66735f;
+
+  --font-sans: ui-rounded, "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-cream-dark);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
