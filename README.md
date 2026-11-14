@@ -15,6 +15,27 @@ npm run dev
 
 Then open the address shown in the terminal (usually http://localhost:5173).
 
+## Optional: AI-written recipes
+
+Without any setup, the app suggests recipes from its built-in list. To have Claude write recipes for any craving:
+
+1. Create a file called `.env.local` in the project root with these two lines:
+
+   ```
+   ANTHROPIC_API_KEY=your-key-here
+   VITE_RECOMMENDATION_API_URL=http://localhost:8787/api/recommendations
+   ```
+
+2. In a second terminal, start the recipe server:
+
+   ```
+   cd server
+   npm install
+   npm start
+   ```
+
+`.env.local` is ignored by git, so the key is never pushed. Each request costs money on the key's account. If the server is not running, the app goes back to the built-in recipes.
+
 ## Working on it
 
 - Read [TEAM.md](TEAM.md) to see which files are yours.

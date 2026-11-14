@@ -29,6 +29,7 @@ This is a FIVE-HOUR MVP. Keep everything simple. Do not add features unless expl
 - LocalStorage for saved recipes
 - Browser Geolocation API for location
 - Google Maps search links as the location fallback
+- Optional: a small local Node server in `server/` that asks Claude to write recipes. The app works without it. The API key lives in `.env.local`, which is never committed.
 
 Do not introduce additional frameworks or libraries without approval from the team lead (Member 1).
 
@@ -76,7 +77,7 @@ Only implement what is assigned to you. No authentication, dashboards, payments,
 | Member | Area | Files |
 | --- | --- | --- |
 | **Member 1** — team lead / integration | App shell, navigation, global styles, shared components, project config, integration, final testing | `src/App.jsx`, `src/main.jsx`, `src/components/Header.jsx`, `src/components/BottomNavigation.jsx`, `src/styles/global.css`, `src/data/recipes.js`, `index.html`, `package.json`, `vite.config.js`, `CLAUDE.md`, `TEAM.md`, `README.md` |
-| **Member 2** — craving and recommendations | Craving input, generating three recommendations, recommendation cards, refresh | `src/pages/Home.jsx`, `src/pages/Results.jsx`, `src/services/recommendationService.js` |
+| **Member 2** — craving and recommendations | Craving input, generating three recommendations, recommendation cards, refresh | `src/pages/Home.jsx`, `src/pages/Results.jsx`, `src/services/recommendationService.js`, `server/` (optional local AI recipe server, approved by the team lead) |
 | **Member 3** — recipes and saved recipes | Recipe details, ingredients, instructions, saving and removing recipes, saved recipes page, LocalStorage | `src/pages/RecipeDetails.jsx`, `src/pages/SavedRecipes.jsx`, `src/components/RecipeCard.jsx` |
 | **Member 4** — location and nearby food | Location permission, geolocation, nearby food options, Google Maps fallback | `src/components/NearbyFood.jsx`, `src/services/locationService.js` |
 
@@ -147,6 +148,7 @@ There is no router library. `App.jsx` keeps track of the current screen, the cur
 | Function | Returns |
 | --- | --- |
 | `getRecommendations(craving)` in `recommendationService.js` | `{ quick: recipe, elaborate: recipe }` — calling it again for the same craving returns different options (refresh) |
+| `getFreshRecommendations(craving, avoidTitles)` in `recommendationService.js` | a Promise of `{ quick, elaborate, source }`, where `source` is `"ai"` or `"built-in"`. Uses the local AI server when it is set up, otherwise the built-in recipes |
 | `getNearbyFood(craving)` in `locationService.js` | a Promise that resolves to a restaurant object |
 
 ### Saved recipes

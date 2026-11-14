@@ -31,6 +31,7 @@ Only edit the files in your own row. If you need a change in someone else's file
 - `src/pages/Home.jsx`
 - `src/pages/Results.jsx`
 - `src/services/recommendationService.js`
+- `server/` (optional local AI recipe server)
 
 ### Member 3 — recipes and saved recipes
 
