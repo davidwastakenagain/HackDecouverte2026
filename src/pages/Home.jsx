@@ -5,7 +5,16 @@
 
 import { useState } from "react";
 import { FoodPhoto } from "../components/RecipeCard.jsx";
+import DietaryProfile from "../components/DietaryProfile.jsx";
 import { getCravingNutrition } from "../services/recommendationService.js";
+import {
+  addSearch,
+  clearSearchHistory,
+  clearUserData,
+  getProfile,
+  getSearchHistory,
+  isProfileEmpty,
+} from "../services/userDataService.js";
 
 const SUGGESTIONS = ["Cheeseburger", "Ice cream", "Fries", "Pizza", "Chocolate"];
 
@@ -18,10 +27,30 @@ const OPTIONS = [
 export default function Home({ onSubmitCraving, onOpenAbout }) {
   const [value, setValue] = useState("");
   const craving = value.trim();
+  // Both are kept in this browser by userDataService.js.
+  const [profile, setProfile] = useState(getProfile);
+  const [history, setHistory] = useState(getSearchHistory);
+
+  // Remembers the search, then opens the results.
+  function search(text) {
+    addSearch(text);
+    onSubmitCraving(text);
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (craving) onSubmitCraving(craving);
+    if (craving) search(craving);
+  }
+
+  function handleClearHistory() {
+    clearSearchHistory();
+    setHistory([]);
+  }
+
+  function handleClearAll() {
+    clearUserData();
+    setProfile(getProfile());
+    setHistory([]);
   }
 
   return (
@@ -59,13 +88,36 @@ export default function Home({ onSubmitCraving, onOpenAbout }) {
             <button
               key={suggestion}
               type="button"
-              onClick={() => onSubmitCraving(suggestion)}
+              onClick={() => search(suggestion)}
               className="rounded-md border border-line bg-surface px-3 py-1 text-[0.95rem] text-ink transition-colors hover:border-ink-soft"
             >
               {suggestion}
             </button>
           ))}
         </div>
+
+        {history.length > 0 && (
+          <div className="mt-3 flex max-w-xl flex-wrap items-center gap-2">
+            <span className="text-sm text-ink-soft">Your recent searches:</span>
+            {history.map((item) => (
+              <button
+                key={item.craving}
+                type="button"
+                onClick={() => search(item.craving)}
+                className="max-w-full truncate rounded-md border border-line bg-surface px-3 py-1 text-[0.95rem] text-ink transition-colors hover:border-ink-soft"
+              >
+                {item.craving}
+              </button>
+            ))}
+            <button
+              type="button"
+              onClick={handleClearHistory}
+              className="text-sm font-semibold text-berry-700 underline underline-offset-2 hover:text-berry-600"
+            >
+              Clear
+            </button>
+          </div>
+        )}
 
         {/* Live photo of what's being typed. Known cravings ("burger", "kit kat")
             use their stored Wikipedia photo straight away; anything else is
@@ -78,6 +130,18 @@ export default function Home({ onSubmitCraving, onOpenAbout }) {
             alt=""
             className="mt-6 aspect-video w-full max-w-xl rounded-xl border border-line"
           />
+        )}
+
+        <DietaryProfile profile={profile} onChange={setProfile} />
+
+        {(history.length > 0 || !isProfileEmpty(profile)) && (
+          <button
+            type="button"
+            onClick={handleClearAll}
+            className="mt-3 text-sm font-semibold text-ink-soft underline underline-offset-2 hover:text-ink"
+          >
+            Delete my food needs and search history from this browser
+          </button>
         )}
       </div>
 
