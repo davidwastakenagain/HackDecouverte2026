@@ -61,8 +61,8 @@ export default function RecipeDetails({ recipe }) {
   return (
     <article className="space-y-5">
       <FoodPhoto
+        photo={recipe.image}
         query={recipe.title}
-        fallback={recipe.image}
         emoji={recipe.category === "elaborate" ? "🍲" : "🥗"}
         alt={recipe.title}
         className="aspect-[4/3] w-full rounded-2xl text-3xl"
@@ -76,6 +76,19 @@ export default function RecipeDetails({ recipe }) {
         <p className="mt-1 text-sm text-ink-soft">⏱ {recipe.cookingTime}</p>
         {recipe.description && (
           <p className="mt-2 text-ink-soft">{recipe.description}</p>
+        )}
+        {recipe.sourceUrl && (
+          <p className="mt-2 text-sm text-ink-soft">
+            Recipe from{" "}
+            <a
+              href={recipe.sourceUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-sage-700 underline"
+            >
+              {recipe.sourceName || "the original source"}
+            </a>
+          </p>
         )}
       </div>
 

@@ -84,17 +84,20 @@ function findFoodPhoto(text) {
 }
 
 /**
- * Shows a live photo of `query`, cropped to fill its box (set the size with className).
- * Props: query (food name), fallback (image URL to use if no photo is found),
- * emoji (shown if there is no image at all), delay (ms to wait after query
- * changes, useful while typing), alt, className.
+ * Shows a photo of a food, scaled to fit inside its box without cropping
+ * (set the box size with className).
+ * Props: photo (the recipe's own image URL; when given, no search is made),
+ * query (food name to search for when there is no photo), fallback (image URL
+ * to use if the search finds nothing), emoji (shown if there is no image at
+ * all), delay (ms to wait after query changes, useful while typing), alt, className.
  * While a new photo loads, the previous one stays visible.
  */
-export function FoodPhoto({ query, fallback = "", emoji = "🍽️", delay = 0, alt = "", className = "" }) {
+export function FoodPhoto({ photo = "", query, fallback = "", emoji = "🍽️", delay = 0, alt = "", className = "" }) {
   const [found, setFound] = useState(null); // { query, url }
   const [broken, setBroken] = useState([]); // URLs that failed to load
 
   useEffect(() => {
+    if (photo) return undefined;
     let current = true;
     const timer = setTimeout(() => {
       findFoodPhoto(query).then((url) => current && setFound({ query, url }));
@@ -103,10 +106,10 @@ export function FoodPhoto({ query, fallback = "", emoji = "🍽️", delay = 0, 
       current = false;
       clearTimeout(timer);
     };
-  }, [query, delay]);
+  }, [photo, query, delay]);
 
-  const isLoading = found?.query !== query;
-  const src = [found?.url, fallback].find((url) => url && !broken.includes(url));
+  const isLoading = !photo && found?.query !== query;
+  const src = [photo, found?.url, fallback].find((url) => url && !broken.includes(url));
 
   return (
     <span className={`relative block overflow-hidden bg-sage-100 ${className}`}>
@@ -116,7 +119,7 @@ export function FoodPhoto({ query, fallback = "", emoji = "🍽️", delay = 0, 
           src={src}
           alt={alt}
           onError={() => setBroken((list) => [...list, src])}
-          className={`h-full w-full object-cover transition-opacity duration-300 ${isLoading ? "opacity-60" : ""}`}
+          className={`h-full w-full object-contain transition-opacity duration-300 ${isLoading ? "opacity-60" : ""}`}
         />
       ) : (
         <span
@@ -142,8 +145,8 @@ export default function RecipeCard({ recipe, onSelect }) {
       className="flex w-full items-center gap-3 rounded-2xl border border-sage-100 bg-white p-3 text-left shadow-sm transition hover:border-sage-300 active:scale-[0.99]"
     >
       <FoodPhoto
+        photo={recipe.image}
         query={recipe.title}
-        fallback={recipe.image}
         emoji={CATEGORY_EMOJI[recipe.category] || "🍽️"}
         className="h-20 w-20 shrink-0 rounded-xl text-2xl"
       />
