@@ -49,8 +49,9 @@ function RecipeFigure({ recipe, cravingFood, row }) {
 }
 
 // Nutrition of one serving of each recipe next to one portion of the craved
-// food. Recipes without published figures (team-written or AI-written) show a
-// dash; if neither recipe has figures, only the craving's figures are given.
+// food. Team-written and AI-written recipes have estimated figures, marked
+// "estimate". A recipe with no figures shows a dash; if neither recipe has
+// figures, only the craving's figures are given.
 function Comparison({ cravingFood, quick, elaborate }) {
   const hasRecipeFigures = Boolean(quick.nutrition || elaborate.nutrition);
   if (!cravingFood && !hasRecipeFigures) return null;
@@ -61,7 +62,7 @@ function Comparison({ cravingFood, quick, elaborate }) {
         For reference, {cravingFood.label} ({cravingFood.portion}) has about {cravingFood.kcal}{" "}
         kcal, {cravingFood.saturates} g saturated fat, {cravingFood.sugars} g sugars and{" "}
         {cravingFood.salt} g salt (USDA FoodData Central; brands and portion sizes vary). These
-        recipes have no published nutrition figures to compare.
+        recipes have no nutrition figures to compare.
       </p>
     );
   }
@@ -87,9 +88,11 @@ function Comparison({ cravingFood, quick, elaborate }) {
             )}
             <th scope="col" className="px-2 py-2 text-right font-semibold">
               Quick &amp; Healthy
+              {quick.nutritionEstimated && <span className="block font-normal">estimate</span>}
             </th>
             <th scope="col" className="py-2 pl-2 text-right font-semibold">
               Worth the Wait
+              {elaborate.nutritionEstimated && <span className="block font-normal">estimate</span>}
             </th>
           </tr>
         </thead>
@@ -115,11 +118,15 @@ function Comparison({ cravingFood, quick, elaborate }) {
         </tbody>
       </table>
       <p className="mt-2 text-sm text-ink-soft">
-        Recipe figures are per serving, as published by BBC Good Food.
+        Recipe figures are per serving.
+        {[quick, elaborate].some((recipe) => recipe.nutrition && !recipe.nutritionEstimated) &&
+          " Those not marked as estimates are published by BBC Good Food."}
+        {[quick, elaborate].some((recipe) => recipe.nutritionEstimated) &&
+          " Figures marked “estimate” are worked out by AI from the ingredient list, not measured, so treat them as a rough guide."}
         {cravingFood &&
           " Craving figures are for a typical portion, from USDA FoodData Central; brands and portion sizes vary."}
         {(!quick.nutrition || !elaborate.nutrition) &&
-          " A dash means the recipe has no published figures."}
+          " A dash means the recipe has no figures."}
       </p>
     </section>
   );

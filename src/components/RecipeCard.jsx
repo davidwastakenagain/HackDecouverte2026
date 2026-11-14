@@ -224,7 +224,8 @@ export default function RecipeCard({ recipe, onSelect }) {
         )}
         <span className="mt-2 block text-sm text-ink-soft">
           {recipe.cookingTime}
-          {recipe.nutrition && ` · ${recipe.nutrition.kcal} kcal per serving`}
+          {recipe.nutrition &&
+            ` · ${recipe.nutritionEstimated ? "about " : ""}${recipe.nutrition.kcal} kcal per serving`}
         </span>
       </span>
     </button>

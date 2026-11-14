@@ -112,6 +112,7 @@ Recipes in `src/data/recipes.js` also have these fields (all generated from the 
 - `sourceName`, `sourceUrl`: where the original recipe is published.
 - `servings`: for example `"Serves 4"`.
 - `nutrition`: per serving, as published by the source: `{ kcal, fat, saturates, carbs, sugars, fibre, protein, salt }` (grams, except kcal).
+- `nutritionEstimated`: `true` when `nutrition` is an AI estimate from the ingredient list and not a published figure (the recipes in `src/data/extraRecipes.js` and AI-written recipes). The app labels these as estimates.
 - `nutrients`: `[{ name: "Iron", from: ["lentils", "spinach"] }]`, the pregnancy nutrients the ingredients provide.
 - `allergens`: `["Milk", "Wheat (gluten)"]`.
 - `cautions`: short pregnancy notes, such as cooking through, oily fish limits or pasteurised cheese.
@@ -159,7 +160,7 @@ There is no router library. `App.jsx` keeps track of the current screen, the cur
 | Function | Returns |
 | --- | --- |
 | `getRecommendations(craving)` in `recommendationService.js` | `{ quick: recipe, elaborate: recipe }` — calling it again for the same craving returns different options (refresh) |
-| `getFreshRecommendations(craving, avoidTitles)` in `recommendationService.js` | a Promise of `{ quick, elaborate, source }`, where `source` is `"ai"` or `"built-in"`. Uses the local AI server when it is set up, otherwise the built-in recipes. AI recipes have no `image`, `sourceUrl`, `nutrition`, `nutrients`, `allergens` or `cautions` |
+| `getFreshRecommendations(craving, avoidTitles)` in `recommendationService.js` | a Promise of `{ quick, elaborate, source }`, where `source` is `"ai"` or `"built-in"`. Uses the local AI server when it is set up, otherwise the built-in recipes. AI recipes have no `image` or `sourceUrl`; their `nutrition`, `nutrients`, `allergens` and `cautions` are estimates from the server, flagged with `nutritionEstimated: true` |
 | `getCravingNutrition(craving, { keywordsOnly })` in `recommendationService.js` | typical nutrition of the craved food per usual portion (`{ label, portion, kcal, saturates, sugars, salt, ... , image }`, from `src/data/cravingNutrition.js`), or `null` if the craving is not recognised. With `keywordsOnly: true` it only matches a food named in the craving, not its wider craving group |
 | `getNearbyFood(craving)` in `locationService.js` | a Promise that resolves to a restaurant object |
 

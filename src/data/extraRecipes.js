@@ -9,6 +9,12 @@
 // taken from a published source, so they have no sourceUrl. image is left
 // empty; RecipeCard looks up a photo by the recipe's title.
 // Each id names its craving group: "pizza-quick-101" is in the "pizza" group.
+//
+// servings, nutrition, nutrients, allergens and cautions are AI estimates from
+// the ingredient list (nutritionEstimated: true), filled in by
+// server/estimate-extras.js. They are not published or measured figures, and
+// the app labels them as estimates. After adding a recipe here, run
+// "cd server && npm run estimate-extras" to fill in its figures.
 
 export const extraRecipes = [
   {
@@ -32,6 +38,15 @@ export const extraRecipes = [
       "Toast the bun and assemble with the toppings.",
       "Food safety: Cook meat all the way through, with no pink in the middle.",
     ],
+    servings: "Serves 1",
+    nutritionEstimated: true,
+    nutrition: {"kcal":402,"fat":17.5,"saturates":7,"carbs":28,"sugars":6,"fibre":5,"protein":33,"salt":2.5},
+    nutrients: [{"name":"Protein","from":["lean ground turkey patty","pasteurized cheddar"]},{"name":"Iron","from":["lean ground turkey patty","whole-wheat bun"]},{"name":"Calcium","from":["pasteurized cheddar"]},{"name":"Fibre","from":["whole-wheat bun"]}],
+    allergens: ["Wheat (gluten)","Milk","Mustard"],
+    cautions: [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Use pasteurised milk, yogurt and cheese.",
+    ],
   },
   {
     id: "burger-quick-102",
@@ -54,6 +69,17 @@ export const extraRecipes = [
       "Spoon into the lettuce leaves.",
       "Top with tomato, pickles and ketchup.",
       "Food safety: Cook meat all the way through, with no pink in the middle.",
+    ],
+    servings: "Serves 1",
+    nutritionEstimated: true,
+    nutrition: {"kcal":432,"fat":25.5,"saturates":12,"carbs":11,"sugars":8,"fibre":2.5,"protein":39.5,"salt":2.1},
+    nutrients: [{"name":"Protein","from":["lean ground beef","cheddar"]},{"name":"Iron","from":["lean ground beef"]},{"name":"Calcium","from":["cheddar"]},{"name":"Vitamin C","from":["tomato"]}],
+    allergens: ["Milk"],
+    cautions: [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Use pasteurised milk, yogurt and cheese.",
+      "Can be salty. Go easy on any extra salt.",
+      "Contains added sugar, so it's best as an occasional treat.",
     ],
   },
   {
@@ -79,6 +105,16 @@ export const extraRecipes = [
       "Top with beef, tomato, pickles and the yogurt sauce.",
       "Food safety: Cook meat all the way through, with no pink in the middle.",
     ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":456,"fat":20,"saturates":6.3,"carbs":38.5,"sugars":4.3,"fibre":5.3,"protein":30.5,"salt":0.9},
+    nutrients: [{"name":"Protein","from":["lean ground beef","plain yogurt"]},{"name":"Iron","from":["lean ground beef"]},{"name":"Vitamin C","from":["potatoes","tomato"]},{"name":"Fibre","from":["potatoes","tomato","lettuce"]}],
+    allergens: ["Milk","Mustard"],
+    cautions: [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Use pasteurised milk, yogurt and cheese.",
+      "Can be salty. Go easy on any extra salt.",
+    ],
   },
   {
     id: "burger-elaborate-102",
@@ -102,6 +138,14 @@ export const extraRecipes = [
       "Serve in buns with the wedges on the side.",
       "Food safety: Cook meat all the way through, with no pink in the middle.",
     ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":570,"fat":21.5,"saturates":5,"carbs":59,"sugars":8.8,"fibre":7.8,"protein":35,"salt":0.85},
+    nutrients: [{"name":"Protein","from":["ground chicken","whole-wheat buns"]},{"name":"Fibre","from":["sweet potatoes","whole-wheat buns"]},{"name":"Vitamin C","from":["sweet potatoes"]}],
+    allergens: ["Wheat (gluten)"],
+    cautions: [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+    ],
   },
   {
     id: "ice-cream-quick-101",
@@ -119,6 +163,14 @@ export const extraRecipes = [
       "Add everything to a blender or food processor.",
       "Blend, scraping down the sides, until smooth and creamy.",
       "Eat right away, or freeze 30 minutes for a firmer scoop.",
+    ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":126,"fat":0.7,"saturates":0.3,"carbs":28,"sugars":15.5,"fibre":3,"protein":1.8,"salt":0.02},
+    nutrients: [{"name":"Fibre","from":["bananas"]},{"name":"Vitamin C","from":["bananas"]}],
+    allergens: ["Milk"],
+    cautions: [
+      "Use pasteurised milk, yogurt and cheese.",
     ],
   },
   {
@@ -140,6 +192,15 @@ export const extraRecipes = [
       "Repeat, then drizzle with honey.",
       "Food safety: Use pasteurized dairy.",
     ],
+    servings: "Serves 1",
+    nutritionEstimated: true,
+    nutrition: {"kcal":306,"fat":8.2,"saturates":4,"carbs":33,"sugars":23,"fibre":3,"protein":25,"salt":0.2},
+    nutrients: [{"name":"Protein","from":["greek yogurt"]},{"name":"Calcium","from":["greek yogurt"]},{"name":"Vitamin C","from":["berries"]}],
+    allergens: ["Milk","Wheat (gluten)"],
+    cautions: [
+      "Use pasteurised milk, yogurt and cheese.",
+      "Contains added sugar, so it's best as an occasional treat.",
+    ],
   },
   {
     id: "ice-cream-elaborate-101",
@@ -160,6 +221,15 @@ export const extraRecipes = [
       "Scatter over the berries and chocolate.",
       "Freeze about 40 minutes, then break into pieces.",
       "Food safety: Use pasteurized dairy.",
+    ],
+    servings: "Serves 4",
+    nutritionEstimated: true,
+    nutrition: {"kcal":182,"fat":8.3,"saturates":5.4,"carbs":15.5,"sugars":13.8,"fibre":1,"protein":11.4,"salt":0.13},
+    nutrients: [{"name":"Protein","from":["greek yogurt"]},{"name":"Calcium","from":["greek yogurt"]}],
+    allergens: ["Milk"],
+    cautions: [
+      "Use pasteurised milk, yogurt and cheese.",
+      "Contains added sugar, so it's best as an occasional treat.",
     ],
   },
   {
@@ -183,6 +253,15 @@ export const extraRecipes = [
       "Serve with yogurt and nuts.",
       "Food safety: Use pasteurized dairy.",
     ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":151,"fat":4.2,"saturates":1.1,"carbs":20.7,"sugars":17.5,"fibre":3.2,"protein":7.5,"salt":0.05},
+    nutrients: [{"name":"Protein","from":["greek yogurt"]},{"name":"Calcium","from":["greek yogurt"]},{"name":"Fibre","from":["peaches","nuts"]}],
+    allergens: ["Milk","Tree nuts"],
+    cautions: [
+      "Use pasteurised milk, yogurt and cheese.",
+      "Contains added sugar, so it's best as an occasional treat.",
+    ],
   },
   {
     id: "fries-quick-101",
@@ -201,6 +280,13 @@ export const extraRecipes = [
       "Toss the carrots with oil, paprika and salt.",
       "Air-fry at 200°C (400°F) for 10-12 minutes, shaking halfway.",
       "Serve hot.",
+    ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":62,"fat":2.4,"saturates":0.4,"carbs":9,"sugars":4.3,"fibre":2.6,"protein":1,"salt":0.3},
+    nutrients: [{"name":"Fibre","from":["carrots"]},{"name":"Vitamin C","from":["carrots"]}],
+    allergens: [],
+    cautions: [
     ],
   },
   {
@@ -222,6 +308,13 @@ export const extraRecipes = [
       "Fry the slices 4-5 minutes per side until golden.",
       "Season and serve.",
     ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":162,"fat":6.8,"saturates":1,"carbs":22.5,"sugars":1,"fibre":2.9,"protein":2.8,"salt":0.2},
+    nutrients: [{"name":"Vitamin C","from":["potatoes"]},{"name":"Fibre","from":["potatoes"]}],
+    allergens: [],
+    cautions: [
+    ],
   },
   {
     id: "fries-elaborate-101",
@@ -241,6 +334,13 @@ export const extraRecipes = [
       "Toss the wedges with oil and seasoning.",
       "Spread on a tray in one layer.",
       "Bake at 220°C (425°F) for 35 minutes, turning once.",
+    ],
+    servings: "Serves 3",
+    nutritionEstimated: true,
+    nutrition: {"kcal":195,"fat":4.7,"saturates":0.7,"carbs":34,"sugars":1.6,"fibre":4.2,"protein":4.2,"salt":0.2},
+    nutrients: [{"name":"Vitamin C","from":["potatoes"]},{"name":"Fibre","from":["potatoes"]}],
+    allergens: [],
+    cautions: [
     ],
   },
   {
@@ -263,6 +363,14 @@ export const extraRecipes = [
       "Stir the garlic into the yogurt for the dip.",
       "Food safety: Use pasteurized dairy.",
     ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":281,"fat":8.9,"saturates":2.2,"carbs":44.7,"sugars":11.3,"fibre":6.2,"protein":5.4,"salt":0.35},
+    nutrients: [{"name":"Fibre","from":["sweet potatoes"]},{"name":"Vitamin C","from":["sweet potatoes"]},{"name":"Calcium","from":["yogurt"]}],
+    allergens: ["Milk"],
+    cautions: [
+      "Use pasteurised milk, yogurt and cheese.",
+    ],
   },
   {
     id: "pizza-quick-101",
@@ -284,6 +392,14 @@ export const extraRecipes = [
       "Bake at 220°C (425°F) for 8 minutes until bubbling.",
       "Food safety: Use pasteurized dairy.",
     ],
+    servings: "Serves 1",
+    nutritionEstimated: true,
+    nutrition: {"kcal":322,"fat":10,"saturates":5.3,"carbs":41,"sugars":5,"fibre":6,"protein":17,"salt":1.6},
+    nutrients: [{"name":"Calcium","from":["mozzarella"]},{"name":"Protein","from":["mozzarella","whole-wheat pita"]},{"name":"Fibre","from":["whole-wheat pita","peppers","mushrooms"]},{"name":"Vitamin C","from":["peppers"]}],
+    allergens: ["Milk","Wheat (gluten)"],
+    cautions: [
+      "Use pasteurised milk, yogurt and cheese.",
+    ],
   },
   {
     id: "pizza-quick-102",
@@ -303,6 +419,14 @@ export const extraRecipes = [
       "Add cheese and spinach, then fold.",
       "Cook in a dry pan 3 minutes per side until crisp and melted.",
       "Food safety: Use pasteurized dairy.",
+    ],
+    servings: "Serves 1",
+    nutritionEstimated: true,
+    nutrition: {"kcal":268,"fat":12,"saturates":6,"carbs":26,"sugars":3,"fibre":4,"protein":14,"salt":1.5},
+    nutrients: [{"name":"Calcium","from":["mozzarella"]},{"name":"Protein","from":["mozzarella","whole-wheat tortilla"]},{"name":"Fibre","from":["whole-wheat tortilla","spinach"]},{"name":"Folate","from":["spinach"]}],
+    allergens: ["Milk","Wheat (gluten)"],
+    cautions: [
+      "Use pasteurised milk, yogurt and cheese.",
     ],
   },
   {
@@ -326,6 +450,14 @@ export const extraRecipes = [
       "Bake at 220°C (425°F) for 15-18 minutes.",
       "Food safety: Use pasteurized dairy.",
     ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":413,"fat":11.3,"saturates":6.9,"carbs":56.3,"sugars":7,"fibre":3.3,"protein":21.5,"salt":1.3},
+    nutrients: [{"name":"Calcium","from":["greek yogurt","mozzarella","self-raising flour"]},{"name":"Protein","from":["greek yogurt","mozzarella"]},{"name":"Iron","from":["self-raising flour"]}],
+    allergens: ["Milk","Wheat (gluten)"],
+    cautions: [
+      "Use pasteurised milk, yogurt and cheese.",
+    ],
   },
   {
     id: "pizza-elaborate-102",
@@ -348,6 +480,15 @@ export const extraRecipes = [
       "Bake at 200°C (400°F) for 25 minutes.",
       "Food safety: Cook meat all the way through, with no pink in the middle.",
     ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":285,"fat":13.6,"saturates":5.4,"carbs":13.3,"sugars":8.8,"fibre":4,"protein":27.3,"salt":1.2},
+    nutrients: [{"name":"Vitamin C","from":["bell peppers","tomato sauce"]},{"name":"Protein","from":["ground turkey","mozzarella"]},{"name":"Calcium","from":["mozzarella"]},{"name":"Fibre","from":["bell peppers","tomato sauce"]}],
+    allergens: ["Milk"],
+    cautions: [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Use pasteurised milk, yogurt and cheese.",
+    ],
   },
   {
     id: "chocolate-quick-101",
@@ -364,6 +505,14 @@ export const extraRecipes = [
       "Melt the chocolate in the microwave in 20-second bursts.",
       "Dip each strawberry halfway.",
       "Set on a lined plate and chill for 10 minutes.",
+    ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":170,"fat":10.7,"saturates":6.3,"carbs":16,"sugars":9,"fibre":4,"protein":2.4,"salt":0.01},
+    nutrients: [{"name":"Vitamin C","from":["strawberries"]},{"name":"Iron","from":["dark chocolate"]},{"name":"Fibre","from":["dark chocolate","strawberries"]}],
+    allergens: ["Milk","Soy"],
+    cautions: [
+      "Contains added sugar, so it's best as an occasional treat.",
     ],
   },
   {
@@ -385,6 +534,14 @@ export const extraRecipes = [
       "Pour into a bowl.",
       "Top with peanut butter and banana.",
     ],
+    servings: "Serves 1",
+    nutritionEstimated: true,
+    nutrition: {"kcal":488,"fat":20,"saturates":7.2,"carbs":58,"sugars":21,"fibre":8.5,"protein":19,"salt":0.35},
+    nutrients: [{"name":"Fibre","from":["rolled oats","cocoa powder","banana","peanut butter"]},{"name":"Calcium","from":["milk"]},{"name":"Protein","from":["milk","peanut butter","rolled oats"]},{"name":"Iron","from":["rolled oats","cocoa powder"]}],
+    allergens: ["Milk","Peanuts"],
+    cautions: [
+      "Use pasteurised milk, yogurt and cheese.",
+    ],
   },
   {
     id: "chocolate-elaborate-101",
@@ -404,6 +561,14 @@ export const extraRecipes = [
       "Drop spoonfuls onto a lined tray and flatten slightly.",
       "Bake at 180°C (350°F) for 15-18 minutes.",
       "Cool on the tray for 5 minutes.",
+    ],
+    servings: "Serves 6",
+    nutritionEstimated: true,
+    nutrition: {"kcal":144,"fat":3,"saturates":1.2,"carbs":25.8,"sugars":7.3,"fibre":3.5,"protein":3.4,"salt":0.01},
+    nutrients: [{"name":"Fibre","from":["rolled oats","bananas"]},{"name":"Iron","from":["rolled oats","dark chocolate chips"]}],
+    allergens: ["Milk"],
+    cautions: [
+      "Contains added sugar, so it's best as an occasional treat.",
     ],
   },
   {
@@ -428,6 +593,15 @@ export const extraRecipes = [
       "Cool before slicing.",
       "Food safety: Bake until fully set, and skip tasting the raw batter since it contains raw egg.",
     ],
+    servings: "Serves 8",
+    nutritionEstimated: true,
+    nutrition: {"kcal":160,"fat":6.6,"saturates":1.6,"carbs":20.3,"sugars":10.6,"fibre":3.6,"protein":4.8,"salt":0.14},
+    nutrients: [{"name":"Fibre","from":["black beans","cocoa powder"]},{"name":"Iron","from":["black beans","cocoa powder"]},{"name":"Folate","from":["black beans"]},{"name":"Protein","from":["black beans","eggs"]}],
+    allergens: ["Egg","Milk"],
+    cautions: [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Contains added sugar, so it's best as an occasional treat.",
+    ],
   },
   {
     id: "fried-chicken-quick-101",
@@ -449,6 +623,14 @@ export const extraRecipes = [
       "Fry 4-5 minutes per side until golden and cooked through (74°C / 165°F).",
       "Food safety: Cook meat and poultry all the way through, with no pink in the middle.",
     ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":244,"fat":10.4,"saturates":2.2,"carbs":13,"sugars":1,"fibre":1,"protein":24.5,"salt":0.5},
+    nutrients: [{"name":"Protein","from":["chicken breast","egg"]},{"name":"Iron","from":["egg","breadcrumbs"]}],
+    allergens: ["Egg","Wheat (gluten)"],
+    cautions: [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+    ],
   },
   {
     id: "fried-chicken-quick-102",
@@ -469,6 +651,16 @@ export const extraRecipes = [
       "Air-fry at 200°C (400°F) for 10 minutes, shaking halfway.",
       "Check the biggest piece is white all the way through.",
       "Food safety: Cook meat and poultry all the way through, with no pink in the middle.",
+    ],
+    servings: "Serves 1",
+    nutritionEstimated: true,
+    nutrition: {"kcal":364,"fat":7.1,"saturates":2.2,"carbs":31.4,"sugars":6.5,"fibre":2,"protein":43.5,"salt":1},
+    nutrients: [{"name":"Protein","from":["chicken breast","yogurt"]},{"name":"Iron","from":["chicken breast","breadcrumbs"]}],
+    allergens: ["Milk","Wheat (gluten)","Mustard"],
+    cautions: [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Use pasteurised milk, yogurt and cheese.",
+      "Contains added sugar, so it's best as an occasional treat.",
     ],
   },
   {
@@ -492,6 +684,15 @@ export const extraRecipes = [
       "Check the meat near the bone reaches 74°C (165°F).",
       "Food safety: Cook meat and poultry all the way through, with no pink in the middle.",
     ],
+    servings: "Serves 3",
+    nutritionEstimated: true,
+    nutrition: {"kcal":345,"fat":15.4,"saturates":4.8,"carbs":18.7,"sugars":3.5,"fibre":1,"protein":32.8,"salt":0.65},
+    nutrients: [{"name":"Protein","from":["chicken drumsticks","yogurt"]},{"name":"Iron","from":["chicken drumsticks","cornflakes"]}],
+    allergens: ["Milk"],
+    cautions: [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Use pasteurised milk, yogurt and cheese.",
+    ],
   },
   {
     id: "pasta-quick-101",
@@ -513,6 +714,14 @@ export const extraRecipes = [
       "Stir in the cheese until melted.",
       "Food safety: Use pasteurized dairy.",
     ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":480,"fat":16,"saturates":9,"carbs":61,"sugars":10,"fibre":9,"protein":23,"salt":0.75},
+    nutrients: [{"name":"Protein","from":["cheddar","milk","whole-wheat macaroni"]},{"name":"Calcium","from":["milk","cheddar"]},{"name":"Fibre","from":["whole-wheat macaroni","peas"]},{"name":"Iron","from":["whole-wheat macaroni","peas"]}],
+    allergens: ["Milk","Wheat (gluten)","Mustard"],
+    cautions: [
+      "Use pasteurised milk, yogurt and cheese.",
+    ],
   },
   {
     id: "pasta-quick-102",
@@ -533,6 +742,14 @@ export const extraRecipes = [
       "Boil the spaghetti until tender.",
       "Fry the garlic in the oil for 1 minute, add the tomatoes and basil and simmer 8 minutes.",
       "Toss the drained pasta in the sauce and top with parmesan.",
+    ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":348,"fat":10.3,"saturates":2.3,"carbs":51,"sugars":5.5,"fibre":8,"protein":12.8,"salt":0.35},
+    nutrients: [{"name":"Fibre","from":["whole-wheat spaghetti","canned tomatoes"]},{"name":"Protein","from":["whole-wheat spaghetti","parmesan"]},{"name":"Iron","from":["whole-wheat spaghetti"]},{"name":"Vitamin C","from":["canned tomatoes"]}],
+    allergens: ["Wheat (gluten)","Milk"],
+    cautions: [
+      "Use pasteurised milk, yogurt and cheese.",
     ],
   },
   {
@@ -557,6 +774,14 @@ export const extraRecipes = [
       "Bake at 200°C (400°F) for 20 minutes.",
       "Food safety: Use pasteurized dairy.",
     ],
+    servings: "Serves 4",
+    nutritionEstimated: true,
+    nutrition: {"kcal":423,"fat":12.7,"saturates":7.3,"carbs":57.5,"sugars":7,"fibre":7,"protein":19.7,"salt":0.65},
+    nutrients: [{"name":"Calcium","from":["pasteurized milk","pasteurized cheddar"]},{"name":"Protein","from":["pasteurized cheddar","pasteurized milk","whole-wheat macaroni"]},{"name":"Fibre","from":["whole-wheat macaroni","broccoli florets"]},{"name":"Vitamin C","from":["broccoli florets"]},{"name":"Folate","from":["broccoli florets"]}],
+    allergens: ["Milk","Wheat (gluten)"],
+    cautions: [
+      "Use pasteurised milk, yogurt and cheese.",
+    ],
   },
   {
     id: "pasta-elaborate-102",
@@ -580,6 +805,16 @@ export const extraRecipes = [
       "Cover and bake at 200°C (400°F) for 30 minutes.",
       "Food safety: Cook meat and poultry all the way through, with no pink in the middle.",
     ],
+    servings: "Serves 4",
+    nutritionEstimated: true,
+    nutrition: {"kcal":413,"fat":19.1,"saturates":9.4,"carbs":29.6,"sugars":6.9,"fibre":2.8,"protein":30.7,"salt":1.65},
+    nutrients: [{"name":"Protein","from":["lean ground turkey","ricotta","mozzarella"]},{"name":"Calcium","from":["ricotta","mozzarella"]},{"name":"Folate","from":["spinach"]},{"name":"Iron","from":["lean ground turkey","spinach"]}],
+    allergens: ["Wheat (gluten)","Milk"],
+    cautions: [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Use pasteurised milk, yogurt and cheese.",
+      "Can be salty. Go easy on any extra salt.",
+    ],
   },
   {
     id: "tacos-quick-101",
@@ -601,6 +836,13 @@ export const extraRecipes = [
       "Warm the tortillas in a dry pan.",
       "Fill with beans, tomato, lettuce and salsa.",
     ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":346,"fat":5.8,"saturates":1.5,"carbs":57.5,"sugars":3.5,"fibre":14,"protein":16,"salt":1.2},
+    nutrients: [{"name":"Fibre","from":["black beans","whole-wheat tortillas"]},{"name":"Protein","from":["black beans","whole-wheat tortillas"]},{"name":"Folate","from":["black beans","shredded lettuce"]},{"name":"Iron","from":["black beans","cumin"]}],
+    allergens: ["Wheat (gluten)"],
+    cautions: [
+    ],
   },
   {
     id: "tacos-quick-102",
@@ -621,6 +863,16 @@ export const extraRecipes = [
       "Cook in a dry pan 3-4 minutes per side until crisp and steaming hot inside.",
       "Slice and serve with salsa.",
       "Food safety: Reheat cooked chicken until it is steaming hot.",
+    ],
+    servings: "Serves 1",
+    nutritionEstimated: true,
+    nutrition: {"kcal":432,"fat":20,"saturates":10.3,"carbs":26,"sugars":3.7,"fibre":4.1,"protein":37,"salt":1.8},
+    nutrients: [{"name":"Protein","from":["cooked chicken","cheddar"]},{"name":"Calcium","from":["cheddar"]},{"name":"Vitamin C","from":["bell pepper","salsa"]},{"name":"Fibre","from":["whole-wheat tortilla"]}],
+    allergens: ["Wheat (gluten)","Milk"],
+    cautions: [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Use pasteurised milk, yogurt and cheese.",
+      "Can be salty. Go easy on any extra salt.",
     ],
   },
   {
@@ -646,6 +898,15 @@ export const extraRecipes = [
       "Build bowls with rice, turkey, beans, corn, tomato and a spoon of yogurt.",
       "Food safety: Cook meat and poultry all the way through, with no pink in the middle.",
     ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":640,"fat":14,"saturates":3.5,"carbs":92,"sugars":4,"fibre":9,"protein":36.5,"salt":0.6},
+    nutrients: [{"name":"Protein","from":["lean ground turkey","black beans"]},{"name":"Fibre","from":["brown rice","black beans","corn"]},{"name":"Folate","from":["black beans"]},{"name":"Iron","from":["black beans","lean ground turkey"]}],
+    allergens: ["Milk"],
+    cautions: [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Use pasteurised milk, yogurt and cheese.",
+    ],
   },
   {
     id: "tacos-elaborate-102",
@@ -668,6 +929,14 @@ export const extraRecipes = [
       "Bake 8 more minutes until melted and hot.",
       "Finish with tomato and salsa.",
       "Food safety: Use pasteurized dairy.",
+    ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":654,"fat":27.4,"saturates":11.2,"carbs":72.5,"sugars":5,"fibre":16,"protein":29.3,"salt":2.65},
+    nutrients: [{"name":"Fibre","from":["whole-wheat tortillas","pinto beans"]},{"name":"Protein","from":["pinto beans","cheddar"]},{"name":"Calcium","from":["cheddar"]},{"name":"Folate","from":["pinto beans"]},{"name":"Iron","from":["pinto beans","whole-wheat tortillas"]}],
+    allergens: ["Wheat (gluten)","Milk"],
+    cautions: [
+      "Use pasteurised milk, yogurt and cheese.",
     ],
   },
   {
@@ -692,6 +961,15 @@ export const extraRecipes = [
       "Stir the egg back in and top with green onion.",
       "Food safety: Cook eggs until the white and yolk are firm.",
     ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":383,"fat":12.5,"saturates":2.1,"carbs":54.5,"sugars":2.8,"fibre":3.8,"protein":13,"salt":1.3},
+    nutrients: [{"name":"Protein","from":["eggs"]},{"name":"Fibre","from":["frozen mixed vegetables"]},{"name":"Folate","from":["eggs","frozen mixed vegetables"]}],
+    allergens: ["Egg","Soy","Wheat (gluten)"],
+    cautions: [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Can be salty. Go easy on any extra salt.",
+    ],
   },
   {
     id: "asian-quick-102",
@@ -713,6 +991,16 @@ export const extraRecipes = [
       "Stir-fry the vegetables and garlic in the oil for 4 minutes.",
       "Add the noodles, soy sauce and honey and toss for 2 minutes until hot.",
     ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":376,"fat":9.3,"saturates":1.3,"carbs":61.5,"sugars":7,"fibre":5,"protein":11.5,"salt":1.4},
+    nutrients: [{"name":"Protein","from":["egg noodles"]},{"name":"Fibre","from":["egg noodles","stir-fry vegetables"]},{"name":"Vitamin C","from":["stir-fry vegetables"]},{"name":"Folate","from":["stir-fry vegetables"]}],
+    allergens: ["Egg","Wheat (gluten)","Soy"],
+    cautions: [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Can be salty. Go easy on any extra salt.",
+      "Contains added sugar, so it's best as an occasional treat.",
+    ],
   },
   {
     id: "snacks-quick-101",
@@ -731,6 +1019,14 @@ export const extraRecipes = [
       "Heat the oil and kernels in a covered pot over medium heat.",
       "Shake the pot until the popping slows.",
       "Toss with the parmesan and salt.",
+    ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":179,"fat":9.5,"saturates":1.6,"carbs":18.5,"sugars":0.2,"fibre":3.5,"protein":4.9,"salt":0.3},
+    nutrients: [{"name":"Fibre","from":["popcorn kernels"]},{"name":"Calcium","from":["parmesan"]}],
+    allergens: ["Milk"],
+    cautions: [
+      "Use pasteurised milk, yogurt and cheese.",
     ],
   },
   {
@@ -752,6 +1048,14 @@ export const extraRecipes = [
       "Bake at 200°C (400°F) for 8 minutes until crisp.",
       "Serve with the salsa.",
     ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":293,"fat":13,"saturates":2.5,"carbs":37,"sugars":4,"fibre":5.5,"protein":7,"salt":2},
+    nutrients: [{"name":"Fibre","from":["whole-wheat tortillas","salsa"]},{"name":"Vitamin C","from":["salsa"]}],
+    allergens: ["Wheat (gluten)"],
+    cautions: [
+      "Can be salty. Go easy on any extra salt.",
+    ],
   },
   {
     id: "snacks-elaborate-101",
@@ -770,6 +1074,13 @@ export const extraRecipes = [
       "Spread in one layer on lined trays.",
       "Bake at 200°C (400°F) for 20-25 minutes, turning once, until golden.",
       "Sprinkle with salt and cool until crisp.",
+    ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":215,"fat":7,"saturates":1,"carbs":34,"sugars":1.5,"fibre":3,"protein":4,"salt":0.3},
+    nutrients: [{"name":"Vitamin C","from":["potatoes"]},{"name":"Fibre","from":["potatoes"]}],
+    allergens: [],
+    cautions: [
     ],
   },
   {
@@ -791,6 +1102,13 @@ export const extraRecipes = [
       "Spread on a tray.",
       "Roast at 200°C (400°F) for 30-35 minutes, shaking twice, until crunchy.",
     ],
+    servings: "Serves 4",
+    nutritionEstimated: true,
+    nutrition: {"kcal":97,"fat":4.9,"saturates":0.7,"carbs":9,"sugars":0.3,"fibre":4.2,"protein":4.3,"salt":0.2},
+    nutrients: [{"name":"Fibre","from":["chickpeas"]},{"name":"Protein","from":["chickpeas"]},{"name":"Folate","from":["chickpeas"]},{"name":"Iron","from":["chickpeas"]}],
+    allergens: [],
+    cautions: [
+    ],
   },
   {
     id: "sour-quick-101",
@@ -810,6 +1128,14 @@ export const extraRecipes = [
       "Stir the vinegar, sugar, salt and dill together.",
       "Toss with the cucumber.",
       "Leave for 5 minutes, then eat. Keep leftovers in the fridge.",
+    ],
+    servings: "Serves 4",
+    nutritionEstimated: true,
+    nutrition: {"kcal":18,"fat":0.1,"saturates":0,"carbs":3.8,"sugars":2.3,"fibre":0.4,"protein":0.5,"salt":0.75},
+    nutrients: [{"name":"Vitamin C","from":["cucumber"]},{"name":"Fibre","from":["cucumber"]}],
+    allergens: [],
+    cautions: [
+      "Contains added sugar, so it's best as an occasional treat.",
     ],
   },
   {
@@ -831,6 +1157,14 @@ export const extraRecipes = [
       "Roast at 220°C (425°F) for 40 minutes.",
       "Check the chicken reaches 74°C (165°F) inside.",
       "Food safety: Cook meat and poultry all the way through, with no pink in the middle.",
+    ],
+    servings: "Serves 4",
+    nutritionEstimated: true,
+    nutrition: {"kcal":347,"fat":15,"saturates":3.8,"carbs":28,"sugars":1.7,"fibre":3,"protein":25,"salt":0.25},
+    nutrients: [{"name":"Protein","from":["chicken thighs"]},{"name":"Vitamin C","from":["lemons","potatoes"]}],
+    allergens: [],
+    cautions: [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
     ],
   },
   {
@@ -855,6 +1189,16 @@ export const extraRecipes = [
       "Stir in the vinegar, ketchup and soy sauce and simmer 3 minutes.",
       "Food safety: Cook meat and poultry all the way through, with no pink in the middle.",
     ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":336,"fat":11.5,"saturates":1.8,"carbs":18,"sugars":12.8,"fibre":2.4,"protein":40,"salt":1.6},
+    nutrients: [{"name":"Protein","from":["chicken breasts"]},{"name":"Vitamin C","from":["bell pepper","pineapple chunks"]}],
+    allergens: ["Soy","Wheat (gluten)"],
+    cautions: [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Can be salty. Go easy on any extra salt.",
+      "Contains added sugar, so it's best as an occasional treat.",
+    ],
   },
   {
     id: "candy-quick-101",
@@ -870,6 +1214,13 @@ export const extraRecipes = [
       "Spread the grapes on a tray.",
       "Freeze until firm. Five minutes of prep, then about 2 hours in the freezer.",
       "Eat frozen.",
+    ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":106,"fat":0.2,"saturates":0.1,"carbs":25,"sugars":23,"fibre":1.4,"protein":1.1,"salt":0},
+    nutrients: [{"name":"Vitamin C","from":["grapes"]},{"name":"Fibre","from":["grapes"]}],
+    allergens: [],
+    cautions: [
     ],
   },
   {
@@ -890,6 +1241,15 @@ export const extraRecipes = [
       "Freeze for 10 minutes until the coating sets.",
       "Food safety: Use pasteurized dairy.",
     ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":97,"fat":3.2,"saturates":2.1,"carbs":11,"sugars":8.8,"fibre":1.5,"protein":6,"salt":0.05},
+    nutrients: [{"name":"Vitamin C","from":["strawberries"]},{"name":"Protein","from":["greek yogurt"]},{"name":"Calcium","from":["greek yogurt"]}],
+    allergens: ["Milk"],
+    cautions: [
+      "Use pasteurised milk, yogurt and cheese.",
+      "Contains added sugar, so it's best as an occasional treat.",
+    ],
   },
   {
     id: "candy-elaborate-101",
@@ -909,6 +1269,14 @@ export const extraRecipes = [
       "Pour into a small lined dish or moulds.",
       "Chill for 30 minutes, then cut into pieces.",
     ],
+    servings: "Serves 4",
+    nutritionEstimated: true,
+    nutrition: {"kcal":61,"fat":0.1,"saturates":0,"carbs":10.8,"sugars":10.3,"fibre":0.1,"protein":4.1,"salt":0.05},
+    nutrients: [{"name":"Protein","from":["gelatin powder"]},{"name":"Vitamin C","from":["pasteurized fruit juice"]}],
+    allergens: [],
+    cautions: [
+      "Contains added sugar, so it's best as an occasional treat.",
+    ],
   },
   {
     id: "candy-elaborate-102",
@@ -925,6 +1293,13 @@ export const extraRecipes = [
       "Lay the slices on lined trays and dust with cinnamon.",
       "Bake at 150°C (300°F) for 40 minutes, turning once.",
       "Cool on the tray until crisp.",
+    ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":105,"fat":0.3,"saturates":0.1,"carbs":25,"sugars":19,"fibre":5,"protein":0.5,"salt":0},
+    nutrients: [{"name":"Fibre","from":["apples","cinnamon"]},{"name":"Vitamin C","from":["apples"]}],
+    allergens: [],
+    cautions: [
     ],
   },
   {
@@ -947,6 +1322,14 @@ export const extraRecipes = [
       "Serve warm.",
       "Food safety: Cook eggs until the white and yolk are firm.",
     ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":192,"fat":6.3,"saturates":1.3,"carbs":27.5,"sugars":7.5,"fibre":3.7,"protein":6.3,"salt":0.1},
+    nutrients: [{"name":"Fibre","from":["rolled oats","banana"]},{"name":"Protein","from":["egg","rolled oats"]},{"name":"Iron","from":["rolled oats","egg"]}],
+    allergens: ["Egg"],
+    cautions: [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+    ],
   },
   {
     id: "bakery-quick-102",
@@ -966,6 +1349,14 @@ export const extraRecipes = [
       "Toast the bread and spread with the butter.",
       "Sprinkle with the cinnamon and sugar.",
       "Top with banana.",
+    ],
+    servings: "Serves 1",
+    nutritionEstimated: true,
+    nutrition: {"kcal":372,"fat":7.4,"saturates":3.2,"carbs":66,"sugars":22,"fibre":8.7,"protein":10.3,"salt":0.8},
+    nutrients: [{"name":"Fibre","from":["whole-grain bread","banana"]},{"name":"Iron","from":["whole-grain bread"]},{"name":"Vitamin C","from":["banana"]}],
+    allergens: ["Wheat (gluten)","Milk"],
+    cautions: [
+      "Contains added sugar, so it's best as an occasional treat.",
     ],
   },
   {
@@ -989,6 +1380,16 @@ export const extraRecipes = [
       "Spoon into a greased donut or muffin tin.",
       "Bake at 180°C (350°F) for 15-18 minutes until a skewer comes out clean.",
       "Food safety: Skip tasting the raw batter, since it contains raw egg and flour.",
+    ],
+    servings: "Serves 6",
+    nutritionEstimated: true,
+    nutrition: {"kcal":139,"fat":1.5,"saturates":0.6,"carbs":27.7,"sugars":9.8,"fibre":1.5,"protein":3.7,"salt":0.24},
+    nutrients: [{"name":"Fibre","from":["flour","apple","cinnamon"]},{"name":"Folate","from":["flour","egg"]}],
+    allergens: ["Wheat (gluten)","Egg","Milk"],
+    cautions: [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Use pasteurised milk, yogurt and cheese.",
+      "Contains added sugar, so it's best as an occasional treat.",
     ],
   },
   {
@@ -1014,6 +1415,16 @@ export const extraRecipes = [
       "Bake at 190°C (375°F) for 20 minutes until a skewer comes out clean.",
       "Food safety: Skip tasting the raw batter, since it contains raw egg and flour.",
     ],
+    servings: "Serves 8",
+    nutritionEstimated: true,
+    nutrition: {"kcal":195,"fat":6.6,"saturates":1,"carbs":30,"sugars":11.4,"fibre":1.1,"protein":3.8,"salt":0.34},
+    nutrients: [{"name":"Calcium","from":["yogurt","baking powder"]},{"name":"Vitamin C","from":["blueberries"]}],
+    allergens: ["Wheat (gluten)","Milk","Egg"],
+    cautions: [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Use pasteurised milk, yogurt and cheese.",
+      "Contains added sugar, so it's best as an occasional treat.",
+    ],
   },
   {
     id: "breakfast-elaborate-101",
@@ -1037,6 +1448,16 @@ export const extraRecipes = [
       "Bake at 180°C (350°F) for 30 minutes until set in the middle.",
       "Food safety: Cook eggs until the white and yolk are firm.",
     ],
+    servings: "Serves 4",
+    nutritionEstimated: true,
+    nutrition: {"kcal":246,"fat":7.5,"saturates":2.6,"carbs":31.5,"sugars":11,"fibre":4.5,"protein":13,"salt":0.7},
+    nutrients: [{"name":"Protein","from":["eggs","pasteurized milk","whole-grain bread"]},{"name":"Fibre","from":["whole-grain bread","berries"]},{"name":"Vitamin C","from":["berries"]},{"name":"Calcium","from":["pasteurized milk"]}],
+    allergens: ["Wheat (gluten)","Egg","Milk"],
+    cautions: [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Use pasteurised milk, yogurt and cheese.",
+      "Contains added sugar, so it's best as an occasional treat.",
+    ],
   },
   {
     id: "sandwich-quick-101",
@@ -1056,6 +1477,14 @@ export const extraRecipes = [
       "Butter the outside.",
       "Cook in a pan 3 minutes per side until golden and melted.",
       "Food safety: Use pasteurized dairy.",
+    ],
+    servings: "Serves 1",
+    nutritionEstimated: true,
+    nutrition: {"kcal":422,"fat":21.1,"saturates":11.9,"carbs":38,"sugars":7,"fibre":6.4,"protein":20,"salt":1.6},
+    nutrients: [{"name":"Calcium","from":["cheddar"]},{"name":"Protein","from":["cheddar","whole-grain bread"]},{"name":"Fibre","from":["whole-grain bread","tomato"]},{"name":"Vitamin C","from":["tomato"]}],
+    allergens: ["Milk","Wheat (gluten)"],
+    cautions: [
+      "Use pasteurised milk, yogurt and cheese.",
     ],
   },
   {
@@ -1077,6 +1506,15 @@ export const extraRecipes = [
       "Spread the yogurt on the tortilla.",
       "Add the chicken, avocado and lettuce and roll up.",
       "Food safety: Reheat cooked chicken until it is steaming hot.",
+    ],
+    servings: "Serves 1",
+    nutritionEstimated: true,
+    nutrition: {"kcal":363,"fat":17.3,"saturates":3.7,"carbs":24.6,"sugars":2.8,"fibre":8,"protein":27.3,"salt":1},
+    nutrients: [{"name":"Protein","from":["cooked chicken","plain pasteurized yogurt"]},{"name":"Fibre","from":["whole-wheat tortilla","avocado"]},{"name":"Folate","from":["avocado","lettuce"]}],
+    allergens: ["Wheat (gluten)","Milk"],
+    cautions: [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Use pasteurised milk, yogurt and cheese.",
     ],
   },
   {
@@ -1101,6 +1539,16 @@ export const extraRecipes = [
       "Spoon into the rolls, top with cheese and bake 5 minutes.",
       "Food safety: Cook meat and poultry all the way through, with no pink in the middle.",
     ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":576,"fat":20,"saturates":6.5,"carbs":54,"sugars":10,"fibre":7,"protein":45,"salt":2.7},
+    nutrients: [{"name":"Protein","from":["lean ground turkey","grated pasteurized mozzarella"]},{"name":"Fibre","from":["whole-wheat sub rolls","tomato sauce"]},{"name":"Iron","from":["lean ground turkey","whole-wheat sub rolls"]},{"name":"Calcium","from":["grated pasteurized mozzarella"]}],
+    allergens: ["Wheat (gluten)","Milk"],
+    cautions: [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+      "Use pasteurised milk, yogurt and cheese.",
+      "Can be salty. Go easy on any extra salt.",
+    ],
   },
   {
     id: "sandwich-elaborate-102",
@@ -1124,6 +1572,14 @@ export const extraRecipes = [
       "Serve in the buns with the onions and mustard.",
       "Food safety: Cook meat and poultry all the way through, with no pink in the middle.",
     ],
+    servings: "Serves 3",
+    nutritionEstimated: true,
+    nutrition: {"kcal":335,"fat":14.5,"saturates":3.3,"carbs":26,"sugars":4.5,"fibre":4.6,"protein":25,"salt":1},
+    nutrients: [{"name":"Protein","from":["lean ground turkey","whole-wheat hot dog buns"]},{"name":"Fibre","from":["whole-wheat hot dog buns","onion"]},{"name":"Iron","from":["lean ground turkey","whole-wheat hot dog buns"]}],
+    allergens: ["Wheat (gluten)","Mustard"],
+    cautions: [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
+    ],
   },
   {
     id: "drinks-quick-101",
@@ -1144,6 +1600,13 @@ export const extraRecipes = [
       "Add the juices and top with sparkling water.",
       "Finish with orange slices.",
     ],
+    servings: "Serves 1",
+    nutritionEstimated: true,
+    nutrition: {"kcal":48,"fat":0.1,"saturates":0,"carbs":11,"sugars":9,"fibre":0.9,"protein":0.8,"salt":0.02},
+    nutrients: [{"name":"Vitamin C","from":["orange juice","lime juice","orange slices"]},{"name":"Folate","from":["orange juice","orange slices"]}],
+    allergens: [],
+    cautions: [
+    ],
   },
   {
     id: "drinks-quick-102",
@@ -1162,6 +1625,14 @@ export const extraRecipes = [
       "Blend everything until smooth.",
       "Pour into a glass and drink cold.",
       "Food safety: Use pasteurized dairy.",
+    ],
+    servings: "Serves 1",
+    nutritionEstimated: true,
+    nutrition: {"kcal":399,"fat":12.9,"saturates":7.2,"carbs":56.2,"sugars":38.7,"fibre":6,"protein":14.6,"salt":0.4},
+    nutrients: [{"name":"Vitamin C","from":["strawberries","banana"]},{"name":"Calcium","from":["milk","yogurt"]},{"name":"Protein","from":["milk","yogurt"]},{"name":"Fibre","from":["strawberries","banana"]},{"name":"Folate","from":["strawberries"]}],
+    allergens: ["Milk"],
+    cautions: [
+      "Use pasteurised milk, yogurt and cheese.",
     ],
   },
   {
@@ -1182,6 +1653,14 @@ export const extraRecipes = [
       "Pour into a shallow dish and freeze for 25 minutes.",
       "Scrape with a fork into slush and serve.",
     ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":107,"fat":0.5,"saturates":0,"carbs":24.5,"sugars":19.5,"fibre":4,"protein":1,"salt":0.01},
+    nutrients: [{"name":"Vitamin C","from":["mixed berries","lemon"]},{"name":"Fibre","from":["mixed berries"]}],
+    allergens: [],
+    cautions: [
+      "Contains added sugar, so it's best as an occasional treat.",
+    ],
   },
   {
     id: "drinks-elaborate-102",
@@ -1201,6 +1680,15 @@ export const extraRecipes = [
       "Remove the cinnamon and stir in the vanilla and honey.",
       "Serve warm.",
       "Food safety: Use pasteurized dairy.",
+    ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":165,"fat":8,"saturates":4.6,"carbs":15.3,"sugars":15,"fibre":0.2,"protein":8,"salt":0.26},
+    nutrients: [{"name":"Calcium","from":["pasteurized milk"]},{"name":"Protein","from":["pasteurized milk"]}],
+    allergens: ["Milk"],
+    cautions: [
+      "Use pasteurised milk, yogurt and cheese.",
+      "Contains added sugar, so it's best as an occasional treat.",
     ],
   },
   {
@@ -1223,6 +1711,14 @@ export const extraRecipes = [
       "Spread the yogurt on the tortillas.",
       "Add the chickpeas and lettuce and roll up.",
     ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":367,"fat":14.6,"saturates":2.6,"carbs":45,"sugars":3.5,"fibre":10,"protein":14,"salt":1},
+    nutrients: [{"name":"Protein","from":["chickpeas","whole-wheat tortillas","yogurt"]},{"name":"Fibre","from":["chickpeas","whole-wheat tortillas"]},{"name":"Iron","from":["chickpeas","whole-wheat tortillas"]},{"name":"Folate","from":["chickpeas","lettuce"]}],
+    allergens: ["Wheat (gluten)","Milk"],
+    cautions: [
+      "Use pasteurised milk, yogurt and cheese.",
+    ],
   },
   {
     id: "spicy-quick-102",
@@ -1243,6 +1739,14 @@ export const extraRecipes = [
       "Cook the noodles with the peas and drain.",
       "Fry the garlic and chili flakes in the oil for 1 minute.",
       "Toss the noodles in the pan with the soy sauce.",
+    ],
+    servings: "Serves 2",
+    nutritionEstimated: true,
+    nutrition: {"kcal":393,"fat":8.3,"saturates":1,"carbs":66.5,"sugars":4.8,"fibre":5.8,"protein":13,"salt":1.3},
+    nutrients: [{"name":"Fibre","from":["frozen peas","noodles"]},{"name":"Folate","from":["frozen peas"]},{"name":"Vitamin C","from":["frozen peas"]},{"name":"Protein","from":["noodles","frozen peas"]},{"name":"Iron","from":["frozen peas","noodles"]}],
+    allergens: ["Wheat (gluten)","Soy"],
+    cautions: [
+      "Can be salty. Go easy on any extra salt.",
     ],
   },
   {
@@ -1267,6 +1771,14 @@ export const extraRecipes = [
       "Stir in the spinach.",
       "Serve over rice cooked following the packet.",
       "Food safety: Cook meat and poultry all the way through, with no pink in the middle.",
+    ],
+    servings: "Serves 3",
+    nutritionEstimated: true,
+    nutrition: {"kcal":434,"fat":7.3,"saturates":1.3,"carbs":60,"sugars":6.7,"fibre":4.3,"protein":32,"salt":0.3},
+    nutrients: [{"name":"Protein","from":["chicken breasts"]},{"name":"Iron","from":["spinach","curry powder"]},{"name":"Folate","from":["spinach"]},{"name":"Vitamin C","from":["chopped tomatoes","spinach"]},{"name":"Fibre","from":["chopped tomatoes","onion","spinach"]}],
+    allergens: [],
+    cautions: [
+      "Cook meat, poultry, fish, shellfish and eggs until steaming hot all the way through, with no pink meat and firm egg yolks.",
     ],
   },
 ];

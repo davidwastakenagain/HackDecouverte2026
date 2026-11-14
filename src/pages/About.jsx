@@ -152,16 +152,18 @@ export default function About({ onStart }) {
           The published recipes do not cover every craving. For the rest, such as burgers, ice
           cream, pizza and chocolate, our team wrote recipes to the same food-safety rules: meat,
           fish and eggs cooked through, pasteurised dairy, no alcohol and no coffee. These have no
-          published nutrition figures and no link to a source.
+          link to a source, and their nutrition figures are estimates worked out by AI from the
+          ingredient list, marked as estimates wherever they appear.
         </p>
       </Section>
 
-      <Section title="Each published recipe shows what it gives you">
-        <p>On the page of a published recipe you will find:</p>
+      <Section title="Each recipe shows what it gives you">
+        <p>On a recipe's page you will find:</p>
         <ul className="space-y-3">
           <li>
             <span className="font-semibold">Nutrition per serving.</span> Calories, fat, saturates,
-            carbs, sugars, fibre, protein and salt, as published by BBC Good Food.
+            carbs, sugars, fibre, protein and salt. For published recipes these are the figures
+            BBC Good Food publishes; for team-written recipes they are estimates.
           </li>
           <li>
             <span className="font-semibold">Good for pregnancy.</span> Which of these nutrients the
@@ -178,13 +180,13 @@ export default function About({ onStart }) {
             oily fish a week.
           </li>
           <li>
-            <span className="font-semibold">The source.</span> A link to where the recipe was
-            originally published.
+            <span className="font-semibold">The source.</span> For published recipes, a link to
+            where the recipe was originally published.
           </li>
         </ul>
         <p>
-          When you type a common craving, the results page also puts one serving of each published
-          recipe next to a typical portion of the food you craved, using figures from USDA
+          When you type a common craving, the results page also puts one serving of each recipe
+          next to a typical portion of the food you craved, using figures from USDA
           FoodData Central, so you can see the difference in calories, saturated fat, sugars, salt,
           fibre and protein.
         </p>
@@ -227,7 +229,7 @@ export default function About({ onStart }) {
           </li>
           <li>
             If the optional AI recipe writer is switched on, its recipes are marked as written by
-            AI and unreviewed.
+            AI and unreviewed, and their nutrition figures are estimates.
           </li>
         </ul>
       </Section>

@@ -4,7 +4,8 @@
   "type": "module",
   "description": "Small local server that asks Claude for recipe alternatives, so the API key stays out of the browser.",
   "scripts": {
-    "start": "node --env-file=../.env.local index.js"
+    "start": "node --env-file=../.env.local index.js",
+    "estimate-extras": "node --env-file=../.env.local estimate-extras.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "latest",

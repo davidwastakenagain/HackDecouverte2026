@@ -109,7 +109,9 @@ export default function RecipeDetails({ recipe }) {
       <div className="space-y-8">
         {recipe.nutrition && (
           <section>
-            <h2 className="text-xl text-ink">Nutrition per serving</h2>
+            <h2 className="text-xl text-ink">
+              Nutrition per serving{recipe.nutritionEstimated ? " (estimate)" : ""}
+            </h2>
             <dl className="mt-3 grid grid-cols-4 gap-y-4 border-y border-line py-4 text-center">
               {[
                 ["Calories", recipe.nutrition.kcal, "kcal"],
@@ -131,9 +133,10 @@ export default function RecipeDetails({ recipe }) {
               ))}
             </dl>
             <p className="mt-2 text-sm text-ink-soft">
-              {recipe.servings ? `${recipe.servings}. ` : ""}Figures published by{" "}
-              {recipe.sourceName || "the recipe source"}. Cholesterol and trans fat are not
-              published.
+              {recipe.servings ? `${recipe.servings}. ` : ""}
+              {recipe.nutritionEstimated
+                ? "These figures are estimated by AI from the ingredient list. They are not measured or published, so treat them as a rough guide."
+                : `Figures published by ${recipe.sourceName || "the recipe source"}. Cholesterol and trans fat are not published.`}
             </p>
           </section>
         )}

@@ -433,7 +433,31 @@ function toRecipe(raw, category) {
     image: "",
     ingredients: raw.ingredients.map((item) => item.trim()),
     instructions: raw.instructions.map((item) => item.trim()),
+    ...estimatedExtras(raw),
   };
+}
+
+const NUTRITION_KEYS = ["kcal", "fat", "saturates", "carbs", "sugars", "fibre", "protein", "salt"];
+
+// The server's estimated nutrition and pregnancy notes for an AI recipe, in the
+// same fields the published recipes use. Anything malformed is left out, so
+// the recipe page simply does not show that section.
+function estimatedExtras(raw) {
+  const extras = {};
+  if (isText(raw.servings, 20)) extras.servings = raw.servings;
+  const n = raw.nutrition;
+  if (n && NUTRITION_KEYS.every((key) => Number.isFinite(n[key]) && n[key] >= 0)) {
+    extras.nutrition = Object.fromEntries(NUTRITION_KEYS.map((key) => [key, n[key]]));
+    extras.nutritionEstimated = true;
+  }
+  if (Array.isArray(raw.nutrients)) {
+    extras.nutrients = raw.nutrients
+      .filter((item) => isText(item?.name, 20) && Array.isArray(item.from) && item.from.length > 0 && item.from.every((text) => isText(text, 60)))
+      .map((item) => ({ name: item.name, from: item.from }));
+  }
+  if (Array.isArray(raw.allergens)) extras.allergens = raw.allergens.filter((item) => isText(item, 30));
+  if (Array.isArray(raw.cautions)) extras.cautions = raw.cautions.filter((item) => isText(item, 200));
+  return extras;
 }
 
 async function askServer(craving, avoidTitles) {
@@ -463,6 +487,7 @@ export async function getFreshRecommendations(craving, avoidTitles = []) {
   if (isAiEnabled() && String(craving ?? "").trim()) {
     try {
       // AI recipes have no image; RecipeCard looks one up by the recipe's title.
+      // Their nutrition figures are estimates (nutritionEstimated: true).
       return { ...(await askServer(craving, avoidTitles)), source: "ai" };
     } catch (error) {
       console.warn("AI recommendations unavailable, using the built-in recipes instead:", error);
